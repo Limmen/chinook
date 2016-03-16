@@ -1,0 +1,4 @@
+/*
+ * Royal Institute of Technology
+ * 2015 (c) Kim Hammar
+ */
