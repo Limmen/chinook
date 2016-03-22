@@ -1,1 +1,12 @@
 /java_backend/chinook_rest/target/
+/clojure_backend/chinook_rest/target/
+/angular_frontend/chinook_consumer/node_modules
+/angular_frontend/chinook_consumer/dist
+/angular_frontend/chinook_consumer/.tmp
+/angular_frontend/chinook_consumer/.sass-cache
+/angular_frontend/chinook_consumer/bower_components
+
+
+
+
+
