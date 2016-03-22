@@ -53,8 +53,8 @@ public class ArtistController {
     @RequestMapping(value = "/{artistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> getArtist(@PathVariable int artistId) {
         log.debug("HTTP GET-request /resources/artists/{}", artistId);
-        ArtistRepresentation temperatureRepresentation = new ArtistRepresentation(artistService.getArtist(artistId));
-        temperatureRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artistId)).withSelfRel());
-        return new ResponseEntity<ArtistRepresentation>(temperatureRepresentation, HttpStatus.OK);
+        ArtistRepresentation artistRepresentation = new ArtistRepresentation(artistService.getArtist(artistId));
+        artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artistId)).withSelfRel());
+        return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
     }
 }

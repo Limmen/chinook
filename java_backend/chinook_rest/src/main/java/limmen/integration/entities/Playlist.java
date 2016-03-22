@@ -6,20 +6,20 @@ import javax.validation.constraints.Size;
 /**
  * @author Kim Hammar on 2016-03-22.
  */
-public class Artist {
+public class Playlist {
     @NotNull
-    private int artistId;
+    private int playlistId;
     @NotNull
     @Size(max = 120)
     private String name;
 
-    public Artist(int artistId, String name) {
-        this.artistId = artistId;
+    public Playlist(int playlistId, String name) {
+        this.playlistId = playlistId;
         this.name = name;
     }
 
-    public int getArtistId() {
-        return artistId;
+    public int getPlaylistId() {
+        return playlistId;
     }
 
     public String getName() {
