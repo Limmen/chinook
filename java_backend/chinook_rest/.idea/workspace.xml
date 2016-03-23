@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42df81d9-f413-4d3c-8f92-74c9dea80a51" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/representations/array_representations/InvoiceLinesArrayRepresentation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/representations/array_representations/InvoicesArrayRepresentation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/representations/entity_representation/InvoiceLineRepresentation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/representations/entity_representation/InvoiceRepresentation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/services/InvoiceLineService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/services/InvoiceService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/services/implementations/InvoiceLineServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/business/services/implementations/InvoiceServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/controllers/InvoiceController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/controllers/InvoiceLineController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/integration/entities/InvoiceLine.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/limmen/integration/repositories/InvoiceLineRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/limmen/integration/entities/Invoice.java" afterPath="$PROJECT_DIR$/src/main/java/limmen/integration/entities/Invoice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/limmen/integration/repositories/InvoiceRepository.java" afterPath="$PROJECT_DIR$/src/main/java/limmen/integration/repositories/InvoiceRepository.java" />
-    </list>
+    <list default="true" id="42df81d9-f413-4d3c-8f92-74c9dea80a51" name="Default" comment="" />
     <ignored path="chinook_rest.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -718,12 +702,12 @@
       <option name="number" value="Default" />
       <updated>1458662161931</updated>
       <workItem from="1458662163350" duration="3827000" />
-      <workItem from="1458745828806" duration="6280000" />
+      <workItem from="1458745828806" duration="6879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10107000" />
+    <option name="totallyTimeSpent" value="10706000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="19" width="1920" height="1181" extended-state="0" />
