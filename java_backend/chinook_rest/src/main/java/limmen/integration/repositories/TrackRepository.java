@@ -1,6 +1,6 @@
 package limmen.integration.repositories;
 
-import limmen.integration.entities.Artist;
+import limmen.integration.entities.Track;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,21 @@ public class TrackRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    public Artist getArtist(int artistId) {
-        return jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, artistId);
+    public Track getTrack(int trackId) {
+        return jdbc.queryForObject("SELECT * FROM \"Track\" WHERE \"TrackId\"=?", trackMapper, trackId);
     }
 
-    public List<Artist> getAllArtists(){
-        log.info("getAllArtists from Database");
-        return jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
+    public List<Track> getAllTracks(){
+        log.info("getAllTracks from Database");
+        return jdbc.query("SELECT * FROM \"Track\";", trackMapper);
     }
 
-    private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {
-        public Artist mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Artist artist = new Artist(rs.getInt("ArtistId"), rs.getString("Name"));
-            return artist;
+    private static final RowMapper<Track> trackMapper = new RowMapper<Track>() {
+        public Track mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Track track = new Track(rs.getInt("TrackId"), rs.getString("Name"), rs.getInt("AlbumId"),
+                    rs.getInt("MediaTypeId"), rs.getInt("GenreId"), rs.getString("Composer"), rs.getInt("Milliseconds"),
+                    rs.getInt("Bytes"), rs.getFloat("UnitPrice"));
+            return track;
         }
     };
 }

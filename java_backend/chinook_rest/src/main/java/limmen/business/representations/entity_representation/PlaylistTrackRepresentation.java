@@ -12,7 +12,7 @@ public class PlaylistTrackRepresentation extends ResourceSupport {
     private final PlaylistTrack playlistTrack;
 
     @JsonCreator
-    public PlaylistTrackRepresentation(@JsonProperty("playlistTrack") PlaylistTrack playlistTrack) {
+    public PlaylistTrackRepresentation(@JsonProperty("playlisttrack") PlaylistTrack playlistTrack) {
         this.playlistTrack = playlistTrack;
     }
 

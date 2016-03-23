@@ -1,0 +1,60 @@
+package limmen.controllers;
+
+import limmen.business.representations.array_representations.EmployeesArrayRepresentation;
+import limmen.business.representations.entity_representation.EmployeeRepresentation;
+import limmen.business.services.EmployeeService;
+import limmen.integration.entities.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+/**
+ * @author Kim Hammar on 2016-03-22.
+ */
+@RestController
+@RequestMapping("/resources/employees")
+public class EmployeeController {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final EmployeeService employeeService;
+
+    @Inject
+    public EmployeeController(final EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<EmployeesArrayRepresentation> getAllEmployees() {
+        log.debug("HTTP GET-request /resources/employees");
+        List<EmployeeRepresentation> employeeRepresentations = new ArrayList();
+        List<Employee> employees = employeeService.getAllEmployees();
+        employees.forEach((employee) -> {
+            EmployeeRepresentation employeeRepresentation = new EmployeeRepresentation(employee);
+            employeeRepresentation.add(linkTo(methodOn(EmployeeController.class).getEmployee(employee.getEmployeeId())).withSelfRel());
+            employeeRepresentations.add(employeeRepresentation);
+        });
+        EmployeesArrayRepresentation arrayRepresentation = new EmployeesArrayRepresentation(employeeRepresentations);
+        return new ResponseEntity<EmployeesArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{employeeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<EmployeeRepresentation> getEmployee(@PathVariable int employeeId) {
+        log.debug("HTTP GET-request /resources/employees/{}", employeeId);
+        EmployeeRepresentation employeeRepresentation = new EmployeeRepresentation(employeeService.getEmployee(employeeId));
+        employeeRepresentation.add(linkTo(methodOn(EmployeeController.class).getEmployee(employeeId)).withSelfRel());
+        return new ResponseEntity<EmployeeRepresentation>(employeeRepresentation, HttpStatus.OK);
+    }
+}

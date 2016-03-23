@@ -22,9 +22,9 @@ public class PlaylistTrackRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    public PlaylistTrack getPlaylistTrack(int playlistTrackId, int playlistId) {
-        return jdbc.queryForObject("SELECT * FROM \"PlaylistTrack\" WHERE \"PlaylistTrackId\"=? AND \"PlaylistId\"=? ",
-                playlistTrackMapper, playlistTrackId, playlistId);
+    public PlaylistTrack getPlaylistTrack(int trackId, int playlistId) {
+        return jdbc.queryForObject("SELECT * FROM \"PlaylistTrack\" WHERE \"TrackId\"=? AND \"PlaylistId\"=? ",
+                playlistTrackMapper, trackId, playlistId);
     }
 
     public List<PlaylistTrack> getAllPlaylistTracks(){

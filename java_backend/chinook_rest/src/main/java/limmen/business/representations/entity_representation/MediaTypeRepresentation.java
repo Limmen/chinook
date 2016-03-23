@@ -12,7 +12,7 @@ public class MediaTypeRepresentation extends ResourceSupport {
     private final MediaTypeEntity mediaTypeEntity;
 
     @JsonCreator
-    public MediaTypeRepresentation(@JsonProperty("mediaTypeEntity") MediaTypeEntity mediaTypeEntity) {
+    public MediaTypeRepresentation(@JsonProperty("mediatype") MediaTypeEntity mediaTypeEntity) {
         this.mediaTypeEntity = mediaTypeEntity;
     }
 

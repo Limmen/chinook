@@ -1,6 +1,6 @@
 package limmen.business.services;
 
-import limmen.integration.entities.Artist;
+import limmen.integration.entities.Track;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface TrackService {
 
-    public List<Artist> getAllArtists();
-    public Artist getArtist(int artistId);
+    public List<Track> getAllTracks();
+    public Track getTrack(int trackId);
 }
