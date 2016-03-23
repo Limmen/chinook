@@ -4,13 +4,16 @@ jdk:
   - oraclejdk8
 
 before_install:
+- echo "overwritten before_install"
 
 install:
 - ./java_build.sh
--
 
 script:
+- echo "overwritten script step"
 
 after_success:
+- echo "overwritten after_success step"
 
 after_failure:
+- echo "overwritten after_failure step"
