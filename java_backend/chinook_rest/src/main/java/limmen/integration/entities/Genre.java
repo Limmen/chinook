@@ -6,19 +6,19 @@ import javax.validation.constraints.Size;
 /**
  * @author Kim Hammar on 2016-03-22.
  */
-public class Artist {
+public class Genre {
     @NotNull
-    private int artistId;
+    private int genreId;
     @Size(max = 120)
     private String name;
 
-    public Artist(int artistId, String name) {
-        this.artistId = artistId;
+    public Genre(int genreId, String name) {
+        this.genreId = genreId;
         this.name = name;
     }
 
-    public int getArtistId() {
-        return artistId;
+    public int getGenreId() {
+        return genreId;
     }
 
     public String getName() {

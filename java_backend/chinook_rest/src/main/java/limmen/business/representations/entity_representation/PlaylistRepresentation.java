@@ -1,4 +1,4 @@
-package limmen.business.resourcerepresentations;
+package limmen.business.representations.entity_representation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,5 +1,6 @@
-package limmen.business.services;
+package limmen.business.services.implementations;
 
+import limmen.business.services.AlbumService;
 import limmen.integration.entities.Album;
 import limmen.integration.repositories.AlbumRepository;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Kim Hammar on 2016-03-22.
  */
 @Service
-public class AlbumServiceImpl  implements AlbumService{
+public class AlbumServiceImpl  implements AlbumService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final AlbumRepository albumRepository;
 

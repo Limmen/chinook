@@ -1,5 +1,6 @@
-package limmen.business.services;
+package limmen.business.services.implementations;
 
+import limmen.business.services.ArtistService;
 import limmen.integration.entities.Artist;
 import limmen.integration.repositories.ArtistRepository;
 import org.slf4j.Logger;

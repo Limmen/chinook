@@ -1,5 +1,6 @@
-package limmen.business.services;
+package limmen.business.services.implementations;
 
+import limmen.business.services.PlaylistService;
 import limmen.integration.entities.Playlist;
 import limmen.integration.repositories.PlaylistRepository;
 import org.slf4j.Logger;

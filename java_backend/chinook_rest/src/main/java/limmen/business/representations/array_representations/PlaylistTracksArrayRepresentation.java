@@ -1,7 +1,8 @@
-package limmen.business.resourcerepresentations;
+package limmen.business.representations.array_representations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import limmen.business.representations.entity_representation.PlaylistTrackRepresentation;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;

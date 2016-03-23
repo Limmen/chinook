@@ -1,7 +1,7 @@
 package limmen.controllers;
 
-import limmen.business.resourcerepresentations.AlbumRepresentation;
-import limmen.business.resourcerepresentations.AlbumsArrayRepresentation;
+import limmen.business.representations.entity_representation.AlbumRepresentation;
+import limmen.business.representations.array_representations.AlbumsArrayRepresentation;
 import limmen.business.services.AlbumService;
 import limmen.integration.entities.Album;
 import org.slf4j.Logger;

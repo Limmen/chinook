@@ -6,19 +6,19 @@ import javax.validation.constraints.Size;
 /**
  * @author Kim Hammar on 2016-03-22.
  */
-public class Artist {
+public class MediaTypeEntity {
     @NotNull
-    private int artistId;
+    private int mediaTypeId;
     @Size(max = 120)
     private String name;
 
-    public Artist(int artistId, String name) {
-        this.artistId = artistId;
+    public MediaTypeEntity(int mediaTypeId, String name) {
+        this.mediaTypeId = mediaTypeId;
         this.name = name;
     }
 
-    public int getArtistId() {
-        return artistId;
+    public int getMediaTypeId() {
+        return mediaTypeId;
     }
 
     public String getName() {

@@ -10,5 +10,5 @@ import java.util.List;
 public interface PlaylistService {
 
     public List<Playlist> getAllPlaylists();
-    public Playlist getPlaylist(int PlaylistId);
+    public Playlist getPlaylist(int playlistId);
 }

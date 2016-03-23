@@ -10,5 +10,5 @@ import java.util.List;
 public interface AlbumService {
 
     public List<Album> getAllAlbums();
-    public Album getAlbum(int AlbumId);
+    public Album getAlbum(int albumId);
 }

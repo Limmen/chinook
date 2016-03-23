@@ -10,5 +10,5 @@ import java.util.List;
 public interface ArtistService {
 
     public List<Artist> getAllArtists();
-    public Artist getArtist(int ArtistId);
+    public Artist getArtist(int artistId);
 }

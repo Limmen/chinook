@@ -1,7 +1,7 @@
 package limmen.controllers;
 
-import limmen.business.resourcerepresentations.PlaylistRepresentation;
-import limmen.business.resourcerepresentations.PlaylistsArrayRepresentation;
+import limmen.business.representations.entity_representation.PlaylistRepresentation;
+import limmen.business.representations.array_representations.PlaylistsArrayRepresentation;
 import limmen.business.services.PlaylistService;
 import limmen.integration.entities.Playlist;
 import org.slf4j.Logger;
