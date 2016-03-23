@@ -1,6 +1,6 @@
 package limmen.integration.repositories;
 
-import limmen.integration.entities.Artist;
+import limmen.integration.entities.Invoice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,21 @@ public class InvoiceRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    public Artist getArtist(int artistId) {
-        return jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, artistId);
+    public Invoice getInvoice(int invoiceId) {
+        return jdbc.queryForObject("SELECT * FROM \"Invoice\" WHERE \"InvoiceId\"=?", invoiceMapper, invoiceId);
     }
 
-    public List<Artist> getAllArtists(){
-        log.info("getAllArtists from Database");
-        return jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
+    public List<Invoice> getAllInvoices(){
+        log.info("getAllInvoices from Database");
+        return jdbc.query("SELECT * FROM \"Invoice\";", invoiceMapper);
     }
 
-    private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {
-        public Artist mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Artist artist = new Artist(rs.getInt("ArtistId"), rs.getString("Name"));
-            return artist;
+    private static final RowMapper<Invoice> invoiceMapper = new RowMapper<Invoice>() {
+        public Invoice mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Invoice invoice = new Invoice(rs.getInt("InvoiceId"),rs.getInt("CustomerId"), rs.getTimestamp("InvoiceDate"),
+                    rs.getString("BillingAddress"), rs.getString("BillingCity"), rs.getString("BillingState"),
+                    rs.getString("BillingCountry"), rs.getString("BillingPostalCode"), rs.getFloat("Total"));
+            return invoice;
         }
     };
 }

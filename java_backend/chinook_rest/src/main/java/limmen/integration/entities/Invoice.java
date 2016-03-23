@@ -19,22 +19,25 @@ public class Invoice {
     @Size(max = 40)
     private String billingCity;
     @Size(max = 40)
+    private String billingState;
+    @Size(max = 40)
     private String billingCountry;
     @Size(max = 10)
     private String billingPostalCode;
     @NotNull
     private float total;
 
-    public Invoice(int invoiceId, int customerId, Date invoiceDate, String billingAddress, String billingCountry,
-                   float total, String billingPostalCode, String billingCity) {
+    public Invoice(int invoiceId, int customerId, Date invoiceDate, String billingAddress, String billingCity,
+                   String billingState, String billingCountry, String billingPostalCode, float total) {
         this.invoiceId = invoiceId;
         this.customerId = customerId;
         this.invoiceDate = invoiceDate;
         this.billingAddress = billingAddress;
-        this.billingCountry = billingCountry;
-        this.total = total;
-        this.billingPostalCode = billingPostalCode;
         this.billingCity = billingCity;
+        this.billingState = billingState;
+        this.billingCountry = billingCountry;
+        this.billingPostalCode = billingPostalCode;
+        this.total = total;
     }
 
     public int getInvoiceId() {
