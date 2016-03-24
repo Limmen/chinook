@@ -17,6 +17,9 @@ public class Artist {
         this.name = name;
     }
 
+    public Artist() {
+    }
+
     public int getArtistId() {
         return artistId;
     }
@@ -24,4 +27,5 @@ public class Artist {
     public String getName() {
         return name;
     }
+
 }

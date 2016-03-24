@@ -9,7 +9,8 @@ import org.springframework.hateoas.ResourceSupport;
  * @author Kim Hammar on 2016-03-22.
  */
 public class ArtistRepresentation extends ResourceSupport {
-    private final Artist artist;
+    @JsonProperty
+    private Artist artist;
 
     @JsonCreator
     public ArtistRepresentation(@JsonProperty("artist") Artist artist) {
@@ -19,4 +20,5 @@ public class ArtistRepresentation extends ResourceSupport {
     public Artist getArtist() {
         return artist;
     }
+
 }
