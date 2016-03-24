@@ -16,6 +16,8 @@ public class Album {
     @NotNull
     private int artistId;
 
+    public Album(){}
+
     public Album(int albumId, String title, int artistId){
         this.albumId = albumId;
         this.title = title;

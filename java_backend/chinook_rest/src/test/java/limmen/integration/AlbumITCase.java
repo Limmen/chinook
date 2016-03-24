@@ -1,10 +1,10 @@
 package limmen.integration;
 
 import limmen.ChinookRestApplication;
-import limmen.builders.ArtistBuilder;
-import limmen.business.representations.array_representations.ArtistsArrayRepresentation;
-import limmen.business.representations.entity_representation.ArtistRepresentation;
-import limmen.integration.entities.Artist;
+import limmen.builders.AlbumBuilder;
+import limmen.business.representations.array_representations.AlbumsArrayRepresentation;
+import limmen.business.representations.entity_representation.AlbumRepresentation;
+import limmen.integration.entities.Album;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,36 +35,37 @@ import static org.junit.Assert.assertEquals;
 @SpringApplicationConfiguration(classes = ChinookRestApplication.class)
 @WebAppConfiguration
 @IntegrationTest
-public class ArtistITCase {
-    final String BASE_URL = "http://localhost:7777/resources/artists";
+public class AlbumITCase {
+    final String BASE_URL = "http://localhost:7777/resources/albums";
 
     @Autowired
     DataSource dataSource;
 
     @Test
-    public void getArtistTest() {
-        ArtistRepresentation expectedArtistRepresenation = new ArtistRepresentation(ArtistBuilder.aArtist().withId(1).withName("AC/DC").build());
+    public void getAlbumTest() {
+        AlbumRepresentation expectedAlbumRepresenation = new AlbumRepresentation(AlbumBuilder.aAlbum().withId(1).
+                withTitle("For Those About To Rock We Salute You").build());
         RestTemplate rest = new TestRestTemplate();
-        ResponseEntity<ArtistRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
-                expectedArtistRepresenation.getArtist().getArtistId(), ArtistRepresentation.class, Collections.EMPTY_MAP);
+        ResponseEntity<AlbumRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
+                expectedAlbumRepresenation.getAlbum().getAlbumId(), AlbumRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Asserting entity", expectedArtistRepresenation, responseEntity.getBody());
+        assertEquals("Asserting entity", expectedAlbumRepresenation, responseEntity.getBody());
     }
 
     @Test
-    public void getArtists(){
+    public void getAlbums(){
         JdbcTemplate jdbc = new JdbcTemplate(dataSource);
-        List<Artist> artists = jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
+        List<Album> albums = jdbc.query("SELECT * FROM \"Album\";", albumMapper);
         RestTemplate rest = new TestRestTemplate();
-        ResponseEntity<ArtistsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, ArtistsArrayRepresentation.class, Collections.EMPTY_MAP);
+        ResponseEntity<AlbumsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, AlbumsArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Asserting array size", artists.size(), responseEntity.getBody().getArtists().size());
+        assertEquals("Asserting array size", albums.size(), responseEntity.getBody().getAlbums().size());
     }
 
-    private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {
-        public Artist mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Artist artist = new Artist(rs.getInt("ArtistId"), rs.getString("Name"));
-            return artist;
+    private static final RowMapper<Album> albumMapper = new RowMapper<Album>() {
+        public Album mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Album album = new Album(rs.getInt("AlbumId"), rs.getString("Title"), rs.getInt("ArtistId"));
+            return album;
         }
     };
 }
