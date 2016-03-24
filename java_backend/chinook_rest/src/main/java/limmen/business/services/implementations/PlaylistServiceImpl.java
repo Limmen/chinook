@@ -14,12 +14,12 @@ import java.util.List;
  * @author Kim Hammar on 2016-03-22.
  */
 @Service
-public class PlaylistImpl implements PlaylistService {
+public class PlaylistServiceImpl implements PlaylistService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final PlaylistRepository playlistRepository;
 
     @Inject
-    public PlaylistImpl(final PlaylistRepository playlistRepository) {
+    public PlaylistServiceImpl(final PlaylistRepository playlistRepository) {
         this.playlistRepository = playlistRepository;
     }
 
