@@ -18,6 +18,8 @@ public class Playlist {
         this.name = name;
     }
 
+    public Playlist(){}
+
     public int getPlaylistId() {
         return playlistId;
     }

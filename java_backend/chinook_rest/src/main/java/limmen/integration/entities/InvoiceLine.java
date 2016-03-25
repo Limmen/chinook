@@ -25,6 +25,8 @@ public class InvoiceLine {
         this.quantity = quantity;
     }
 
+    public InvoiceLine(){}
+
     public int getInvoiceLineId() {
         return invoiceLineId;
     }

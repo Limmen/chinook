@@ -37,6 +37,8 @@ public class Track {
         this.unitPrice = unitPrice;
     }
 
+    public Track(){}
+
     public int getTrackId() {
         return trackId;
     }

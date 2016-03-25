@@ -40,6 +40,8 @@ public class Invoice {
         this.total = total;
     }
 
+    public Invoice(){}
+
     public int getInvoiceId() {
         return invoiceId;
     }

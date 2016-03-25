@@ -17,6 +17,8 @@ public class MediaTypeEntity {
         this.name = name;
     }
 
+    public MediaTypeEntity(){}
+
     public int getMediaTypeId() {
         return mediaTypeId;
     }

@@ -17,6 +17,9 @@ public class Genre {
         this.name = name;
     }
 
+    public Genre() {
+    }
+
     public int getGenreId() {
         return genreId;
     }

@@ -1,17 +1,16 @@
 package limmen.integration;
 
 import limmen.ChinookRestApplication;
-import limmen.builders.ArtistBuilder;
 import limmen.business.representations.array_representations.ArtistsArrayRepresentation;
 import limmen.business.representations.entity_representation.ArtistRepresentation;
 import limmen.integration.entities.Artist;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,15 +35,23 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 @IntegrationTest
 public class ArtistITCase {
-    final String BASE_URL = "http://localhost:7777/resources/artists";
-
+    private final String BASE_URL = "http://localhost:7777/resources/artists";
+    private JdbcTemplate jdbc;
+    private RestTemplate rest;
     @Autowired
     DataSource dataSource;
 
+    @Before
+    public void setup() {
+        rest = new RestTemplate();
+        jdbc = new JdbcTemplate(dataSource);
+    }
+
     @Test
     public void getArtistTest() {
-        ArtistRepresentation expectedArtistRepresenation = new ArtistRepresentation(ArtistBuilder.aArtist().withId(1).withName("AC/DC").build());
-        RestTemplate rest = new TestRestTemplate();
+        ArtistRepresentation expectedArtistRepresenation =
+                new ArtistRepresentation
+                        (jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, 1));
         ResponseEntity<ArtistRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
                 expectedArtistRepresenation.getArtist().getArtistId(), ArtistRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
@@ -52,10 +59,8 @@ public class ArtistITCase {
     }
 
     @Test
-    public void getArtists(){
-        JdbcTemplate jdbc = new JdbcTemplate(dataSource);
+    public void getArtists() {
         List<Artist> artists = jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
-        RestTemplate rest = new TestRestTemplate();
         ResponseEntity<ArtistsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, ArtistsArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals("Asserting array size", artists.size(), responseEntity.getBody().getArtists().size());

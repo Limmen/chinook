@@ -55,6 +55,8 @@ public class Customer {
         this.supportRepId = supportRepId;
     }
 
+    public Customer(){}
+
     public int getCustomerId() {
         return customerId;
     }

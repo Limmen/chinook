@@ -1,17 +1,16 @@
 package limmen.integration;
 
 import limmen.ChinookRestApplication;
-import limmen.builders.AlbumBuilder;
 import limmen.business.representations.array_representations.AlbumsArrayRepresentation;
 import limmen.business.representations.entity_representation.AlbumRepresentation;
 import limmen.integration.entities.Album;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,15 +36,21 @@ import static org.junit.Assert.assertEquals;
 @IntegrationTest
 public class AlbumITCase {
     final String BASE_URL = "http://localhost:7777/resources/albums";
-
+    private JdbcTemplate jdbc;
+    private RestTemplate rest;
     @Autowired
     DataSource dataSource;
 
+    @Before
+    public void setup() {
+        rest = new RestTemplate();
+        jdbc = new JdbcTemplate(dataSource);
+    }
+
     @Test
     public void getAlbumTest() {
-        AlbumRepresentation expectedAlbumRepresenation = new AlbumRepresentation(AlbumBuilder.aAlbum().withId(1).
-                withTitle("For Those About To Rock We Salute You").build());
-        RestTemplate rest = new TestRestTemplate();
+        AlbumRepresentation expectedAlbumRepresenation =
+                new AlbumRepresentation(jdbc.queryForObject("SELECT * FROM \"Album\" WHERE \"AlbumId\"=?", albumMapper, 1));
         ResponseEntity<AlbumRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
                 expectedAlbumRepresenation.getAlbum().getAlbumId(), AlbumRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
@@ -54,9 +59,7 @@ public class AlbumITCase {
 
     @Test
     public void getAlbums(){
-        JdbcTemplate jdbc = new JdbcTemplate(dataSource);
         List<Album> albums = jdbc.query("SELECT * FROM \"Album\";", albumMapper);
-        RestTemplate rest = new TestRestTemplate();
         ResponseEntity<AlbumsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, AlbumsArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals("Asserting array size", albums.size(), responseEntity.getBody().getAlbums().size());

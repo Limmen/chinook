@@ -16,6 +16,8 @@ public class PlaylistTrack {
         this.playlistId = playlistId;
     }
 
+    public PlaylistTrack(){}
+
     public int getTrackId() {
         return trackId;
     }

@@ -60,6 +60,8 @@ public class Employee {
         this.email = email;
     }
 
+    public Employee(){}
+
     public int getEmployeeId() {
         return employeeId;
     }
