@@ -4,19 +4,37 @@
 
 ## Description
 
-Angular front-end that consumes a REST-API for the chinook database.
+This repo contains three separate projects:
+
+* angular_frontend
+
+A JavaScript frontend that consumes a REST-API for the chinook database.
+
+* java_backend
+
+A REST-API for the chinook database developed with Java
+
+* clojure_backend
+
+A REST-API for the chinook database developed with clojure
 
 ## Current state
 
-Under development
+java_backend contains a fullt functional RESP-API for HTTP/GET
+
+TODO:
+
+* clojure_backend
+* angular_frontend
+* support PUT/POST/DELETE in java_backend
 
 ## How to run
 
-TODO
+See separate README's for each project.
 
 ## Documentation
 
-TODO
+See separate README's for each project.
 
 ## Author
 
@@ -24,6 +42,14 @@ Kim Hammar
 
 ## Copyright and license
 
+* The repo:
+
 The MIT License (MIT)
 
 Copyright (c) 2016 Kim Hammar
+
+* The database:
+
+The MIT License (MIT)
+
+Copyright (c) 2008-2014 Luis Rocha
