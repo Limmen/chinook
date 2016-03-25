@@ -7,11 +7,19 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
-/**@author Kim Hammar on 2016-03-22.
+/**
+ * JSON-Representation of a Array of albums.
+ *
+ * @author Kim Hammar on 2016-03-22.
  */
 public class AlbumsArrayRepresentation extends ResourceSupport {
     private final List<AlbumRepresentation> albums;
 
+    /**
+     * Class constructor. Initializes the albums property of the JSON representation.
+     *
+     * @param albums value of the albums property.
+     */
     @JsonCreator
     public AlbumsArrayRepresentation(@JsonProperty("albums") List<AlbumRepresentation> albums) {
         this.albums = albums;

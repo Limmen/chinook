@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the mediatype REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class MediaTypeITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class MediaTypeITCase {
         mediaTypes = jdbc.query("SELECT * FROM \"MediaType\";", mediaTypeMapper);
     }
 
+    /**
+     * test of a singular mediatype resource
+     */
     @Test
     public void getMediaTypeTest() {
         if (mediaTypes.size() > 0) {
@@ -60,6 +68,9 @@ public class MediaTypeITCase {
         }
     }
 
+    /**
+     * test of mediatypes resource
+     */
     @Test
     public void getMediaTypes() {
         ResponseEntity<MediaTypesArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, MediaTypesArrayRepresentation.class, Collections.EMPTY_MAP);

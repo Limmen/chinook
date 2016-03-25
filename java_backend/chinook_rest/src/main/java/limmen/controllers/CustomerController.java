@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/customers*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class CustomerController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final CustomerService customerService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param customerService service to handle customer-data.
+     */
     @Inject
     public CustomerController(final CustomerService customerService) {
         this.customerService = customerService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/customers
+     *
+     * @return HTTP-response, JSON array of customers
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<CustomersArrayRepresentation> getAllCustomers() {
         log.debug("HTTP GET-request /resources/customers");
@@ -53,6 +65,12 @@ public class CustomerController {
         return new ResponseEntity<CustomersArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/customers/{customerId}
+     *
+     * @param customerId id of the customer.
+     * @return HTTP-response, JSON-representation of the customer.
+     */
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<CustomerRepresentation> getCustomer(@PathVariable int customerId) {
         log.debug("HTTP GET-request /resources/customers/{}", customerId);

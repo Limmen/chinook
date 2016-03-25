@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "Customer" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class CustomerRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a certain customer.
+     *
+     * @param customerId id of the customer
+     * @return Customer with the specifed id.
+     */
     public Customer getCustomer(int customerId) {
         return jdbc.queryForObject("SELECT * FROM \"Customer\" WHERE \"CustomerId\"=?", customerMapper, customerId);
     }
 
+    /**
+     * Method to query the database for a list of all customers.
+     *
+     * @return list of customers
+     */
     public List<Customer> getAllCustomers(){
         log.info("getAllCustomers from Database");
         return jdbc.query("SELECT * FROM \"Customer\";", customerMapper);

@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the playlisttrack REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class PlaylistTrackITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class PlaylistTrackITCase {
         playlistTracks = jdbc.query("SELECT * FROM \"PlaylistTrack\";", playlistTrackMapper);
     }
 
+    /**
+     * test of a singular playlisttrack resource
+     */
     @Test
     public void getPlaylistTrackTest() {
         if (playlistTracks.size() > 0) {
@@ -61,6 +69,9 @@ public class PlaylistTrackITCase {
         }
     }
 
+    /**
+     * test of playlisttracks resource
+     */
     @Test
     public void getPlaylistTracks() {
         ResponseEntity<PlaylistTracksArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, PlaylistTracksArrayRepresentation.class, Collections.EMPTY_MAP);

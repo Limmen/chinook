@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "Album" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class AlbumRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a album with a certain unique id.
+     *
+     * @param albumId id of the album.
+     * @return Album with albumId.
+     */
     public Album getAlbum(int albumId) {
         return jdbc.queryForObject("SELECT * FROM \"Album\" WHERE \"AlbumId\"=?", albumMapper, albumId);
     }
 
+    /**
+     * Method to query the database for a list of all  albums.
+     *
+     * @return list of albums
+     */
     public List<Album> getAllAlbums(){
         log.info("getAllAlbums from Database");
         return jdbc.query("SELECT * FROM \"Album\";", albumMapper);

@@ -8,13 +8,20 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.List;
 
 /**
+ * JSON-Representation of a Array of invoicelines.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class InvoiceLinesArrayRepresentation extends ResourceSupport {
     private final List<InvoiceLineRepresentation> invoiceLines;
 
+    /**
+     * Class constructor. Initializes the invoicelines property of the JSON representation.
+     *
+     * @param invoiceLines value of the invoicelines property
+     */
     @JsonCreator
-    public InvoiceLinesArrayRepresentation(@JsonProperty("invoiceLines") List<InvoiceLineRepresentation> invoiceLines) {
+    public InvoiceLinesArrayRepresentation(@JsonProperty("invoicelines") List<InvoiceLineRepresentation> invoiceLines) {
         this.invoiceLines = invoiceLines;
     }
 

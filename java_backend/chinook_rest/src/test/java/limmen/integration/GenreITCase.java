@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the genre REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class GenreITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class GenreITCase {
         genres = jdbc.query("SELECT * FROM \"Genre\";", genreMapper);
     }
 
+    /**
+     * test of a singular genre resource
+     */
     @Test
     public void getGenreTest() {
         if (genres.size() > 0) {
@@ -61,6 +69,9 @@ public class GenreITCase {
         }
     }
 
+    /**
+     * test of genres resource
+     */
     @Test
     public void getGenres() {
         ResponseEntity<GenresArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, GenresArrayRepresentation.class, Collections.EMPTY_MAP);

@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the employee REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class EmployeeITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class EmployeeITCase {
         employees = jdbc.query("SELECT * FROM \"Employee\";", employeeMapper);
     }
 
+    /**
+     * test of a singular employee resource
+     */
     @Test
     public void getEmployeeTest() {
         if (employees.size() > 0) {
@@ -61,6 +69,9 @@ public class EmployeeITCase {
         }
     }
 
+    /**
+     * test of employees resource
+     */
     @Test
     public void getEmployees() {
         ResponseEntity<EmployeesArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, EmployeesArrayRepresentation.class, Collections.EMPTY_MAP);

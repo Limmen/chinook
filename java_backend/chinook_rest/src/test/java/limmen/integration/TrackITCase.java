@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the track REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class TrackITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class TrackITCase {
         tracks = jdbc.query("SELECT * FROM \"Track\";", trackMapper);
     }
 
+    /**
+     * test of a singular track resource
+     */
     @Test
     public void getTrackTest() {
         if (tracks.size() > 0) {
@@ -60,6 +68,9 @@ public class TrackITCase {
         }
     }
 
+    /**
+     * test of tracks resource
+     */
     @Test
     public void getTracks() {
         ResponseEntity<TracksArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, TracksArrayRepresentation.class, Collections.EMPTY_MAP);

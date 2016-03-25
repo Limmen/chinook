@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/playlisttracks*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class PlaylistTrackController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final PlaylistTrackService playlistTrackService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param playlistTrackService service to handle playlisttrack-data.
+     */
     @Inject
     public PlaylistTrackController(final PlaylistTrackService playlistTrackService) {
         this.playlistTrackService = playlistTrackService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/playlisttracks
+     *
+     * @return HTTP-response, JSON array of playlisttracks
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistTracksArrayRepresentation> getAllPlaylistTracks() {
         log.debug("HTTP GET-request /resources/playlisttracks");
@@ -55,6 +67,13 @@ public class PlaylistTrackController {
         return new ResponseEntity<PlaylistTracksArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/playlisttrakcs/{trackId}/{playlistId}
+     *
+     * @param trackId id of the track
+     * @param playlistId id of the playlist
+     * @return HTTP-response, JSON-representation of the playlisttrack
+     */
     @RequestMapping(value = "/{trackId}/{playlistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistTrackRepresentation> getPlaylistTrack(@PathVariable int trackId, @PathVariable int playlistId) {
         log.debug("HTTP GET-request /resources/playlistTracks/{}", trackId);

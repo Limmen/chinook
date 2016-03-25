@@ -8,11 +8,18 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.List;
 
 /**
+ * JSON-Representation of a Array of employees.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class EmployeesArrayRepresentation extends ResourceSupport {
     private final List<EmployeeRepresentation> employees;
 
+    /**
+     * Class constructor. Initializes the employees property of the JSON representation.
+     *
+     * @param employees value of the employees property.
+     */
     @JsonCreator
     public EmployeesArrayRepresentation(@JsonProperty("employees") List<EmployeeRepresentation> employees) {
         this.employees = employees;

@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/invoices*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class InvoiceController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final InvoiceService invoiceService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param invoiceService service that handles invoice-data.
+     */
     @Inject
     public InvoiceController(final InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/invoices
+     *
+     * @return HTTP-response, JSON array of invoices
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoicesArrayRepresentation> getAllInvoices() {
         log.debug("HTTP GET-request /resources/invoices");
@@ -53,6 +65,12 @@ public class InvoiceController {
         return new ResponseEntity<InvoicesArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/invoices/{invoiceId}
+     *
+     * @param invoiceId id of the invoice
+     * @return HTTP-response, JSON-representation of the invoice.
+     */
     @RequestMapping(value = "/{invoiceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoiceRepresentation> getInvoice(@PathVariable int invoiceId) {
         log.debug("HTTP GET-request /resources/invoices/{}", invoiceId);

@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the album service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class AlbumServiceImplTest {
     @Mock
     private Album albumTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         albumService = new AlbumServiceImpl((albumRepository));
     }
 
+    /**
+     * Test for the getAllAlbums method
+     */
     @Test
-    public void testGetAllAlbums() throws Exception {
+    public void testGetAllAlbums(){
         final List<Album> databaseList = new ArrayList();
         when(albumRepository.getAllAlbums()).thenReturn(databaseList);
         List<Album> returnedList = albumService.getAllAlbums();
         assertEquals("Asserting getAllAlbums", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getAlbum method
+     */
     @Test
-    public void testGetAlbum() throws Exception {
+    public void testGetAlbum() {
         when(albumRepository.getAlbum(1)).thenReturn(albumOne);
         when(albumRepository.getAlbum(2)).thenReturn(albumTwo);
         assertEquals("Asserting getAlbum", albumOne, albumService.getAlbum(1));

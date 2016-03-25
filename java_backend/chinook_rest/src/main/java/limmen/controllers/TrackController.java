@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/tracks*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class TrackController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final TrackService trackService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param trackService service to handle track-data.
+     */
     @Inject
     public TrackController(final TrackService trackService) {
         this.trackService = trackService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/tracks
+     *
+     * @return HTTP-response, JSON array of tracks
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<TracksArrayRepresentation> getAllTracks() {
         log.debug("HTTP GET-request /resources/tracks");
@@ -56,6 +68,12 @@ public class TrackController {
         return new ResponseEntity<TracksArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/tracks/{trackId}
+     *
+     * @param trackId id of the track
+     * @return HTTP-response, JSON-representation of the track.
+     */
     @RequestMapping(value = "/{trackId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<TrackRepresentation> getTrack(@PathVariable int trackId) {
         log.debug("HTTP GET-request /resources/tracks/{}", trackId);

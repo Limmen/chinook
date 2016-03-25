@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
+ * Implementation of the InvoiceLineService interface, uses a repository for database interaction.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Service

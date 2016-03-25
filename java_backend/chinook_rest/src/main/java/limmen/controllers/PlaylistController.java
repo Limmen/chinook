@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/playlistst*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class PlaylistController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final PlaylistService playlistService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param playlistService service to handle playlist-data
+     */
     @Inject
     public PlaylistController(final PlaylistService playlistService) {
         this.playlistService = playlistService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/playlists
+     *
+     * @return HTTP-response, JSON array of playlists
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistsArrayRepresentation> getAllPlaylists() {
         log.debug("HTTP GET-request /resources/playlists");
@@ -50,6 +62,12 @@ public class PlaylistController {
         return new ResponseEntity<PlaylistsArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/playlists/{playlistId}
+     *
+     * @param playlistId id of the playlist
+     * @return HTTP-response, JSON-representation of the playlist
+     */
     @RequestMapping(value = "/{playlistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistRepresentation> getPlaylist(@PathVariable int playlistId) {
         log.debug("HTTP GET-request /resources/playlists/{}", playlistId);

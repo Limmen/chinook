@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the invoiceline REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class InvoiceLineITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class InvoiceLineITCase {
         invoiceLines = jdbc.query("SELECT * FROM \"InvoiceLine\";", invoiceLineMapper);
     }
 
+    /**
+     * test of a singular invoiceline resource
+     */
     @Test
     public void getInvoiceLineTest() {
         if (invoiceLines.size() > 0) {
@@ -60,6 +68,9 @@ public class InvoiceLineITCase {
         }
     }
 
+    /**
+     * test of invoicelines resource
+     */
     @Test
     public void getInvoiceLines() {
         ResponseEntity<InvoiceLinesArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, InvoiceLinesArrayRepresentation.class, Collections.EMPTY_MAP);

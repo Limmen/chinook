@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the mediatype service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class MediaTypeServiceImplTest {
     @Mock
     private MediaTypeEntity mediaTypeTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mediaTypeService = new MediaTypeServiceImpl((mediaTypeRepository));
     }
 
+    /**
+     * Test for the getAllMediaTypes method
+     */
     @Test
-    public void testGetAllMediaTypes() throws Exception {
+    public void testGetAllMediaTypes() {
         final List<MediaTypeEntity> databaseList = new ArrayList();
         when(mediaTypeRepository.getAllMediaTypes()).thenReturn(databaseList);
         List<MediaTypeEntity> returnedList = mediaTypeService.getAllMediaTypes();
         assertEquals("Asserting getAllMediaTypes", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getMediaType method
+     */
     @Test
-    public void testGetMediaType() throws Exception {
+    public void testGetMediaType() {
         when(mediaTypeRepository.getMediaType(1)).thenReturn(mediaTypeOne);
         when(mediaTypeRepository.getMediaType(2)).thenReturn(mediaTypeTwo);
         assertEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.getMediaType(1));

@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "PlaylistTrack" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,11 +24,23 @@ public class PlaylistTrackRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a playlisttrack with a specified trackid and playlistid..
+     *
+     * @param trackId id of the track.
+     * @param playlistId id of the playlist.
+     * @return playlisttrack with the specified trackid and playlistid.
+     */
     public PlaylistTrack getPlaylistTrack(int trackId, int playlistId) {
         return jdbc.queryForObject("SELECT * FROM \"PlaylistTrack\" WHERE \"TrackId\"=? AND \"PlaylistId\"=? ",
                 playlistTrackMapper, trackId, playlistId);
     }
 
+    /**
+     * Method to query the database for a list of all playlisttracks.
+     *
+     * @return list of playlisttracks.
+     */
     public List<PlaylistTrack> getAllPlaylistTracks(){
         log.info("getAllPlaylistTracks from Database");
         return jdbc.query("SELECT * FROM \"PlaylistTrack\";", playlistTrackMapper);

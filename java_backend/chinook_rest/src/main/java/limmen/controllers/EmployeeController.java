@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/employees*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class EmployeeController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final EmployeeService employeeService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param employeeService service that handles employee-data
+     */
     @Inject
     public EmployeeController(final EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/employees
+     *
+     * @return HTTP-response, JSON array of employees
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<EmployeesArrayRepresentation> getAllEmployees() {
         log.debug("HTTP GET-request /resources/employees");
@@ -50,6 +62,11 @@ public class EmployeeController {
         return new ResponseEntity<EmployeesArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/employees/{employeeId}
+     * @param employeeId id of the employee
+     * @return HTTP-response, JSON representation of the employee
+     */
     @RequestMapping(value = "/{employeeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<EmployeeRepresentation> getEmployee(@PathVariable int employeeId) {
         log.debug("HTTP GET-request /resources/employees/{}", employeeId);

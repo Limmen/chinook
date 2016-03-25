@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "MediaType" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class MediaTypeRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a mediatype with a certain id.
+     *
+     * @param mediaTypeId id of the mediatype.
+     * @return MediaType with the specified id.
+     */
     public MediaTypeEntity getMediaType(int mediaTypeId) {
         return jdbc.queryForObject("SELECT * FROM \"MediaType\" WHERE \"MediaTypeId\"=?", mediaTypeMapper, mediaTypeId);
     }
 
+    /**
+     * Method to query the database for all mediatypes.
+     *
+     * @return list of mediatypes.
+     */
     public List<MediaTypeEntity> getAllMediaTypes(){
         log.info("getAllMediaTypes from Database");
         return jdbc.query("SELECT * FROM \"MediaType\";", mediaTypeMapper);

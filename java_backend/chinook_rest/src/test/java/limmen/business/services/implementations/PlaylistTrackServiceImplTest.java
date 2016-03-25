@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the playlisttrack service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class PlaylistTrackServiceImplTest {
     @Mock
     private PlaylistTrack playlistTrackTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         playlistTrackService = new PlaylistTrackServiceImpl((playlistTrackRepository));
     }
 
+    /**
+     * Test for the getAllPlaylistTracks method
+     */
     @Test
-    public void testGetAllPlaylistTracks() throws Exception {
+    public void testGetAllPlaylistTracks() {
         final List<PlaylistTrack> databaseList = new ArrayList();
         when(playlistTrackRepository.getAllPlaylistTracks()).thenReturn(databaseList);
         List<PlaylistTrack> returnedList = playlistTrackService.getAllPlaylistTracks();
         assertEquals("Asserting getAllPlaylistTracks", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getPlaylistTrack method
+     */
     @Test
-    public void testGetPlaylistTrack() throws Exception {
+    public void testGetPlaylistTrack() {
         when(playlistTrackRepository.getPlaylistTrack(1, 1)).thenReturn(playlistTrackOne);
         when(playlistTrackRepository.getPlaylistTrack(2, 2)).thenReturn(playlistTrackTwo);
         assertEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.getPlaylistTrack(1, 1));

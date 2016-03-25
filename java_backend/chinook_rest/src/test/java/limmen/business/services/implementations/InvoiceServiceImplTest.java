@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the invoice service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class InvoiceServiceImplTest {
     @Mock
     private Invoice invoiceTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         invoiceService = new InvoiceServiceImpl((invoiceRepository));
     }
 
+    /**
+     * Test for the getAllInvoices method
+     */
     @Test
-    public void testGetAllInvoices() throws Exception {
+    public void testGetAllInvoices() {
         final List<Invoice> databaseList = new ArrayList();
         when(invoiceRepository.getAllInvoices()).thenReturn(databaseList);
         List<Invoice> returnedList = invoiceService.getAllInvoices();
         assertEquals("Asserting getAllInvoices", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getInvoice method
+     */
     @Test
-    public void testGetInvoice() throws Exception {
+    public void testGetInvoice() {
         when(invoiceRepository.getInvoice(1)).thenReturn(invoiceOne);
         when(invoiceRepository.getInvoice(2)).thenReturn(invoiceTwo);
         assertEquals("Asserting getInvoice", invoiceOne, invoiceService.getInvoice(1));

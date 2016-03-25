@@ -27,6 +27,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Integration test-suite for the customer REST-resource
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 
@@ -42,6 +44,9 @@ public class CustomerITCase {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
     public void setup() {
         rest = new RestTemplate();
@@ -49,6 +54,9 @@ public class CustomerITCase {
         customers = jdbc.query("SELECT * FROM \"Customer\";", customerMapper);
     }
 
+    /**
+     * test of a singular customer resource
+     */
     @Test
     public void getCustomerTest() {
         if (customers.size() > 0) {
@@ -60,6 +68,9 @@ public class CustomerITCase {
         }
     }
 
+    /**
+     * test of customers resource
+     */
     @Test
     public void getCustomers() {
         ResponseEntity<CustomersArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, CustomersArrayRepresentation.class, Collections.EMPTY_MAP);

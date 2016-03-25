@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
+ * Implementation of the AlbumService interface, uses a repository for database interaction.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Service
@@ -22,6 +24,7 @@ public class AlbumServiceImpl  implements AlbumService {
     public AlbumServiceImpl(final AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
+
     @Override
     public List<Album> getAllAlbums() {
         return albumRepository.getAllAlbums();

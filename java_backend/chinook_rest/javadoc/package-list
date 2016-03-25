@@ -1,0 +1,9 @@
+limmen
+limmen.business.representations.array_representations
+limmen.business.representations.entity_representation
+limmen.business.services
+limmen.business.services.implementations
+limmen.controllers
+limmen.integration
+limmen.integration.entities
+limmen.integration.repositories

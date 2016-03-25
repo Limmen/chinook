@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "InvoiceLine" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class InvoiceLineRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a invoiceline with a certain id.
+     *
+     * @param invoiceLineId id of the invoiceline.
+     * @return InvoiceLine with the specified id.
+     */
     public InvoiceLine getInvoiceLine(int invoiceLineId) {
         return jdbc.queryForObject("SELECT * FROM \"InvoiceLine\" WHERE \"InvoiceLineId\"=?", invoiceLineMapper, invoiceLineId);
     }
 
+    /**
+     * Method to query the database for a list of all invoicelines.
+     *
+     * @return list of invoicelines
+     */
     public List<InvoiceLine> getAllInvoiceLines(){
         log.info("getAllInvoiceLines from Database");
         return jdbc.query("SELECT * FROM \"InvoiceLine\";", invoiceLineMapper);

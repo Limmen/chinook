@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the employee service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class EmployeeServiceImplTest {
     @Mock
     private Employee employeeTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         employeeService = new EmployeeServiceImpl((employeeRepository));
     }
 
+    /**
+     * Test for the getAllEmployees method
+     */
     @Test
-    public void testGetAllEmployees() throws Exception {
+    public void testGetAllEmployees() {
         final List<Employee> databaseList = new ArrayList();
         when(employeeRepository.getAllEmployees()).thenReturn(databaseList);
         List<Employee> returnedList = employeeService.getAllEmployees();
         assertEquals("Asserting getAllEmployees", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getEmployee method
+     */
     @Test
-    public void testGetEmployee() throws Exception {
+    public void testGetEmployee() {
         when(employeeRepository.getEmployee(1)).thenReturn(employeeOne);
         when(employeeRepository.getEmployee(2)).thenReturn(employeeTwo);
         assertEquals("Asserting getEmployee", employeeOne, employeeService.getEmployee(1));

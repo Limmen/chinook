@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/artists*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class ArtistController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ArtistService artistService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param artistService service to handle artist-data
+     */
     @Inject
     public ArtistController(final ArtistService artistService) {
         this.artistService = artistService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/artists
+     *
+     * @return HTTP-response, JSON array of artists
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistsArrayRepresentation> getAllArtists() {
         log.debug("HTTP GET-request /resources/artists");
@@ -50,6 +62,12 @@ public class ArtistController {
         return new ResponseEntity<ArtistsArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/artists/{artistId}
+     *
+     * @param artistId id of the artist.
+     * @return HTTP-response, JSON representation of the artist
+     */
     @RequestMapping(value = "/{artistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> getArtist(@PathVariable int artistId) {
         log.debug("HTTP GET-request /resources/artists/{}", artistId);

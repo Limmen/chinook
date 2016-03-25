@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the artist service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class ArtistServiceImplTest {
     @Mock
     private Artist artistTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         artistService = new ArtistServiceImpl((artistRepository));
     }
 
+    /**
+     * Test for the getAllArtists method
+     */
     @Test
-    public void testGetAllArtists() throws Exception {
+    public void testGetAllArtists(){
         final List<Artist> databaseList = new ArrayList();
         when(artistRepository.getAllArtists()).thenReturn(databaseList);
         List<Artist> returnedList = artistService.getAllArtists();
         assertEquals("Asserting getAllArtists", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getArtist method
+     */
     @Test
-    public void testGetArtist() throws Exception {
+    public void testGetArtist() {
         when(artistRepository.getArtist(1)).thenReturn(artistOne);
         when(artistRepository.getArtist(2)).thenReturn(artistTwo);
         assertEquals("Asserting getArtist", artistOne, artistService.getArtist(1));

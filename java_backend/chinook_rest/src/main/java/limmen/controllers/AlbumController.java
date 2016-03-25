@@ -23,6 +23,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
+ * RestController for the resource pointed by the url: /resources/albums*
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
@@ -31,11 +33,21 @@ public class AlbumController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final AlbumService albumService;
 
+    /**
+     * Method to be injected by the Spring container. Initializes the service.
+     *
+     * @param albumService service for album-data
+     */
     @Inject
     public AlbumController(final AlbumService albumService) {
         this.albumService = albumService;
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/albums
+     *
+     * @return HTTP-response, JSON array of albums
+     */
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<AlbumsArrayRepresentation> getAllAlbums() {
         log.debug("HTTP GET-request /resources/albums");
@@ -52,6 +64,12 @@ public class AlbumController {
         return new ResponseEntity<AlbumsArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP-requests for /resources/albums/{albumId}
+     *
+     * @param albumId id of the album
+     * @return HTTP-response, JSON representation of the album
+     */
     @RequestMapping(value = "/{albumId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<AlbumRepresentation> getAlbum(@PathVariable int albumId) {
         log.debug("HTTP GET-request /resources/albums/{}", albumId);

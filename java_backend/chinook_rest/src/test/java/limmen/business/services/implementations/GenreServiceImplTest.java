@@ -17,6 +17,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 /**
+ * Unit test-suite for the genre service implementation
+ *
  * @author Kim Hammar on 2016-03-24.
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,21 +32,30 @@ public class GenreServiceImplTest {
     @Mock
     private Genre genreTwo;
 
+    /**
+     * This method is used for initializing the test, and called before tests are executed.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         genreService = new GenreServiceImpl((genreRepository));
     }
 
+    /**
+     * Test for the getAllGenres method
+     */
     @Test
-    public void testGetAllGenres() throws Exception {
+    public void testGetAllGenres() {
         final List<Genre> databaseList = new ArrayList();
         when(genreRepository.getAllGenres()).thenReturn(databaseList);
         List<Genre> returnedList = genreService.getAllGenres();
         assertEquals("Asserting getAllGenres", databaseList, returnedList);
     }
 
+    /**
+     * Test of the getGenre method
+     */
     @Test
-    public void testGetGenre() throws Exception {
+    public void testGetGenre() {
         when(genreRepository.getGenre(1)).thenReturn(genreOne);
         when(genreRepository.getGenre(2)).thenReturn(genreTwo);
         assertEquals("Asserting getGenre", genreOne, genreService.getGenre(1));

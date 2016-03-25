@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "Employee" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class EmployeeRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a employee with a certain id.
+     *
+     * @param employeeId id of the employee.
+     * @return Employee with the id.
+     */
     public Employee getEmployee(int employeeId) {
         return jdbc.queryForObject("SELECT * FROM \"Employee\" WHERE \"EmployeeId\"=?", employeeMapper, employeeId);
     }
 
+    /**
+     * Method to query the database for a list of all employees.
+     *
+     * @return list of employees.
+     */
     public List<Employee> getAllEmployees(){
         log.info("getAllEmployees from Database");
         return jdbc.query("SELECT * FROM \"Employee\";", employeeMapper);

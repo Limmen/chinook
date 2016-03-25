@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * CRUD-repository for the "Invoice" table in the chinook database.
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 @Repository
@@ -22,10 +24,21 @@ public class InvoiceRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * Method to query the database for a certain invoice.
+     *
+     * @param invoiceId id of the invoice.
+     * @return Invoice with the specified id.
+     */
     public Invoice getInvoice(int invoiceId) {
         return jdbc.queryForObject("SELECT * FROM \"Invoice\" WHERE \"InvoiceId\"=?", invoiceMapper, invoiceId);
     }
 
+    /**
+     * Method to query the database for a list of all invoices.
+     *
+     * @return list of invoices.
+     */
     public List<Invoice> getAllInvoices(){
         log.info("getAllInvoices from Database");
         return jdbc.query("SELECT * FROM \"Invoice\";", invoiceMapper);
