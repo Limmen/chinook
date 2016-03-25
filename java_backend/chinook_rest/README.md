@@ -26,14 +26,19 @@ The URL for the resources are prefixed with "/resources/"
 ### Request collection resources
 
     curl localhost:7777/resources/artists
+    
 Returns a JSON array of all artists
 
     curl localhost:7777/resources/tracks
+    
 Returns a JSON array of tracks
 
 ### Request single resources:
+
 Artist:
+
     curl localhost:7777/resources/artists/1
+    
 Returns artist with id 1:
 
     {
@@ -49,7 +54,9 @@ Returns artist with id 1:
     }
 
 Track:
+
     curl localhost:7777/resources/artists/1
+    
 Returns track with id 1:
 
     {
@@ -79,6 +86,7 @@ Returns track with id 1:
         }
       }
     }
+
 ## TODO
 
 Currently the API is read-only. POST/PUT/DELETE is yet to be implemented.
