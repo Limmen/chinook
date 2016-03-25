@@ -38,6 +38,7 @@ public class ArtistITCase {
     private final String BASE_URL = "http://localhost:7777/resources/artists";
     private JdbcTemplate jdbc;
     private RestTemplate rest;
+    private List<Artist> artists;
     @Autowired
     DataSource dataSource;
 
@@ -45,22 +46,22 @@ public class ArtistITCase {
     public void setup() {
         rest = new RestTemplate();
         jdbc = new JdbcTemplate(dataSource);
+        artists = jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
     }
 
     @Test
     public void getArtistTest() {
-        ArtistRepresentation expectedArtistRepresenation =
-                new ArtistRepresentation
-                        (jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, 1));
-        ResponseEntity<ArtistRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
-                expectedArtistRepresenation.getArtist().getArtistId(), ArtistRepresentation.class, Collections.EMPTY_MAP);
-        assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Asserting entity", expectedArtistRepresenation, responseEntity.getBody());
+        if (artists.size() > 0) {
+            ArtistRepresentation expectedArtistRepresenation = new ArtistRepresentation(artists.get(0));
+            ResponseEntity<ArtistRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
+                    expectedArtistRepresenation.getArtist().getArtistId(), ArtistRepresentation.class, Collections.EMPTY_MAP);
+            assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
+            assertEquals("Asserting entity", expectedArtistRepresenation, responseEntity.getBody());
+        }
     }
 
     @Test
     public void getArtists() {
-        List<Artist> artists = jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
         ResponseEntity<ArtistsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, ArtistsArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals("Asserting array size", artists.size(), responseEntity.getBody().getArtists().size());

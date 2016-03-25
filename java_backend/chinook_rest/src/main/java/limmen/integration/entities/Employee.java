@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
+ * POJO that represents a Employee entity from the chinook database
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class Employee {
@@ -39,7 +41,25 @@ public class Employee {
     private String email;
 
 
-
+    /**
+     * Class constructor. Initializes an immutable entity class
+     *
+     * @param employeeId id of the employee
+     * @param lastName lastname of the employee
+     * @param firstName firstname of the employee
+     * @param title title of the employee
+     * @param reportsTo other employee or self that this employee reports to
+     * @param birthDate birtdate of the employee
+     * @param hireDate date of hirement
+     * @param address address of the employee
+     * @param city city where the employee lives
+     * @param state state where the employee lives
+     * @param country country where the employee lives
+     * @param postalCode postalcode where the employee lives
+     * @param phone phonenumber of the employee
+     * @param fax fax of the employee
+     * @param email email of the employee
+     */
     public Employee(int employeeId, String lastName, String firstName, String title, int reportsTo, Date birthDate,
                     Date hireDate, String address, String city, String state, String country, String postalCode,
                     String phone, String fax, String email) {

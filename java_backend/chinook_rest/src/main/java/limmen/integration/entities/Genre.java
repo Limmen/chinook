@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * POJO that represents a Genre entity from the chinook database
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class Genre {
@@ -12,6 +14,12 @@ public class Genre {
     @Size(max = 120)
     private String name;
 
+    /**
+     * Class constructor. Initializes an immutable entity class.
+     *
+     * @param genreId id of the genre, unique.
+     * @param name name of the genre.
+     */
     public Genre(int genreId, String name) {
         this.genreId = genreId;
         this.name = name;

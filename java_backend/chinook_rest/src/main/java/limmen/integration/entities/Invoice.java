@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
+ * POJO that represents a Invoice entity from the chinook database
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class Invoice {
@@ -27,6 +29,19 @@ public class Invoice {
     @NotNull
     private float total;
 
+    /**
+     * Class constructor. Initializes an immutable entity class.
+     *
+     * @param invoiceId if of the invoice, unique.
+     * @param customerId id of the customer who is associated with the invoice
+     * @param invoiceDate date when the invocie was issued
+     * @param billingAddress address to send the bill
+     * @param billingCity city to send the bill
+     * @param billingState state to send the bill
+     * @param billingCountry country to send the bill
+     * @param billingPostalCode postal code to send the bill
+     * @param total amount to bill
+     */
     public Invoice(int invoiceId, int customerId, Date invoiceDate, String billingAddress, String billingCity,
                    String billingState, String billingCountry, String billingPostalCode, float total) {
         this.invoiceId = invoiceId;

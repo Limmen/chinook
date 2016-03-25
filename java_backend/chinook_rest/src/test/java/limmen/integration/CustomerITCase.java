@@ -38,6 +38,7 @@ public class CustomerITCase {
     final String BASE_URL = "http://localhost:7777/resources/customers";
     private JdbcTemplate jdbc;
     private RestTemplate rest;
+    private List<Customer> customers;
     @Autowired
     DataSource dataSource;
 
@@ -45,21 +46,22 @@ public class CustomerITCase {
     public void setup() {
         rest = new RestTemplate();
         jdbc = new JdbcTemplate(dataSource);
+        customers = jdbc.query("SELECT * FROM \"Customer\";", customerMapper);
     }
 
     @Test
     public void getCustomerTest() {
-        CustomerRepresentation expectedCustomerRepresenation = new CustomerRepresentation
-                (jdbc.queryForObject("SELECT * FROM \"Customer\" WHERE \"CustomerId\"=?", customerMapper, 14));
-        ResponseEntity<CustomerRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
-                expectedCustomerRepresenation.getCustomer().getCustomerId(), CustomerRepresentation.class, Collections.EMPTY_MAP);
-        assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Asserting entity", expectedCustomerRepresenation, responseEntity.getBody());
+        if (customers.size() > 0) {
+            CustomerRepresentation expectedCustomerRepresenation = new CustomerRepresentation(customers.get(0));
+            ResponseEntity<CustomerRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
+                    expectedCustomerRepresenation.getCustomer().getCustomerId(), CustomerRepresentation.class, Collections.EMPTY_MAP);
+            assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
+            assertEquals("Asserting entity", expectedCustomerRepresenation, responseEntity.getBody());
+        }
     }
 
     @Test
-    public void getCustomers(){
-        List<Customer> customers = jdbc.query("SELECT * FROM \"Customer\";", customerMapper);
+    public void getCustomers() {
         ResponseEntity<CustomersArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, CustomersArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals("Asserting array size", customers.size(), responseEntity.getBody().getCustomers().size());

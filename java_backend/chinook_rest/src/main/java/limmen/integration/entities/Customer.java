@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * POJO that represents a Customer entity from the chinook database
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class Customer {
@@ -36,7 +38,23 @@ public class Customer {
     private String email;
     private int supportRepId;
 
-
+    /**
+     * Class constructor. Initializes an immutable entity class.
+     *
+     * @param customerId id of the customer
+     * @param firstName first name of the customer
+     * @param lastName last name of the customer
+     * @param company company of the customer
+     * @param address address of the customer
+     * @param city city of the customer
+     * @param country country of the customer
+     * @param state state of the customer
+     * @param postalCode postalCode of the customer
+     * @param phone phone of the customer
+     * @param fax fax of the customer
+     * @param email email of the customer
+     * @param supportRepId id of employee that assisted
+     */
     public Customer(int customerId, String firstName, String lastName, String company, String address, String city,
                     String country, String state, String postalCode, String phone, String fax, String email,
                     int supportRepId) {

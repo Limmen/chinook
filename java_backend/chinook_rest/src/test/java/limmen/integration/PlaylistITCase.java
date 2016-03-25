@@ -1,9 +1,9 @@
 package limmen.integration;
 
 import limmen.ChinookRestApplication;
-import limmen.business.representations.array_representations.AlbumsArrayRepresentation;
-import limmen.business.representations.entity_representation.AlbumRepresentation;
-import limmen.integration.entities.Album;
+import limmen.business.representations.array_representations.PlaylistsArrayRepresentation;
+import limmen.business.representations.entity_representation.PlaylistRepresentation;
+import limmen.integration.entities.Playlist;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,11 +34,11 @@ import static org.junit.Assert.assertEquals;
 @SpringApplicationConfiguration(classes = ChinookRestApplication.class)
 @WebAppConfiguration
 @IntegrationTest
-public class AlbumITCase {
-    final String BASE_URL = "http://localhost:7777/resources/albums";
+public class PlaylistITCase {
+    private final String BASE_URL = "http://localhost:7777/resources/playlists";
     private JdbcTemplate jdbc;
     private RestTemplate rest;
-    private List<Album> albums;
+    private List<Playlist> playlists;
     @Autowired
     DataSource dataSource;
 
@@ -46,31 +46,31 @@ public class AlbumITCase {
     public void setup() {
         rest = new RestTemplate();
         jdbc = new JdbcTemplate(dataSource);
-        albums = jdbc.query("SELECT * FROM \"Album\";", albumMapper);
+        playlists = jdbc.query("SELECT * FROM \"Playlist\";", playlistMapper);
     }
 
     @Test
-    public void getAlbumTest() {
-        if (albums.size() > 0) {
-            AlbumRepresentation expectedAlbumRepresenation = new AlbumRepresentation(albums.get(0));
-            ResponseEntity<AlbumRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
-                    expectedAlbumRepresenation.getAlbum().getAlbumId(), AlbumRepresentation.class, Collections.EMPTY_MAP);
+    public void getPlaylistTest() {
+        if (playlists.size() > 0) {
+            PlaylistRepresentation expectedPlaylistRepresenation = new PlaylistRepresentation(playlists.get(0));
+            ResponseEntity<PlaylistRepresentation> responseEntity = rest.getForEntity(BASE_URL + "/" +
+                    expectedPlaylistRepresenation.getPlaylist().getPlaylistId(), PlaylistRepresentation.class, Collections.EMPTY_MAP);
             assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-            assertEquals("Asserting entity", expectedAlbumRepresenation, responseEntity.getBody());
+            assertEquals("Asserting entity", expectedPlaylistRepresenation, responseEntity.getBody());
         }
     }
 
     @Test
-    public void getAlbums() {
-        ResponseEntity<AlbumsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, AlbumsArrayRepresentation.class, Collections.EMPTY_MAP);
+    public void getPlaylists() {
+        ResponseEntity<PlaylistsArrayRepresentation> responseEntity = rest.getForEntity(BASE_URL, PlaylistsArrayRepresentation.class, Collections.EMPTY_MAP);
         assertEquals("Asserting status code", HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Asserting array size", albums.size(), responseEntity.getBody().getAlbums().size());
+        assertEquals("Asserting array size", playlists.size(), responseEntity.getBody().getPlaylists().size());
     }
 
-    private static final RowMapper<Album> albumMapper = new RowMapper<Album>() {
-        public Album mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Album album = new Album(rs.getInt("AlbumId"), rs.getString("Title"), rs.getInt("ArtistId"));
-            return album;
+    private static final RowMapper<Playlist> playlistMapper = new RowMapper<Playlist>() {
+        public Playlist mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Playlist playlist = new Playlist(rs.getInt("PlaylistId"), rs.getString("Name"));
+            return playlist;
         }
     };
 }

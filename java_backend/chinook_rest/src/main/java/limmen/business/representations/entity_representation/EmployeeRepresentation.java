@@ -16,7 +16,7 @@ public class EmployeeRepresentation extends ResourceSupport {
         this.employee = employee;
     }
 
-    public Employee getemployee() {
+    public Employee getEmployee() {
         return employee;
     }
 }

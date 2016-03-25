@@ -23,15 +23,15 @@ public class MediaTypeRepository {
     private JdbcTemplate jdbc;
 
     public MediaTypeEntity getMediaType(int mediaTypeId) {
-        return jdbc.queryForObject("SELECT * FROM \"MediaType\" WHERE \"MediaTypeId\"=?", MediaTypeMapper, mediaTypeId);
+        return jdbc.queryForObject("SELECT * FROM \"MediaType\" WHERE \"MediaTypeId\"=?", mediaTypeMapper, mediaTypeId);
     }
 
     public List<MediaTypeEntity> getAllMediaTypes(){
         log.info("getAllMediaTypes from Database");
-        return jdbc.query("SELECT * FROM \"MediaType\";", MediaTypeMapper);
+        return jdbc.query("SELECT * FROM \"MediaType\";", mediaTypeMapper);
     }
 
-    private static final RowMapper<MediaTypeEntity> MediaTypeMapper = new RowMapper<MediaTypeEntity>() {
+    private static final RowMapper<MediaTypeEntity> mediaTypeMapper = new RowMapper<MediaTypeEntity>() {
         public MediaTypeEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             MediaTypeEntity mediaTypeEntity = new MediaTypeEntity(rs.getInt("MediaTypeId"), rs.getString("Name"));
             return mediaTypeEntity;

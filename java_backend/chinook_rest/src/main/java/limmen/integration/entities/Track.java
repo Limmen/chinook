@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * POJO that represents a Track entity from the chinook database
+ *
  * @author Kim Hammar on 2016-03-22.
  */
 public class Track {
@@ -24,6 +26,19 @@ public class Track {
     @NotNull
     private float unitPrice;
 
+    /**
+     * Class constructor. Initializes an immutable entity class.
+     *
+     * @param trackId id of the track, unique.
+     * @param name name of the track.
+     * @param albumId id of the album where this track lives.
+     * @param mediaTypeId id of the media type of this track.
+     * @param genreId id of the genre of this track.
+     * @param composer composer of this track.
+     * @param milliseconds length in milliseconds.
+     * @param bytes size in bytes.
+     * @param unitPrice price per unit.
+     */
     public Track(int trackId, String name, int albumId, int mediaTypeId, int genreId, String composer, int milliseconds,
                  int bytes, float unitPrice) {
         this.trackId = trackId;
