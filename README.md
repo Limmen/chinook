@@ -20,7 +20,7 @@ A REST-API for the chinook database developed with clojure
 
 ## Current state
 
-java_backend contains a fullt functional RESP-API for HTTP/GET
+java_backend contains a fully functional RESP-API for HTTP/GET
 
 TODO:
 

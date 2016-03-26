@@ -55,7 +55,7 @@ Returns artist with id 1:
 
 Track:
 
-    curl localhost:7777/resources/artists/1
+    curl localhost:7777/resources/tracks/1
     
 Returns track with id 1:
 
@@ -86,6 +86,21 @@ Returns track with id 1:
         }
       }
     }
+
+### Error responses
+
+    curl localhost:7777/wrong_path
+
+Returns a JSON response on the following format:
+    
+    {
+        "timestamp":1459003058410,
+        "status":404,
+        "error":"Not Found",
+        "message":"No message available",
+        "path":"/wrong_path"
+    }
+
 
 ## TODO
 
