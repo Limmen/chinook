@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
@@ -17,24 +8,24 @@ import { addEventListener, removeEventListener } from './core/DOMUtils';
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
 const context = {
-  insertCss: styles => styles._insertCss(),
-  onSetTitle: value => (document.title = value),
-  onSetMeta: (name, content) => {
-    // Remove and create a new <meta /> tag in order to make it work
-    // with bookmarks in Safari
-    const elements = document.getElementsByTagName('meta');
-    Array.from(elements).forEach((element) => {
-      if (element.getAttribute('name') === name) {
-        element.parentNode.removeChild(element);
-      }
-    });
-    const meta = document.createElement('meta');
-    meta.setAttribute('name', name);
-    meta.setAttribute('content', content);
-    document
-      .getElementsByTagName('head')[0]
-      .appendChild(meta);
-  },
+    insertCss: styles => styles._insertCss(),
+    onSetTitle: value => (document.title = value),
+    onSetMeta: (name, content) => {
+        // Remove and create a new <meta /> tag in order to make it work
+        // with bookmarks in Safari
+        const elements = document.getElementsByTagName('meta');
+        Array.from(elements).forEach((element) => {
+            if (element.getAttribute('name') === name) {
+                element.parentNode.removeChild(element);
+            }
+        });
+        const meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        meta.setAttribute('content', content);
+        document
+            .getElementsByTagName('head')[0]
+            .appendChild(meta);
+    },
 };
 
 // Google Analytics tracking. Don't send 'pageview' event after the first
@@ -42,25 +33,25 @@ const context = {
 let trackPageview = () => (trackPageview = () => window.ga('send', 'pageview'));
 
 function render(state) {
-  Router.dispatch(state, (newState, component) => {
-    ReactDOM.render(component, appContainer, () => {
-      // Restore the scroll position if it was saved into the state
-      if (state.scrollY !== undefined) {
-        window.scrollTo(state.scrollX, state.scrollY);
-      } else {
-        window.scrollTo(0, 0);
-      }
+    Router.dispatch(state, (newState, component) => {
+        ReactDOM.render(component, appContainer, () => {
+            // Restore the scroll position if it was saved into the state
+            if (state.scrollY !== undefined) {
+                window.scrollTo(state.scrollX, state.scrollY);
+            } else {
+                window.scrollTo(0, 0);
+            }
 
-      trackPageview();
+            trackPageview();
 
-      // Remove the pre-rendered CSS because it's no longer used
-      // after the React app is launched
-      if (cssContainer) {
-        cssContainer.parentNode.removeChild(cssContainer);
-        cssContainer = null;
-      }
+            // Remove the pre-rendered CSS because it's no longer used
+            // after the React app is launched
+            if (cssContainer) {
+                cssContainer.parentNode.removeChild(cssContainer);
+                cssContainer = null;
+            }
+        });
     });
-  });
 }
 
 function run() {

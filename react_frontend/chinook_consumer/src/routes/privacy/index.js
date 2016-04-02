@@ -1,8 +1,8 @@
 import React from 'react';
-import Home from './Home';
+import Home from './Privacy';
 
-export const path = '/';
+export const path = '/privacy';
 export const action = async (state) => {
     state.context.onSetTitle('Chinook');
-    return <Home/>;
+    return <Privacy/>;
 };
