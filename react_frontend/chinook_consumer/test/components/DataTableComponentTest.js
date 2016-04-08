@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import HeaderComponent from 'components/src/components/HeaderComponent.js';
+import DataTableComponent from 'components//DataTableComponent.js';
 
-describe('HeaderComponent', () => {
+describe('DataTableComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(HeaderComponent);
+    component = createComponent(DataTableComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('header-component');
+    expect(component.props.className).to.equal('datatable-component');
   });
 });

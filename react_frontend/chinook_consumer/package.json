@@ -63,9 +63,12 @@
     "postcss-loader": "^0.8.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "core-js": "^2.0.0",
+    "fixed-data-table": "^0.6.0",
     "normalize.css": "^4.0.0",
     "react": "^0.14.0",
+    "react-bootstrap-table": "^2.1.2",
     "react-dom": "^0.14.0"
   }
 }
