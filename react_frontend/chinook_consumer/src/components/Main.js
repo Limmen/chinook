@@ -12,7 +12,7 @@ class AppComponent extends React.Component {
         return (
                 <div className="index">
                 <HeaderComponent />
-                <DataTableComponent />
+                <DataTableComponent url="http://localhost:7777/resources/artists" pollInterval="10000" />
                 <FooterComponent />
                 </div>
         );

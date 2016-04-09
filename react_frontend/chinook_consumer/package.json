@@ -66,6 +66,7 @@
     "bootstrap": "^3.3.6",
     "core-js": "^2.0.0",
     "fixed-data-table": "^0.6.0",
+    "jquery": "^2.2.3",
     "normalize.css": "^4.0.0",
     "react": "^0.14.0",
     "react-bootstrap-table": "^2.1.2",

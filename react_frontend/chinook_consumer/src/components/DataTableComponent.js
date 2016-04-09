@@ -1,8 +1,9 @@
 'use strict';
 
 import React from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {Table, Column, Cell} from 'fixed-data-table';
+import $ from "jquery";
+
 require('styles//DataTable.css');
 
 const rows = [{"id":1,"first_name":"William","last_name":"Elliott","email":"welliott0@wisc.edu",
@@ -16,12 +17,39 @@ const rows = [{"id":1,"first_name":"William","last_name":"Elliott","email":"well
              ];
 
 
-class DataTableComponent extends React.Component {  
+class DataTableComponent extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            artists : {}
+        }
+    };
+
+    loadArtistsFromServer() {
+        $.ajax({
+            type: "GET",
+            url: this.props.url,
+            dataType: 'json',
+            success: (artistsData) => {
+                console.log(JSON.stringify(artistsData))
+                this.setState({artists: artistsData});
+            },
+            error: (xhr, status, err) => {
+                console.error(this.props.url, status, err.toString());
+            }
+        });
+    }
+
+    componentDidMount() {
+        this.loadArtistsFromServer();
+        setInterval(this.loadArtistsFromServer, this.props.pollInterval);
+    }
+    
     render() {
         return (
                 <div className="datatable-component">
                 <Table
-            className="data_table_jao"
             height={rows.length * 30}
             width={1150}
             rowsCount={rows.length}
@@ -31,14 +59,14 @@ class DataTableComponent extends React.Component {
                 
                 <Column dataKey="id" width={50} label="Id" />
                 <Column dataKey="first_name" width={200} label="First Name" />
-                <Column  dataKey="last_name" width={200} label="Last Name" />
-                <Column  dataKey="email" width={400} label="e-mail" />
-                <Column  dataKey="country" width={300} label="Country" />
+            <Column  dataKey="last_name" width={200} label="Last Name" />
+            <Column  dataKey="email" width={400} label="e-mail" />
+            <Column  dataKey="country" width={300} label="Country" />
                 
-            </Table>
-                </div>
-        );
-    }
+        </Table>
+            </div>
+    );
+}
 }
 
 

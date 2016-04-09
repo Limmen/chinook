@@ -1,7 +1,7 @@
 package limmen.controllers;
 
-import limmen.business.representations.entity_representation.ArtistRepresentation;
 import limmen.business.representations.array_representations.ArtistsArrayRepresentation;
+import limmen.business.representations.entity_representation.ArtistRepresentation;
 import limmen.business.services.ArtistService;
 import limmen.integration.entities.Artist;
 import org.slf4j.Logger;
@@ -10,10 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -48,6 +45,7 @@ public class ArtistController {
      *
      * @return HTTP-response, JSON array of artists
      */
+    @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistsArrayRepresentation> getAllArtists() {
         log.debug("HTTP GET-request /resources/artists");
