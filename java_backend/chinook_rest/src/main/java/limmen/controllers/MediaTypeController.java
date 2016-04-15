@@ -10,10 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -29,6 +26,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/resources/mediatypes")
 public class MediaTypeController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -49,6 +47,7 @@ public class MediaTypeController {
      *
      * @return HTTP-response, JSON array of mediatypes
      */
+    @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypesArrayRepresentation> getAllMediaTypes() {
         log.debug("HTTP GET-request /resources/mediatypes");
@@ -69,6 +68,7 @@ public class MediaTypeController {
      * @param mediaTypeId id of the mediatype
      * @return HTTP-response, JSON-representation of the mediatype
      */
+    @CrossOrigin
     @RequestMapping(value = "/{mediaTypeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypeRepresentation> getMediaType(@PathVariable int mediaTypeId) {
         log.debug("HTTP GET-request /resources/mediaTypes/{}", mediaTypeId);

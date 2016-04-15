@@ -10,10 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -28,6 +25,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/resources/playlisttracks")
 public class PlaylistTrackController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -48,6 +46,7 @@ public class PlaylistTrackController {
      *
      * @return HTTP-response, JSON array of playlisttracks
      */
+    @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistTracksArrayRepresentation> getAllPlaylistTracks() {
         log.debug("HTTP GET-request /resources/playlisttracks");
@@ -74,6 +73,7 @@ public class PlaylistTrackController {
      * @param playlistId id of the playlist
      * @return HTTP-response, JSON-representation of the playlisttrack
      */
+    @CrossOrigin
     @RequestMapping(value = "/{trackId}/{playlistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<PlaylistTrackRepresentation> getPlaylistTrack(@PathVariable int trackId, @PathVariable int playlistId) {
         log.debug("HTTP GET-request /resources/playlistTracks/{}", trackId);

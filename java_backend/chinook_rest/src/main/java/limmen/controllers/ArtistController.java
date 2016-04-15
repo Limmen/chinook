@@ -25,6 +25,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/resources/artists")
 public class ArtistController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -66,6 +67,7 @@ public class ArtistController {
      * @param artistId id of the artist.
      * @return HTTP-response, JSON representation of the artist
      */
+    @CrossOrigin
     @RequestMapping(value = "/{artistId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> getArtist(@PathVariable int artistId) {
         log.debug("HTTP GET-request /resources/artists/{}", artistId);

@@ -69,7 +69,7 @@
     "jquery": "^2.2.3",
     "normalize.css": "^4.0.0",
     "react": "^0.14.0",
-    "react-bootstrap-table": "^2.1.2",
+    "react-datagrid": "^2.0.2",
     "react-dom": "^0.14.0"
   }
 }

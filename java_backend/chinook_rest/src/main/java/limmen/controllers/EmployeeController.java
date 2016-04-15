@@ -10,10 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -28,6 +25,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Kim Hammar on 2016-03-22.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/resources/employees")
 public class EmployeeController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -48,6 +46,7 @@ public class EmployeeController {
      *
      * @return HTTP-response, JSON array of employees
      */
+    @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<EmployeesArrayRepresentation> getAllEmployees() {
         log.debug("HTTP GET-request /resources/employees");
@@ -67,6 +66,7 @@ public class EmployeeController {
      * @param employeeId id of the employee
      * @return HTTP-response, JSON representation of the employee
      */
+    @CrossOrigin
     @RequestMapping(value = "/{employeeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<EmployeeRepresentation> getEmployee(@PathVariable int employeeId) {
         log.debug("HTTP GET-request /resources/employees/{}", employeeId);
