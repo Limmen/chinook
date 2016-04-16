@@ -6,7 +6,7 @@
 
 This repo contains three separate projects:
 
-* angular_frontend
+* react_frontend
 
 A JavaScript frontend that consumes a REST-API for the chinook database.
 
@@ -25,7 +25,7 @@ java_backend contains a fully functional RESP-API for HTTP/GET
 TODO:
 
 * clojure_backend
-* angular_frontend
+* react_frontend
 * support PUT/POST/DELETE in java_backend
 
 ## How to run
