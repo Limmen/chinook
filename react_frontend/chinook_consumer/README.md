@@ -7,11 +7,11 @@ The application was initiated with a template from: [generator-react-webpack](ht
 
 Tools used:
 
-- Webpack
-..- Module bundler. Bundles all necessary javascript files to a bundle dist/assets/app.js
+* Webpack
+  * Module bundler. Bundles all necessary javascript files to a bundle dist/assets/app.js
 
-- Babel
-..- JavaScript compiler that transforms EcmaScript2015 code to JavaScript code that is compatible with the browser. Enables us to write the application in ES2015.
+* Babel
+  * JavaScript compiler that transforms EcmaScript2015 code to JavaScript code that is compatible with the browser. Enables us to write the application in ES2015.
 
 ## Screenshot
 
