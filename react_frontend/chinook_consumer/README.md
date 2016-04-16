@@ -21,11 +21,6 @@ TODO
 
 1. `git clone https://github.com/Limmen/chinook`
 2. `cd chinook/react_frontend/chinook_consumer/`
-3. `mvn clean install` , downloads dependencies and runs tests
-4. The application is packaged in a "fat jar" that includes dependencies on a tomcat server, run with: `java -jar target/chinook_rest-0.0.1-SNAPSHOT.jar`
-5. The server is now up and running and accepts HTTP requests. The primary entry point is at:
-
-   http://localhost:7777
 
 ## Generating new components with yeoman
 ```bash
@@ -65,7 +60,7 @@ npm run clean
 npm run copy
 ```
 ### Naming Components
-We have opted to follow [@floydophone](https://twitter.com/floydophone) convention of uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components). I am open to suggestions if there is a general objection to this decision.
+Uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components).
 
 ### Modules
 Each component is a module and can be required using the [Webpack](http://webpack.github.io/) module system. [Webpack](http://webpack.github.io/) uses [Loaders](http://webpack.github.io/docs/loaders.html) which means you can also require CSS and a host of other file types. Read the [Webpack documentation](http://webpack.github.io/docs/home.html) to find out more.
