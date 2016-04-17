@@ -55,6 +55,8 @@ public class EmployeeController {
         employees.forEach((employee) -> {
             EmployeeRepresentation employeeRepresentation = new EmployeeRepresentation(employee);
             employeeRepresentation.add(linkTo(methodOn(EmployeeController.class).getEmployee(employee.getEmployeeId())).withSelfRel());
+            employeeRepresentation.add(linkTo(methodOn(EmployeeController.class).
+                    getEmployee(employeeRepresentation.getEmployee().getReportsTo())).withRel("reportsTo"));
             employeeRepresentations.add(employeeRepresentation);
         });
         EmployeesArrayRepresentation arrayRepresentation = new EmployeesArrayRepresentation(employeeRepresentations);
