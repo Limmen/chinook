@@ -4,22 +4,28 @@ require('styles/App.css');
 import React from 'react';
 import HeaderComponent from './HeaderComponent';
 import FooterComponent from './FooterComponent';
-import DataTableComponent from './DataTableComponent';
+import DataTableControllerComponent from './DataTableControllerComponent';
 
 
 class AppComponent extends React.Component {
-    render() {
-        return (
-                <div className="index">
-                <HeaderComponent />
-                <DataTableComponent url="http://localhost:7777/resources/artists" pollInterval="10000" />
-                <FooterComponent />
-                </div>
-        );
-    }
+  render() {
+    return (
+      <div className="index">
+        <HeaderComponent/>
+        <div className="row">
+          <div className="col-sm-4"></div>
+          <div className="col-sm-6">
+            <DataTableControllerComponent />
+            {this.props.children}
+          </div>
+          <div className="col-sm-4"></div>
+        </div>
+        <FooterComponent className="col-sm-12"/>
+      </div>
+    );
+  }
 }
 
-AppComponent.defaultProps = {
-};
+AppComponent.defaultProps = {};
 
 export default AppComponent;
