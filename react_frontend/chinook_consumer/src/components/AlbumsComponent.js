@@ -9,6 +9,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
+import Dimensions from 'react-dimensions'
 
 require('styles//DataTable.css');
 require('styles//Albums.css');
@@ -49,7 +50,7 @@ class AlbumsComponent extends React.Component {
             rowsCount={this.state.albums.length}
             rowHeight={50}
             headerHeight={50}
-            width={1000}
+            width={this.props.containerWidth}
             height={500}>
             <Column
               header={<Cell>Id</Cell>}
@@ -58,7 +59,8 @@ class AlbumsComponent extends React.Component {
         {this.state.albums[props.rowIndex].album.albumId}
           </Cell>
         )}
-              width={500}
+              width={50}
+              flexGrow={1}
             />
             <Column
               header={<Cell>Title</Cell>}
@@ -67,7 +69,8 @@ class AlbumsComponent extends React.Component {
         {this.state.albums[props.rowIndex].album.title}
 </Cell>
         )}
-              width={500}
+              width={350}
+              flexGrow={1}
             />
           </Table>
         </div>
@@ -81,4 +84,4 @@ AlbumsComponent.displayName = 'AlbumsComponent';
 AlbumsComponent.propTypes = {};
 AlbumsComponent.defaultProps = {};
 
-export default AlbumsComponent;
+export default Dimensions()(AlbumsComponent);

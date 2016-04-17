@@ -6,33 +6,37 @@
 
 'use strict';
 
- import React from 'react';
- import HeaderComponent from './HeaderComponent';
- import FooterComponent from './FooterComponent';
- import DataTableControllerComponent from './DataTableControllerComponent';
+import React from 'react';
+import HeaderComponent from './HeaderComponent';
+import FooterComponent from './FooterComponent';
+import DataTableControllerComponent from './DataTableControllerComponent';
 
- require('normalize.css/normalize.css');
- require('styles/App.css');
+require('normalize.css/normalize.css');
+require('styles/App.css');
 
- class AppComponent extends React.Component {
+class AppComponent extends React.Component {
   render() {
     return (
-      <div className="index">
-        <HeaderComponent/>
+      <div className="index container-fluid">
         <div className="row">
-          <div className="col-sm-4"></div>
+          <HeaderComponent/>
+        </div>
+        <div className="row">
+          <div className="col-sm-3"></div>
           <div className="col-sm-6">
             <DataTableControllerComponent />
             {this.props.children}
           </div>
-          <div className="col-sm-4"></div>
+          <div className="col-sm-3"></div>
         </div>
-        <FooterComponent className="col-sm-12"/>
+        <div className="row">
+        <FooterComponent />
+          </div>
       </div>
     );
   }
 }
 
- AppComponent.defaultProps = {};
+AppComponent.defaultProps = {};
 
- export default AppComponent;
+export default AppComponent;

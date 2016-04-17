@@ -8,6 +8,8 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
+import Dimensions from 'react-dimensions'
+
 
 require('styles//DataTable.css');
 require('styles//Artists.css');
@@ -48,7 +50,7 @@ class ArtistsComponent extends React.Component {
           rowsCount={this.state.artists.length}
           rowHeight={50}
           headerHeight={50}
-          width={1000}
+          width={this.props.containerWidth}
           height={500}>
           <Column
             header={<Cell>Id</Cell>}
@@ -57,7 +59,8 @@ class ArtistsComponent extends React.Component {
         {this.state.artists[props.rowIndex].artist.artistId}
           </Cell>
         )}
-            width={500}
+            width={50}
+            flexGrow={1}
           />
           <Column
             header={<Cell>Name</Cell>}
@@ -66,7 +69,8 @@ class ArtistsComponent extends React.Component {
         {this.state.artists[props.rowIndex].artist.name}
 </Cell>
         )}
-            width={500}
+            width={350}
+            flexGrow={1}
           />
         </Table>
           </div>
@@ -81,4 +85,4 @@ ArtistsComponent.displayName = 'ArtistsComponent';
 ArtistsComponent.propTypes = {};
 ArtistsComponent.defaultProps = {};
 
-export default ArtistsComponent;
+export default Dimensions()(ArtistsComponent);

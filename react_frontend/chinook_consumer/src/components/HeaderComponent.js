@@ -13,6 +13,7 @@ require('styles//Header.css');
 let HeaderComponent = (props) => (
         <div className="header-component">
         <div className="jumbotron">
+          <h1 className="display-2 text-center">Chinook</h1>
         </div>
         </div>
 );

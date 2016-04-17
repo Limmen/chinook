@@ -11,7 +11,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       {/* add the routes here */}
-      <IndexRoute component={ArtistsComponent}/>
+      {/* <IndexRoute component={ArtistsComponent}/> */}
       <Route path="/artists" component={ArtistsComponent}/>
       <Route path="/albums" component={AlbumsComponent}/>
     </Route>
