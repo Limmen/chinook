@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import DataTableComponent from 'components//ArtistsComponent.js';
+import AlbumsComponent from 'components//AlbumsComponent.js';
 
-describe('DataTableComponent', () => {
+describe('AlbumsComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(DataTableComponent);
+    component = createComponent(AlbumsComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('datatable-component');
+    expect(component.props.className).to.equal('albums-component');
   });
 });

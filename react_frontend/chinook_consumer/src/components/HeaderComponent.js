@@ -1,3 +1,9 @@
+/**
+ * HeaderComponent.
+ *
+ * Renders a Bootstrap-Jumbotron.
+ */
+
 'use strict';
 
 import React from 'react';
@@ -5,7 +11,7 @@ import React from 'react';
 require('styles//Header.css');
 
 let HeaderComponent = (props) => (
-        <div classNameNameName="header-component">
+        <div className="header-component">
         <div className="jumbotron">
         </div>
         </div>
@@ -13,8 +19,7 @@ let HeaderComponent = (props) => (
 
 HeaderComponent.displayName = 'HeaderComponent';
 
-// Uncomment properties you need
-// HeaderComponent.propTypes = {};
-// HeaderComponent.defaultProps = {};
+HeaderComponent.propTypes = {};
+HeaderComponent.defaultProps = {};
 
 export default HeaderComponent;

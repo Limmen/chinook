@@ -1,9 +1,15 @@
+/**
+ * ArtistsComponent.
+ *
+ * Component that fetches a list of artists from the REST-API and renders it in a datatable.
+ */
 'use strict';
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
 
+require('styles//DataTable.css');
 require('styles//Artists.css');
 
 class ArtistsComponent extends React.Component {
@@ -22,7 +28,6 @@ class ArtistsComponent extends React.Component {
       url: this.state.url,
       dataType: 'json',
       success: (artistsData) => {
-        console.log(JSON.stringify(artistsData.artists))
         this.setState({artists: artistsData.artists})
       },
       error: (xhr, status, err) => {
@@ -38,8 +43,8 @@ class ArtistsComponent extends React.Component {
   render() {
     return (
       <div className="artists-component">
+        <div className="datatablecontainer">
         <Table
-          className="artists-component"
           rowsCount={this.state.artists.length}
           rowHeight={50}
           headerHeight={50}
@@ -64,6 +69,7 @@ class ArtistsComponent extends React.Component {
             width={500}
           />
         </Table>
+          </div>
       </div>
     );
   }
@@ -71,5 +77,8 @@ class ArtistsComponent extends React.Component {
 
 
 ArtistsComponent.displayName = 'ArtistsComponent';
+
+ArtistsComponent.propTypes = {};
+ArtistsComponent.defaultProps = {};
 
 export default ArtistsComponent;

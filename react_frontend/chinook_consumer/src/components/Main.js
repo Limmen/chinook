@@ -1,13 +1,20 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
+/**
+ *  Application Container.
+ *
+ *  Bootstraps different components into a complete application.
+ */
 
-import React from 'react';
-import HeaderComponent from './HeaderComponent';
-import FooterComponent from './FooterComponent';
-import DataTableControllerComponent from './DataTableControllerComponent';
+'use strict';
 
+ import React from 'react';
+ import HeaderComponent from './HeaderComponent';
+ import FooterComponent from './FooterComponent';
+ import DataTableControllerComponent from './DataTableControllerComponent';
 
-class AppComponent extends React.Component {
+ require('normalize.css/normalize.css');
+ require('styles/App.css');
+
+ class AppComponent extends React.Component {
   render() {
     return (
       <div className="index">
@@ -26,6 +33,6 @@ class AppComponent extends React.Component {
   }
 }
 
-AppComponent.defaultProps = {};
+ AppComponent.defaultProps = {};
 
-export default AppComponent;
+ export default AppComponent;

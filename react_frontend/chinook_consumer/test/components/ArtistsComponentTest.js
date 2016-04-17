@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import NavLinkComponent from 'components//NavLinkComponent.js';
+import ArtistsComponent from 'components//ArtistsComponent.js';
 
-describe('NavLinkComponent', () => {
+describe('ArtistsComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(NavLinkComponent);
+    component = createComponent(ArtistsComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('navlink-component');
+    expect(component.props.className).to.equal('artists-component');
   });
 });

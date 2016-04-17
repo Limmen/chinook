@@ -1,3 +1,8 @@
+/**
+ * DataTableControllerComponent.
+ *
+ * Renders a list of links to datatables of different data.
+ */
 'use strict';
 
 import React from 'react';
@@ -20,8 +25,7 @@ class DataTableControllerComponent extends React.Component {
 
 DataTableControllerComponent.displayName = 'DataTableControllerComponent';
 
-// Uncomment properties you need
-// DataTableControllerComponent.propTypes = {};
-// DataTableControllerComponent.defaultProps = {};
+DataTableControllerComponent.propTypes = {};
+DataTableControllerComponent.defaultProps = {};
 
 export default DataTableControllerComponent;

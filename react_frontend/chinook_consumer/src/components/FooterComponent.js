@@ -1,3 +1,7 @@
+/**
+ * FooterComponent
+ */
+
 'use strict';
 
 import React from 'react';
@@ -16,8 +20,7 @@ let FooterComponent = (props) => (
 
 FooterComponent.displayName = 'FooterComponent';
 
-// Uncomment properties you need
-// FooterComponent.propTypes = {};
-// FooterComponent.defaultProps = {};
+FooterComponent.propTypes = {};
+FooterComponent.defaultProps = {};
 
 export default FooterComponent;

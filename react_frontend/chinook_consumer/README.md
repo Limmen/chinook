@@ -12,6 +12,12 @@ Tools used:
 
 * Babel
   * JavaScript compiler that transforms EcmaScript2015 code to JavaScript code that is compatible with the browser. Enables us to write the application in ES2015.
+  
+* Mocha
+  * JavaScript test framework.
+  
+*
+  * JavaScript linting utility (a type of static analysis).
 
 ## Screenshot
 
