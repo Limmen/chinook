@@ -1,4 +1,3 @@
-/* Configurationfile for babel */
 {
   "presets": [
     "es2015",

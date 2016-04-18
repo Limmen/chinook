@@ -68,7 +68,7 @@ class InvoiceLinesComponent extends React.Component {
         {this.state.invoiceLines[props.rowIndex].invoiceLine.unitPrice}
 </Cell>
         )}
-              width={350}
+              width={250}
               flexGrow={1}
             />
             <Column
@@ -78,7 +78,7 @@ class InvoiceLinesComponent extends React.Component {
         {this.state.invoiceLines[props.rowIndex].invoiceLine.quantity}
 </Cell>
         )}
-              width={350}
+              width={250}
               flexGrow={1}
             />
           </Table>

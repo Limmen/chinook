@@ -1,9 +1,8 @@
 /**
- * InvoicesComponent.
+ * TracksComponent.
  *
- * Component that fetches a list of invoices from the REST-API and renders it in a datatable.
+ * Component that fetches a list of tracks from the REST-API and renders it in a datatable.
  */
-
 'use strict';
 
 import React from 'react';
@@ -12,25 +11,25 @@ import $ from "jquery";
 import Dimensions from 'react-dimensions'
 
 require('styles//DataTable.css');
-require('styles//Invoices.css');
+require('styles//Tracks.css');
 
-class InvoicesComponent extends React.Component {
+class TracksComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      invoices: [],
-      url: "http://localhost:7777/resources/invoices"
+      tracks: [],
+      url: "http://localhost:7777/resources/tracks"
     }
   };
 
-  loadInvoicesFromServer() {
+  loadTracksFromServer() {
     $.ajax({
       type: "GET",
       url: this.state.url,
       dataType: 'json',
-      success: (invoicesData) => {
-        this.setState({invoices: invoicesData.invoices})
+      success: (tracksData) => {
+        this.setState({tracks: tracksData.tracks})
       },
       error: (xhr, status, err) => {
         console.error(this.state.url, status, err.toString());
@@ -39,14 +38,14 @@ class InvoicesComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.loadInvoicesFromServer();
+    this.loadTracksFromServer();
   }
   render() {
     return (
-      <div className="invoices-component">
+      <div className="tracks-component">
         <div className="datatablecontainer">
           <Table
-            rowsCount={this.state.invoices.length}
+            rowsCount={this.state.tracks.length}
             rowHeight={50}
             headerHeight={50}
             width={this.props.containerWidth}
@@ -55,67 +54,57 @@ class InvoicesComponent extends React.Component {
               header={<Cell>Id</Cell>}
               cell={props => (
            <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.invoiceId}
+        {this.state.tracks[props.rowIndex].track.trackId}
           </Cell>
         )}
               width={50}
               flexGrow={1}
             />
             <Column
-              header={<Cell>Invoice date</Cell>}
+              header={<Cell>Name</Cell>}
               cell={props => (
 <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.invoiceDate}
+        {this.state.tracks[props.rowIndex].track.name}
 </Cell>
         )}
               width={250}
               flexGrow={1}
             />
             <Column
-              header={<Cell>Billing Address</Cell>}
+              header={<Cell>Composer</Cell>}
               cell={props => (
 <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.billingAddress}
+        {this.state.tracks[props.rowIndex].track.composer}
 </Cell>
         )}
               width={250}
               flexGrow={1}
             />
             <Column
-              header={<Cell>Billing City</Cell>}
+              header={<Cell>Milliseconds</Cell>}
               cell={props => (
 <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.billingCity}
+        {this.state.tracks[props.rowIndex].track.milliseconds}
 </Cell>
         )}
               width={250}
               flexGrow={1}
             />
             <Column
-              header={<Cell>Billing Country</Cell>}
+              header={<Cell>Bytes</Cell>}
               cell={props => (
 <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.billingCountry}
+        {this.state.tracks[props.rowIndex].track.bytes}
 </Cell>
         )}
               width={250}
               flexGrow={1}
             />
             <Column
-              header={<Cell>Billing Postalcode</Cell>}
+              header={<Cell>Unitprice</Cell>}
               cell={props => (
 <Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.billingPostalCode}
-</Cell>
-        )}
-              width={250}
-              flexGrow={1}
-            />
-            <Column
-              header={<Cell>Total</Cell>}
-              cell={props => (
-<Cell {...props}>
-        {this.state.invoices[props.rowIndex].invoice.total}
+        {this.state.tracks[props.rowIndex].track.unitPrice}
 </Cell>
         )}
               width={250}
@@ -128,9 +117,10 @@ class InvoicesComponent extends React.Component {
   }
 }
 
-InvoicesComponent.displayName = 'InvoicesComponent';
+TracksComponent.displayName = 'TracksComponent';
 
-InvoicesComponent.propTypes = {};
-InvoicesComponent.defaultProps = {};
+TracksComponent.propTypes = {};
+TracksComponent.defaultProps = {};
 
-export default Dimensions()(InvoicesComponent);
+export default TracksComponent;
+export default Dimensions()(TracksComponent);

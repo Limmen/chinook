@@ -16,6 +16,10 @@ import EmployeesComponent from './components/EmployeesComponent';
 import GenresComponent from './components/GenresComponent';
 import InvoicesComponent from './components/InvoicesComponent';
 import InvoiceLinesComponent from './components/InvoiceLinesComponent';
+import MediaTypesComponent from './components/MediaTypesComponent';
+import PlaylistsComponent from './components/PlaylistsComponent';
+import PlaylistTracksComponent from './components/PlaylistTracksComponent';
+import TracksComponent from './components/TracksComponent';
 
 // Render the main component into the dom
 ReactDOM.render(
@@ -30,6 +34,10 @@ ReactDOM.render(
       <Route path="/genres" component={GenresComponent}/>
       <Route path="/invoices" component={InvoicesComponent}/>
       <Route path="/invoicelines" component={InvoiceLinesComponent}/>
+      <Route path="/mediatypes" component={MediaTypesComponent}/>
+      <Route path="/playlists" component={PlaylistsComponent}/>
+      <Route path="/playlisttracks" component={PlaylistTracksComponent}/>
+      <Route path="/tracks" component={TracksComponent}/>
     </Route>
   </Router>
   , document.getElementById('app'));
