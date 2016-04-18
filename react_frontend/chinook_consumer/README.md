@@ -16,7 +16,10 @@ Tools used:
 * Mocha
   * JavaScript test framework.
   
-*
+* Karma
+  * JavaScript test runner. Allows for executing code in real browsers.
+  
+* ESLint
   * JavaScript linting utility (a type of static analysis).
 
 ## Screenshot

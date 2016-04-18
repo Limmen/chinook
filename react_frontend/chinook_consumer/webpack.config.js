@@ -1,3 +1,7 @@
+/**
+ * Configuration file for webpack
+ */
+
 'use strict';
 
 const path = require('path');

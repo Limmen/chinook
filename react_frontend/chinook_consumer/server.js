@@ -1,3 +1,7 @@
+/**
+ * Node server for hosting the application on a webpack-devserver.
+ */
+
 /*eslint no-console:0 */
 'use strict';
 require('core-js/fn/object/assign');

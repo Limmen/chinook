@@ -14,6 +14,8 @@ import AlbumsComponent from './components/AlbumsComponent';
 import CustomersComponent from './components/CustomersComponent';
 import EmployeesComponent from './components/EmployeesComponent';
 import GenresComponent from './components/GenresComponent';
+import InvoicesComponent from './components/InvoicesComponent';
+import InvoiceLinesComponent from './components/InvoiceLinesComponent';
 
 // Render the main component into the dom
 ReactDOM.render(
@@ -26,6 +28,8 @@ ReactDOM.render(
       <Route path="/customers" component={CustomersComponent}/>
       <Route path="/employees" component={EmployeesComponent}/>
       <Route path="/genres" component={GenresComponent}/>
+      <Route path="/invoices" component={InvoicesComponent}/>
+      <Route path="/invoicelines" component={InvoiceLinesComponent}/>
     </Route>
   </Router>
   , document.getElementById('app'));

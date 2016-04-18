@@ -1,3 +1,5 @@
+/* Configuration file for karma */
+
 var webpackCfg = require('./webpack.config');
 
 module.exports = function(config) {

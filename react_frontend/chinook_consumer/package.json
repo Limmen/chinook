@@ -1,3 +1,4 @@
+/* Specification file for package manager (npm) */
 {
   "name": "chinookConsumer",
   "private": true,

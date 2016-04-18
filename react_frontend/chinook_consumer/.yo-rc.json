@@ -1,3 +1,4 @@
+/* Yeoman generator file */
 {
   "generator-react-webpack": {
     "appName": "chinookConsumer",
