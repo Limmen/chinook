@@ -20,7 +20,9 @@ class AlbumsComponent extends React.Component {
 
     this.state = {
       albums: [],
-      url: "http://localhost:7777/resources/albums"
+      url: "http://localhost:7777/resources/albums",
+      album: {},
+      artist: {}
     }
   };
 
@@ -38,6 +40,26 @@ class AlbumsComponent extends React.Component {
     });
   }
 
+  loadArtistFromServer(url) {
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: 'json',
+      success: (artistData) => {
+        console.log(JSON.stringify(artistData))
+        this.setState({artist: artistData.artist})
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+  }
+
+  updateAlbum(index) {
+    //this.setState({album: index})
+    this.setState({album: this.state.albums[index].album})
+  }
+
   componentDidMount() {
     this.loadAlbumsFromServer();
   }
@@ -45,6 +67,66 @@ class AlbumsComponent extends React.Component {
   render() {
     return (
       <div className="albums-component">
+        <div id="editModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Edit Album</h4>
+              </div>
+              <div className="modal-body row">
+                <div>
+                <div className="form-group">
+                  <label className="col-sm-2" for="album_id">Id</label>
+                  <div className="col-sm-10 margin_bottom">
+                    <input type="text" className="form-control" id="album_id" value={this.state.album.albumId}/>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-sm-2" for="album_title">Title</label>
+                  <div className="col-sm-10 margin_bottom">
+                    <input type="text" className="form-control" id="album_title" value={this.state.album.title}/>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-sm-2" for="album_artist">Artist Id</label>
+                  <div className="col-sm-10 margin_bottom">
+                    <input type="text" className="form-control" id="album_artist" value={this.state.album.artistId}/>
+                  </div>
+                </div>
+              </div>
+                </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="artistModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Artist</h4>
+              </div>
+              <div className="modal-body row">
+                <div>
+                  <label className="col-sm-2">Id</label>
+                  <div className="col-sm-10 margin_bottom">
+                    <p>{this.state.artist.artistId}</p>
+                  </div>
+                  <label className="col-sm-2">Name</label>
+                  <div className="col-sm-10 margin_bottom">
+                    <p>{this.state.artist.name}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="datatablecontainer">
           <Table
             rowsCount={this.state.albums.length}
@@ -70,6 +152,30 @@ class AlbumsComponent extends React.Component {
 </Cell>
         )}
               width={350}
+              flexGrow={1}
+            />
+            <Column
+              header={<Cell>Artist</Cell>}
+              cell={props => (
+<Cell {...props}>
+        <button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#artistModal" onClick={this.loadArtistFromServer.bind(this, this.state.albums[props.rowIndex]._links.artist.href)}>
+          <span className="glyphicon glyphicon-info-sign"> Id: {this.state.albums[props.rowIndex].album.artistId}</span>
+        </button>
+</Cell>
+        )}
+              width={150}
+              flexGrow={1}
+            />
+            <Column
+              header={<Cell>Edit</Cell>}
+              cell={props => (
+<Cell {...props}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#editModal" onClick={this.updateAlbum.bind(this, props.rowIndex)}>
+          <span className="glyphicon glyphicon-edit"></span> Edit
+        </button>
+</Cell>
+        )}
+              width={150}
               flexGrow={1}
             />
           </Table>
