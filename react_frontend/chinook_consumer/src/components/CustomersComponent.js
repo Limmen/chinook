@@ -289,63 +289,63 @@ class CustomersComponent extends React.Component {
                 <div>
                   <label className="col-sm-4">Id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.employeeId}</p>
+                    <p>{this.state.employee.employeeId} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.firstName}</p>
+                    <p>{this.state.employee.firstName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.lastName}</p>
+                    <p>{this.state.employee.lastName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Reports to empoyee id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p> {this.state.employee.reportsTo} </p>
+                    <p> {this.state.employee.reportsTo} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Birthdate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.birthDate}</p>
+                    <p>{this.state.employee.birthDate}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">hireDate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.hireDate}</p>
+                    <p>{this.state.employee.hireDate} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Address</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.address}</p>
+                    <p>{this.state.employee.address} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">City</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.city}</p>
+                    <p>{this.state.employee.city} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">State</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.state}</p>
+                    <p>{this.state.employee.state} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Country</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.country}</p>
+                    <p>{this.state.employee.country} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Postalcode</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.postalCode}</p>
+                    <p>{this.state.employee.postalCode} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Phone</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.phone}</p>
+                    <p>{this.state.employee.phone} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.fax}</p>
+                    <p>{this.state.employee.fax} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Email</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.email}</p>
+                    <p>{this.state.employee.email} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Title</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.employee.title}</p>
+                    <p>{this.state.employee.title} &nbsp;</p>
                   </div>
                 </div>
               </div>

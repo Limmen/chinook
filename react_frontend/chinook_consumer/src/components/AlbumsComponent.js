@@ -117,11 +117,11 @@ class AlbumsComponent extends React.Component {
                 <div>
                   <label className="col-sm-2">Id</label>
                   <div className="col-sm-10 margin_bottom">
-                    <p>{this.state.artist.artistId}</p>
+                    <p>{this.state.artist.artistId} &nbsp;</p>
                   </div>
                   <label className="col-sm-2">Name</label>
                   <div className="col-sm-10 margin_bottom">
-                    <p>{this.state.artist.name}</p>
+                    <p>{this.state.artist.name} &nbsp;</p>
                   </div>
                 </div>
               </div>

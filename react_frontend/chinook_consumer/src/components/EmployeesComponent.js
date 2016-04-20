@@ -328,63 +328,63 @@ class EmployeesComponent extends React.Component {
                 <div>
                   <label className="col-sm-4">Id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.employeeId}</p>
+                    <p>{this.state.reportsto.employeeId} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.firstName}</p>
+                    <p>{this.state.reportsto.firstName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.lastName}</p>
+                    <p>{this.state.reportsto.lastName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Reports to empoyee id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p> {this.state.reportsto.reportsTo} </p>
+                    <p> {this.state.reportsto.reportsTo} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Birthdate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.birthDate}</p>
+                    <p>{this.state.reportsto.birthDate}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">hireDate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.hireDate}</p>
+                    <p>{this.state.reportsto.hireDate}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Address</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.address}</p>
+                    <p>{this.state.reportsto.address}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">City</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.city}</p>
+                    <p>{this.state.reportsto.city}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">State</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.state}</p>
+                    <p>{this.state.reportsto.state}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Country</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.country}</p>
+                    <p>{this.state.reportsto.country}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Postalcode</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.postalCode}</p>
+                    <p>{this.state.reportsto.postalCode} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Phone</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.phone}</p>
+                    <p>{this.state.reportsto.phone} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.fax}</p>
+                    <p>{this.state.reportsto.fax} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Email</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.email}</p>
+                    <p>{this.state.reportsto.email} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Title</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.title}</p>
+                    <p>{this.state.reportsto.title} &nbsp;</p>
                   </div>
                 </div>
               </div>

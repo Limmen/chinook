@@ -227,15 +227,15 @@ class InvoicesComponent extends React.Component {
                 <div>
                   <label className="col-sm-4">Id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.customerId}</p>
+                    <p>{this.state.customer.customerId} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.firstName}</p>
+                    <p>{this.state.customer.firstName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.lastName}</p>
+                    <p>{this.state.customer.lastName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Company</label>
                   <div className="col-sm-8 margin_bottom">
@@ -243,15 +243,15 @@ class InvoicesComponent extends React.Component {
                   </div>
                   <label className="col-sm-4">Address</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.address}</p>
+                    <p>{this.state.customer.address} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">City</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.city}</p>
+                    <p>{this.state.customer.city} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">State</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.state}</p>
+                    <p>{this.state.customer.state} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Country</label>
                   <div className="col-sm-8 margin_bottom">
@@ -263,7 +263,7 @@ class InvoicesComponent extends React.Component {
                   </div>
                   <label className="col-sm-4">Phone</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.phone}</p>
+                    <p>{this.state.customer.phone} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
                   <div className="col-sm-8 margin_bottom">
@@ -271,11 +271,11 @@ class InvoicesComponent extends React.Component {
                   </div>
                   <label className="col-sm-4">Email</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.email}</p>
+                    <p>{this.state.customer.email} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Supported by employee id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.customer.supportRepId}</p>
+                    <p>{this.state.customer.supportRepId} &nbsp;</p>
                   </div>
                 </div>
               </div>
