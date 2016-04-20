@@ -51,7 +51,7 @@ class CustomersComponent extends React.Component {
         this.setState({employee: employeeData.employee})
       },
       error: (xhr, status, err) => {
-        console.error(this.state.url, status, err.toString());
+        console.error(url, status, err.toString());
       }
     });
   }
@@ -82,83 +82,83 @@ class CustomersComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_id"
                              value={this.state.customer.customerId}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_firstname">First Name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_firstname">First Name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_firstname"
                              value={this.state.customer.firstName}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_lastname">Last name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_lastname">Last name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_lastname"
                              value={this.state.customer.lastName}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_company">Company</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_company">Company</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_company"
                              value={this.state.customer.company}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_address">Address</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_address">Address</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_address"
                              value={this.state.customer.address}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_city">City</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_city">City</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_city" value={this.state.customer.city}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_state">State</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_state">State</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_state"
                              value={this.state.customer.state}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_country">Country</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_country">Country</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_country"
                              value={this.state.customer.country}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_phone">Phone</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_phone">Phone</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_phone"
                              value={this.state.customer.phone}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_fax">Fax</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_fax">Fax</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_fax" value={this.state.customer.fax}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_email">Email</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_email">Email</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_email"
                              value={this.state.customer.email}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_supportRepId">Supported by employee</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_supportedRepId"
                              value={this.state.customer.supportRepId}/>
                     </div>
@@ -181,74 +181,74 @@ class CustomersComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_id" placeholder="id"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_firstname">First Name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_firstname">First Name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_firstname" placeholder="first name"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_lastname">Last name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_lastname">Last name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_lastname" placeholder="last name"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_company">Company</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_company">Company</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_company" placeholder="company"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_address">Address</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_address">Address</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_address" placeholder="address"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_city">City</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_city">City</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_city" placeholder="city"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_state">State</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_state">State</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_state" placeholder="state"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_country">Country</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_country">Country</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_country" placeholder="country"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_phone">Phone</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_phone">Phone</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_phone" placeholder="phone"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_fax">Fax</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_fax">Fax</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_fax" placeholder="fax"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_email">Email</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_email">Email</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_email" placeholder="email"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="customer_supportRepId">Supported by employee</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_supportedRepId"
                              placeholder="employee id"/>
                     </div>
@@ -288,63 +288,63 @@ class CustomersComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <label className="col-sm-4">Id</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.employeeId}</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.firstName}</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.lastName}</p>
                   </div>
                   <label className="col-sm-4">Reports to empoyee id</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p> {this.state.employee.reportsTo} </p>
                   </div>
                   <label className="col-sm-4">Birthdate</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.birthDate}</p>
                   </div>
                   <label className="col-sm-4">hireDate</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.hireDate}</p>
                   </div>
                   <label className="col-sm-4">Address</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.address}</p>
                   </div>
                   <label className="col-sm-4">City</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.city}</p>
                   </div>
                   <label className="col-sm-4">State</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.state}</p>
                   </div>
                   <label className="col-sm-4">Country</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.country}</p>
                   </div>
                   <label className="col-sm-4">Postalcode</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.postalCode}</p>
                   </div>
                   <label className="col-sm-4">Phone</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.phone}</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.fax}</p>
                   </div>
                   <label className="col-sm-4">Email</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.email}</p>
                   </div>
                   <label className="col-sm-4">Title</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.employee.title}</p>
                   </div>
                 </div>
@@ -379,7 +379,7 @@ class CustomersComponent extends React.Component {
         {this.state.customers[props.rowIndex].customer.firstName}
 </Cell>
         )}
-              width={250}
+              width={450}
               flexGrow={1}
             />
             <Column

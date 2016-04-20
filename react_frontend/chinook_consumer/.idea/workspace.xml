@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/components/EmployeesComponent.js" mnemonic="5" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="26db08b1-9219-44cf-b9f6-9ff3302f14aa" name="Default" comment="" />
     <ignored path="chinook_consumer.iws" />
@@ -26,18 +29,38 @@
       <file leaf-file-name="EmployeesComponent.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/EmployeesComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.928572">
-              <caret line="393" column="18" selection-start-line="393" selection-start-column="18" selection-end-line="393" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="387" column="24" selection-start-line="387" selection-start-column="24" selection-end-line="387" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomersComponent.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CustomersComponent.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/CustomersComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6738351">
-              <caret line="283" column="44" selection-start-line="283" selection-start-column="44" selection-end-line="283" selection-end-column="44" />
+            <state vertical-scroll-proportion="52.363636">
+              <caret line="108" column="64" selection-start-line="108" selection-start-column="64" selection-end-line="108" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvoicesComponent.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/InvoicesComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.78431374">
+              <caret line="268" column="58" selection-start-line="268" selection-start-column="58" selection-end-line="268" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenresComponent.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/GenresComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="106" selection-start-line="67" selection-start-column="106" selection-end-line="67" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -70,7 +93,6 @@
         <option value="$PROJECT_DIR$/src/styles/Customers.css" />
         <option value="$PROJECT_DIR$/src/styles/Employees.css" />
         <option value="$PROJECT_DIR$/src/styles/Genres.css" />
-        <option value="$PROJECT_DIR$/src/components/GenresComponent.js" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/styles/InvoiceLines.css" />
         <option value="$PROJECT_DIR$/src/styles/Invoices.css" />
@@ -89,7 +111,6 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/components/PlaylistTracksComponent.js" />
         <option value="$PROJECT_DIR$/src/components/InvoiceLinesComponent.js" />
-        <option value="$PROJECT_DIR$/src/components/InvoicesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/TracksComponent.js" />
         <option value="$PROJECT_DIR$/src/styles/PlaylistTracks.css" />
         <option value="$PROJECT_DIR$/src/styles/Tracks.css" />
@@ -99,8 +120,10 @@
         <option value="$PROJECT_DIR$/src/styles/Albums.css" />
         <option value="$PROJECT_DIR$/src/components/AlbumsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/ArtistsComponent.js" />
-        <option value="$PROJECT_DIR$/src/components/EmployeesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/CustomersComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/EmployeesComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/GenresComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/InvoicesComponent.js" />
       </list>
     </option>
   </component>
@@ -119,10 +142,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="-24" />
-    <option name="width" value="1924" />
-    <option name="height" value="1226" />
+    <option name="y" value="19" />
+    <option name="width" value="960" />
+    <option name="height" value="1181" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -808,12 +830,12 @@
       <workItem from="1460964327413" duration="2359000" />
       <workItem from="1460999694848" duration="2099000" />
       <workItem from="1461062479919" duration="4691000" />
-      <workItem from="1461152026167" duration="6690000" />
+      <workItem from="1461152026167" duration="9616000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41614000" />
+    <option name="totallyTimeSpent" value="44540000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -825,7 +847,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="-24" width="1924" height="1226" extended-state="0" />
+    <frame x="0" y="19" width="960" height="1181" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -836,9 +858,9 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19494584" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-2" y="-24" width="4" height="26" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20319849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-2" y="-24" width="4" height="26" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14217253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29212254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1098,24 +1120,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/GenresComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.052878965">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/InvoiceLinesComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4101057">
           <caret line="80" column="22" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/InvoicesComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1151586">
-          <caret line="120" column="22" selection-start-line="120" selection-start-column="22" selection-end-line="120" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1234,16 +1242,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/EmployeesComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.928572">
-          <caret line="393" column="18" selection-start-line="393" selection-start-column="18" selection-end-line="393" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="387" column="24" selection-start-line="387" selection-start-column="24" selection-end-line="387" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/GenresComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="106" selection-start-line="67" selection-start-column="106" selection-end-line="67" selection-end-column="106" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/CustomersComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6738351">
-          <caret line="283" column="44" selection-start-line="283" selection-start-column="44" selection-end-line="283" selection-end-column="44" />
+        <state vertical-scroll-proportion="52.363636">
+          <caret line="108" column="64" selection-start-line="108" selection-start-column="64" selection-end-line="108" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/InvoicesComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78431374">
+          <caret line="268" column="58" selection-start-line="268" selection-start-column="58" selection-end-line="268" selection-end-column="58" />
           <folding />
         </state>
       </provider>

@@ -84,105 +84,105 @@ class EmployeesComponent extends React.Component {
                 <div>
                   <div className="form-group">
                     <label for="employee_id" className="col-sm-4">Id</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_id"
                              placeholder="Employee Id"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_firstname" className="col-sm-4">First Name</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_firstname"
                              placeholder="First Name"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_lastname" className="col-sm-4">Last name</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_lastname"
                              placeholder="Last Name"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_reportsto"
                              placeholder="Reports to"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_birthdate"
                              placeholder="Birthdate"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_hiredate" className="col-sm-4">Hire date</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_hiredate"
                              placeholder="Hire date"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_address" className="col-sm-4">Address</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_address"
                              placeholder="Address"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_city" className="col-sm-4">City</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_city"
                              placeholder="City"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_state" className="col-sm-4">State</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_state"
                              placeholder="State"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_country" className="col-sm-4">Country</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_country"
                              placeholder="Country"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_postalcode" className="col-sm-4">Postalcode</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_postalcode"
                              placeholder="Postalcode"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_phone" className="col-sm-4">Phone</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_phone"
                              placeholder="Phone"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_fax" className="col-sm-4">Fax</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_fax"
                              placeholder="Fax"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_email" className="col-sm-4">Email</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_email"
                              placeholder="Email"/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_title" className="col-sm-4">Title</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_title"
                              placeholder="Title"/>
                     </div>
@@ -206,105 +206,105 @@ class EmployeesComponent extends React.Component {
                 <div>
                   <div className="form-group">
                     <label for="employee_id" className="col-sm-4">Id</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_id"
                              value={this.state.employee.employeeId}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_firstname" className="col-sm-4">First Name</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_firstname"
                              value={this.state.employee.firstName}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_lastname" className="col-sm-4">Last name</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_lastname"
                              value={this.state.employee.lastName}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_reportsto"
                              value={this.state.employee.reportsTo}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_birthdate"
                              value={this.state.employee.birthDate}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_hiredate" className="col-sm-4">Hire date</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_hiredate"
                              value={this.state.employee.hireDate}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_address" className="col-sm-4">Address</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_address"
                              value={this.state.employee.address}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_city" className="col-sm-4">city</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_city"
                              value={this.state.employee.city}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_state" className="col-sm-4">State</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_state"
                              value={this.state.employee.state}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_country" className="col-sm-4">Country</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_country"
                              value={this.state.employee.country}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_postalcode" className="col-sm-4">Postalcode</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_postalcode"
                              value={this.state.employee.postalcode}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_phone" className="col-sm-4">Phone</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_phone"
                              value={this.state.employee.phone}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_fax" className="col-sm-4">Fax</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_fax"
                              value={this.state.employee.fax}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_email" className="col-sm-4">Email</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_email"
                              value={this.state.employee.email}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_title" className="col-sm-4">Title</label>
-                    <div className="col-sm-6 margin_bottom">
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_title"
                              value={this.state.employee.title}/>
                     </div>
@@ -327,63 +327,63 @@ class EmployeesComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <label className="col-sm-4">Id</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.employeeId}</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.firstName}</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.lastName}</p>
                   </div>
                   <label className="col-sm-4">Reports to empoyee id</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p> {this.state.reportsto.reportsTo} </p>
                   </div>
                   <label className="col-sm-4">Birthdate</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.birthDate}</p>
                   </div>
                   <label className="col-sm-4">hireDate</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.hireDate}</p>
                   </div>
                   <label className="col-sm-4">Address</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.address}</p>
                   </div>
                   <label className="col-sm-4">City</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.city}</p>
                   </div>
                   <label className="col-sm-4">State</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.state}</p>
                   </div>
                   <label className="col-sm-4">Country</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.country}</p>
                   </div>
                   <label className="col-sm-4">Postalcode</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.postalCode}</p>
                   </div>
                   <label className="col-sm-4">Phone</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.phone}</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.fax}</p>
                   </div>
                   <label className="col-sm-4">Email</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.email}</p>
                   </div>
                   <label className="col-sm-4">Title</label>
-                  <div className="col-sm-6 margin_bottom">
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.reportsto.title}</p>
                   </div>
                 </div>
