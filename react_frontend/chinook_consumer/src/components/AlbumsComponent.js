@@ -152,7 +152,7 @@ class AlbumsComponent extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">Edit Album</h4>
+                <h4 className="modal-title">Create new Album</h4>
               </div>
               <div className="modal-body row">
                 <div>
