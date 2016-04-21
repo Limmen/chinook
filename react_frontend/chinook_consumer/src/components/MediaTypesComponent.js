@@ -19,7 +19,8 @@ class MediaTypesComponent extends React.Component {
 
     this.state = {
       mediaTypes: [],
-      url: "http://localhost:7777/resources/mediatypes"
+      url: "http://localhost:7777/resources/mediatypes",
+      mediaType: {}
     }
   };
 
@@ -36,13 +37,94 @@ class MediaTypesComponent extends React.Component {
       }
     });
   }
+  updateMediaType(index) {
+    //this.setState({artist: index})
+    this.setState({mediaType: this.state.mediaTypes[index].mediaTypeEntity})
+  }
 
+  deleteMediaType(index) {
+
+  }
   componentDidMount() {
     this.loadMediaTypesFromServer();
   }
   render() {
     return (
       <div className="mediatype-component">
+        <div id="editModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Edit MediaType</h4>
+              </div>
+              <div className="modal-body row">
+                <div>
+                  <div className="form-group">
+                    <label className="col-sm-2" for="artist_id">Id</label>
+                    <div className="col-sm-10 margin_bottom">
+                      <input type="text" className="form-control" id="artist_id" value={this.state.mediaType.mediaTypeId}/>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-sm-2" for="artist_name">Name</label>
+                    <div className="col-sm-10 margin_bottom">
+                      <input type="text" className="form-control" id="artist_name" value={this.state.mediaType.name}/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="deleteModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Are you sure?</h4>
+              </div>
+              <div className="modal-body row">
+                <button type="button" className="btn btn-default">Yes</button><button type="button" className="btn btn-default">No</button>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="addModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Create new MediaType</h4>
+              </div>
+              <div className="modal-body row">
+                <div>
+                  <div className="form-group">
+                    <label className="col-sm-2" for="artist_id">Id</label>
+                    <div className="col-sm-10 margin_bottom">
+                      <input type="text" className="form-control" id="artist_id" placeholder="id"/>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-sm-2" for="artist_title">Name</label>
+                    <div className="col-sm-10 margin_bottom">
+                      <input type="text" className="form-control" id="artist_title" placeholder="title"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="datatablecontainer">
           <Table
             rowsCount={this.state.mediaTypes.length}
@@ -70,8 +152,35 @@ class MediaTypesComponent extends React.Component {
               width={350}
               flexGrow={1}
             />
+            <Column
+              header={<Cell>Edit</Cell>}
+              cell={props => (
+<Cell {...props}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#editModal" onClick={this.updateMediaType.bind(this, props.rowIndex)}>
+          <span className="glyphicon glyphicon-edit"></span> Edit
+        </button>
+</Cell>
+        )}
+              width={150}
+              flexGrow={1}
+            />
+            <Column
+              header={<Cell>Delete</Cell>}
+              cell={props => (
+<Cell {...props}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteMediaType.bind(this, props.rowIndex)}>
+          <span className="glyphicon glyphicon-trash"></span> Delete
+        </button>
+</Cell>
+        )}
+              width={150}
+              flexGrow={1}
+            />
           </Table>
         </div>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
+          <span className="glyphicon glyphicon-plus"></span> Add
+        </button>
       </div>
     );
   }
