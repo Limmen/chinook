@@ -46,11 +46,10 @@ class AlbumsComponent extends React.Component {
       url: url,
       dataType: 'json',
       success: (artistData) => {
-        console.log(JSON.stringify(artistData))
         this.setState({artist: artistData.artist})
       },
       error: (xhr, status, err) => {
-        console.error(this.state.url, status, err.toString());
+        console.error(url, status, err.toString());
       }
     });
   }
@@ -81,20 +80,20 @@ class AlbumsComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_id" value={this.state.album.albumId}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_title">Title</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_title">Title</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_title" value={this.state.album.title}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_artist">Artist Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_artist">Artist Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_artist" value={this.state.album.artistId}/>
                     </div>
                   </div>
@@ -115,12 +114,12 @@ class AlbumsComponent extends React.Component {
               </div>
               <div className="modal-body row">
                 <div>
-                  <label className="col-sm-2">Id</label>
-                  <div className="col-sm-10 margin_bottom">
+                  <label className="col-sm-4">Id</label>
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.artist.artistId} &nbsp;</p>
                   </div>
-                  <label className="col-sm-2">Name</label>
-                  <div className="col-sm-10 margin_bottom">
+                  <label className="col-sm-4">Name</label>
+                  <div className="col-sm-8 margin_bottom">
                     <p>{this.state.artist.name} &nbsp;</p>
                   </div>
                 </div>
@@ -157,20 +156,20 @@ class AlbumsComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_id" placeholder="id"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_title">Title</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_title">Title</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_title" placeholder="title"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="album_artist">Artist Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="album_artist">Artist Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="album_artist" placeholder="artist id"/>
                     </div>
                   </div>

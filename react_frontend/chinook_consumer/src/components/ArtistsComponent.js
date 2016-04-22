@@ -63,14 +63,14 @@ class ArtistsComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="artist_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="artist_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="artist_id" value={this.state.artist.artistId}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="artist_name">Name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="artist_name">Name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="artist_name" value={this.state.artist.name}/>
                     </div>
                   </div>
@@ -108,14 +108,14 @@ class ArtistsComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="artist_id">Id</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="artist_id">Id</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="artist_id" placeholder="id"/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="artist_title">Name</label>
-                    <div className="col-sm-10 margin_bottom">
+                    <label className="col-sm-4" for="artist_title">Name</label>
+                    <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="artist_title" placeholder="title"/>
                     </div>
                   </div>
