@@ -31,7 +31,7 @@ public class InvoiceRepository {
      * @return Invoice with the specified id.
      */
     public Invoice getInvoice(int invoiceId) {
-        log.debug("getInvoice from Database");
+        log.debug("getInvoice {} from Database", invoiceId);
         return jdbc.queryForObject("SELECT * FROM \"Invoice\" WHERE \"InvoiceId\"=?", invoiceMapper, invoiceId);
     }
 

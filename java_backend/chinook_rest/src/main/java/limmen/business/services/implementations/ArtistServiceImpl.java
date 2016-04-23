@@ -40,4 +40,16 @@ public class ArtistServiceImpl implements ArtistService {
         artist.setArtistId(artistRepository.getMaxId() + 1);
         return artistRepository.createNewArtist(artist);
     }
+
+    @Override
+    public Artist updateArtist(Artist artist) {
+        return artistRepository.updateArtist(artist);
+    }
+
+    @Override
+    public Artist deleteArtist(int artistId) {
+        Artist artist = getArtist(artistId);
+        artistRepository.deleteArtist(artistId);
+        return artist;
+    }
 }

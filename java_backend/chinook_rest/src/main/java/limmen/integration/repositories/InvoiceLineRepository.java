@@ -31,7 +31,7 @@ public class InvoiceLineRepository {
      * @return InvoiceLine with the specified id.
      */
     public InvoiceLine getInvoiceLine(int invoiceLineId) {
-        log.debug("getInvoiceLine from Database");
+        log.debug("getInvoiceLine {} from Database", invoiceLineId);
         return jdbc.queryForObject("SELECT * FROM \"InvoiceLine\" WHERE \"InvoiceLineId\"=?", invoiceLineMapper, invoiceLineId);
     }
 

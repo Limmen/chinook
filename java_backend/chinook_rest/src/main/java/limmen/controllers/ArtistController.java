@@ -85,5 +85,29 @@ public class ArtistController {
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.CREATED);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/{artistId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<ArtistRepresentation> updateArtist(@PathVariable int artistId, @RequestBody Artist artist) {
+        log.debug("HTTP PUT-request /resources/artists/{}", artistId);
+        artist.setArtistId(artistId);
+        ArtistRepresentation artistRepresentation = new ArtistRepresentation(artistService.updateArtist(artist));
+        artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artist.getArtistId())).withSelfRel());
+        return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/{artistId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<ArtistRepresentation> deleteArtist(@PathVariable int artistId) {
+        log.debug("HTTP DELETE-request /resources/artists/{}", artistId);
+        ArtistRepresentation artistRepresentation = new ArtistRepresentation(artistService.deleteArtist(artistId));
+        artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artistId)).withSelfRel());
+        return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
+    }
+
+    //TODO return HTTP 204 if updated artist not found
+    //TODO Update README:
     //curl -H "Content-Type: application/json" -X POST -d '{"name":"testName"}' http://localhost:7777/resources/artists
+    //curl -H "Content-Type: application/json" -X PUT -d '{"name":"testNamess"}' http://localhost:7777/resources/artists/276
+    //curl -H "Content-Type: application/json" -X DELETE  http://localhost:7777/resources/artists/276
+    //TODO Add ExceptionHandling
 }

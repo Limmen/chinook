@@ -31,7 +31,7 @@ public class EmployeeRepository {
      * @return Employee with the id.
      */
     public Employee getEmployee(int employeeId) {
-        log.debug("getEmployee from Database");
+        log.debug("getEmployee {} from Database", employeeId);
         return jdbc.queryForObject("SELECT * FROM \"Employee\" WHERE \"EmployeeId\"=?", employeeMapper, employeeId);
     }
 

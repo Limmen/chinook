@@ -31,7 +31,7 @@ public class PlaylistRepository {
      * @return playlist with the specified id.
      */
     public Playlist getPlaylist(int playlistId) {
-        log.debug("getPlaylist from Database");
+        log.debug("getPlaylist {} from Database", playlistId);
         return jdbc.queryForObject("SELECT * FROM \"Playlist\" WHERE \"PlaylistId\"=?", playlistMapper, playlistId);
     }
 

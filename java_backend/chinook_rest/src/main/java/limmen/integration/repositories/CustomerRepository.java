@@ -31,7 +31,7 @@ public class CustomerRepository {
      * @return Customer with the specifed id.
      */
     public Customer getCustomer(int customerId) {
-        log.debug("getCustomer from Database");
+        log.debug("getCustomer {} from Database", customerId);
         return jdbc.queryForObject("SELECT * FROM \"Customer\" WHERE \"CustomerId\"=?", customerMapper, customerId);
     }
 

@@ -31,7 +31,7 @@ public class ArtistRepository {
      * @return Artist with the specified id.
      */
     public Artist getArtist(int artistId) {
-        log.debug("getArtist from Database");
+        log.debug("getArtist {} from Database", artistId);
         return jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, artistId);
     }
 
@@ -40,7 +40,7 @@ public class ArtistRepository {
      *
      * @return list of artists.
      */
-    public List<Artist> getAllArtists(){
+    public List<Artist> getAllArtists() {
         log.debug("getAllArtists from Database");
         return jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
     }
@@ -51,8 +51,8 @@ public class ArtistRepository {
      * @param artist artist to insert
      * @return the inserted artist
      */
-    public Artist createNewArtist(Artist artist){
-        log.info("Update Database with new Artist");
+    public Artist createNewArtist(Artist artist) {
+        log.info("Update Database with new Artist. artistId: {}, name: {}", artist.getArtistId(), artist.getName());
         jdbc.update("INSERT INTO \"Artist\" (\"ArtistId\", \"Name\") VALUES (?, ?);", artist.getArtistId(), artist.getName());
         return artist;
     }
@@ -62,9 +62,26 @@ public class ArtistRepository {
      *
      * @return maxmum id
      */
-    public int getMaxId(){
+    public int getMaxId() {
         log.debug("get max Id of artists");
         return jdbc.queryForObject("SELECT max(\"ArtistId\") FROM \"Artist\";", maxIdMapper);
+    }
+
+    /**
+     * Method to update the database with new data for a certain artist.
+     *
+     * @param artist data to update
+     * @return updated artist
+     */
+    public Artist updateArtist(Artist artist) {
+        log.debug("update artist {}", artist.getArtistId());
+        jdbc.update("UPDATE \"Artist\" SET \"Name\" = ? WHERE \"ArtistId\" = ?;", artist.getName(), artist.getArtistId());
+        return artist;
+    }
+
+    public void deleteArtist(int artistId) {
+        log.debug("delete artist {}", artistId);
+        jdbc.update("DELETE FROM \"Artist\" WHERE \"ArtistId\" = ?;", artistId);
     }
 
     private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {
@@ -76,7 +93,7 @@ public class ArtistRepository {
 
     private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
         public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-            int id =  rs.getInt(1);
+            int id = rs.getInt(1);
             return id;
         }
     };

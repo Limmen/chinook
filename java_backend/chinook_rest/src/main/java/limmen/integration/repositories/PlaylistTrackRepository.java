@@ -32,7 +32,7 @@ public class PlaylistTrackRepository {
      * @return playlisttrack with the specified trackid and playlistid.
      */
     public PlaylistTrack getPlaylistTrack(int trackId, int playlistId) {
-        log.debug("getPlaylistTrack from Database");
+        log.debug("getPlaylistTrack, trackId: {}, playlistId: {} . from Database", trackId, playlistId);
         return jdbc.queryForObject("SELECT * FROM \"PlaylistTrack\" WHERE \"TrackId\"=? AND \"PlaylistId\"=? ",
                 playlistTrackMapper, trackId, playlistId);
     }

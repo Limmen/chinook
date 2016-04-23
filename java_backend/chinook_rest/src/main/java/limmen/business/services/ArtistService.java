@@ -27,10 +27,27 @@ public interface ArtistService {
     public Artist getArtist(int artistId);
 
     /**
-     * Method to create a new artist
+     * Method to create a new artist.
      *
      * @param artist data of the artist to create
      * @return the created  artist
      */
     public Artist createNewArtist(Artist artist);
+
+    /**
+     * Method to update a artist.
+     *
+     * @param artist artist to update
+     * @return updated artist
+     */
+    public Artist updateArtist(Artist artist);
+
+    /**
+     * Method to delete a artist.
+     *
+     * @param artistId id of the artist to delete
+     * @return the deleted artist.
+     */
+    public Artist deleteArtist(int artistId);
+
 }

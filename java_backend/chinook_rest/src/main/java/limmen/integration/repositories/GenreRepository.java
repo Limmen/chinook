@@ -31,7 +31,7 @@ public class GenreRepository {
      * @return Genre with the specified id.
      */
     public Genre getGenre(int genreId) {
-        log.debug("getGenre from Database");
+        log.debug("getGenre {} from Database", genreId);
         return jdbc.queryForObject("SELECT * FROM \"Genre\" WHERE \"GenreId\"=?", genreMapper, genreId);
     }
 

@@ -31,7 +31,7 @@ public class TrackRepository {
      * @return Track with the specified id.
      */
     public Track getTrack(int trackId) {
-        log.debug("getTrack from Database");
+        log.debug("getTrack {} from Database", trackId);
         return jdbc.queryForObject("SELECT * FROM \"Track\" WHERE \"TrackId\"=?", trackMapper, trackId);
     }
 
