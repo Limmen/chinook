@@ -25,4 +25,12 @@ public interface ArtistService {
      * @return artis with the specified id.
      */
     public Artist getArtist(int artistId);
+
+    /**
+     * Method to create a new artist
+     *
+     * @param artist data of the artist to create
+     * @return the created  artist
+     */
+    public Artist createNewArtist(Artist artist);
 }

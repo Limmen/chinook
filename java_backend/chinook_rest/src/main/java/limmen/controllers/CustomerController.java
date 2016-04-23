@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/customers
+     * Method to handle HTTP GET-requests for /resources/customers
      *
      * @return HTTP-response, JSON array of customers
      */
@@ -65,7 +65,7 @@ public class CustomerController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/customers/{customerId}
+     * Method to handle HTTP GET-requests for /resources/customers/{customerId}
      *
      * @param customerId id of the customer.
      * @return HTTP-response, JSON-representation of the customer.

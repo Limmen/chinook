@@ -31,6 +31,7 @@ public class InvoiceLineRepository {
      * @return InvoiceLine with the specified id.
      */
     public InvoiceLine getInvoiceLine(int invoiceLineId) {
+        log.debug("getInvoiceLine from Database");
         return jdbc.queryForObject("SELECT * FROM \"InvoiceLine\" WHERE \"InvoiceLineId\"=?", invoiceLineMapper, invoiceLineId);
     }
 
@@ -40,7 +41,7 @@ public class InvoiceLineRepository {
      * @return list of invoicelines
      */
     public List<InvoiceLine> getAllInvoiceLines(){
-        log.info("getAllInvoiceLines from Database");
+        log.debug("getAllInvoiceLines from Database");
         return jdbc.query("SELECT * FROM \"InvoiceLine\";", invoiceLineMapper);
     }
 

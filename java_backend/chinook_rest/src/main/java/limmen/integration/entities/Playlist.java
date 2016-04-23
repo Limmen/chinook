@@ -17,6 +17,7 @@ public class Playlist {
 
     /**
      * Class constructor
+     *
      * @param playlistId id of the playlist, unique.
      * @param name name of the playlist.
      */

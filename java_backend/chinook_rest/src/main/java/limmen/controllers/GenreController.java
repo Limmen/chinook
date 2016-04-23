@@ -42,7 +42,7 @@ public class GenreController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/genres
+     * Method to handle HTTP GET-requests for /resources/genres
      *
      * @return HTTP-response, JSON array of genres
      */
@@ -62,7 +62,7 @@ public class GenreController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/genres/{genreId}
+     * Method to handle HTTP GET-requests for /resources/genres/{genreId}
      *
      * @param genreId id of the genre.
      * @return HTTP-response, JSON representation of the genre

@@ -42,7 +42,7 @@ public class InvoiceLineController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/invoicelines
+     * Method to handle HTTP GET-requests for /resources/invoicelines
      *
      * @return HTTP-response, JSON array of invoicelines
      */
@@ -67,7 +67,7 @@ public class InvoiceLineController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/invoicelines/{invoicelinesId}
+     * Method to handle HTTP GET-requests for /resources/invoicelines/{invoicelinesId}
      *
      * @param invoiceLineId id of the invoiceline.
      * @return HTTP-response, JSON-representation of the invoiceline.

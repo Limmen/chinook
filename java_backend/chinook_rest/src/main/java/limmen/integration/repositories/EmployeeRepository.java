@@ -31,6 +31,7 @@ public class EmployeeRepository {
      * @return Employee with the id.
      */
     public Employee getEmployee(int employeeId) {
+        log.debug("getEmployee from Database");
         return jdbc.queryForObject("SELECT * FROM \"Employee\" WHERE \"EmployeeId\"=?", employeeMapper, employeeId);
     }
 
@@ -40,7 +41,7 @@ public class EmployeeRepository {
      * @return list of employees.
      */
     public List<Employee> getAllEmployees(){
-        log.info("getAllEmployees from Database");
+        log.debug("getAllEmployees from Database");
         return jdbc.query("SELECT * FROM \"Employee\";", employeeMapper);
     }
 

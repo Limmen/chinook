@@ -19,7 +19,7 @@ public class MainController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * Method to handle HTTP-requests for /
+     * Method to handle HTTP GET-requests for /
      *
      * @return HTTP-response
      */
@@ -31,7 +31,7 @@ public class MainController {
     }
 
     /**
-     * Method to handle HTTP-requests for /error
+     * Method to handle HTTP GET-requests for /error
      *
      * @return HTTP-response
      */

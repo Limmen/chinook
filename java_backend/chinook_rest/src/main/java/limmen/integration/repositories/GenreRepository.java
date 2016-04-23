@@ -31,6 +31,7 @@ public class GenreRepository {
      * @return Genre with the specified id.
      */
     public Genre getGenre(int genreId) {
+        log.debug("getGenre from Database");
         return jdbc.queryForObject("SELECT * FROM \"Genre\" WHERE \"GenreId\"=?", genreMapper, genreId);
     }
 
@@ -40,7 +41,7 @@ public class GenreRepository {
      * @return list of genres
      */
     public List<Genre> getAllGenres(){
-        log.info("getAllGenres from Database");
+        log.debug("getAllGenres from Database");
         return jdbc.query("SELECT * FROM \"Genre\";", genreMapper);
     }
 

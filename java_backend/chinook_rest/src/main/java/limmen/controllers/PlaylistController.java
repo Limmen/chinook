@@ -42,7 +42,7 @@ public class PlaylistController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/playlists
+     * Method to handle HTTP GET-requests for /resources/playlists
      *
      * @return HTTP-response, JSON array of playlists
      */
@@ -62,7 +62,7 @@ public class PlaylistController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/playlists/{playlistId}
+     * Method to handle HTTP GET-requests for /resources/playlists/{playlistId}
      *
      * @param playlistId id of the playlist
      * @return HTTP-response, JSON-representation of the playlist

@@ -31,6 +31,7 @@ public class ArtistRepository {
      * @return Artist with the specified id.
      */
     public Artist getArtist(int artistId) {
+        log.debug("getArtist from Database");
         return jdbc.queryForObject("SELECT * FROM \"Artist\" WHERE \"ArtistId\"=?", artistMapper, artistId);
     }
 
@@ -40,8 +41,30 @@ public class ArtistRepository {
      * @return list of artists.
      */
     public List<Artist> getAllArtists(){
-        log.info("getAllArtists from Database");
+        log.debug("getAllArtists from Database");
         return jdbc.query("SELECT * FROM \"Artist\";", artistMapper);
+    }
+
+    /**
+     * Method to update the database with a new artist.
+     *
+     * @param artist artist to insert
+     * @return the inserted artist
+     */
+    public Artist createNewArtist(Artist artist){
+        log.info("Update Database with new Artist");
+        jdbc.update("INSERT INTO \"Artist\" (\"ArtistId\", \"Name\") VALUES (?, ?);", artist.getArtistId(), artist.getName());
+        return artist;
+    }
+
+    /**
+     * Method to query the database for the maximum id of all artists
+     *
+     * @return maxmum id
+     */
+    public int getMaxId(){
+        log.debug("get max Id of artists");
+        return jdbc.queryForObject("SELECT max(\"ArtistId\") FROM \"Artist\";", maxIdMapper);
     }
 
     private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {
@@ -50,4 +73,12 @@ public class ArtistRepository {
             return artist;
         }
     };
+
+    private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int id =  rs.getInt(1);
+            return id;
+        }
+    };
+
 }

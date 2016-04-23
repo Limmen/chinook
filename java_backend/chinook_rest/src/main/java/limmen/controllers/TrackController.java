@@ -42,7 +42,7 @@ public class TrackController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/tracks
+     * Method to handle HTTP GET-requests for /resources/tracks
      *
      * @return HTTP-response, JSON array of tracks
      */
@@ -68,7 +68,7 @@ public class TrackController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/tracks/{trackId}
+     * Method to handle HTTP GET-requests for /resources/tracks/{trackId}
      *
      * @param trackId id of the track
      * @return HTTP-response, JSON-representation of the track.

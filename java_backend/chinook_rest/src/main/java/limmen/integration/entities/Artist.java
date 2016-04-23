@@ -15,7 +15,8 @@ public class Artist {
     private String name;
 
     /**
-     * Class constructor. Initializes an immutable entity class
+     * Class constructor. Initializes an entity class
+     *
      * @param artistId id of the artist, unique.
      * @param name name of the artist
      */
@@ -24,10 +25,23 @@ public class Artist {
         this.name = name;
     }
 
+    /**
+     * Alternative constructor when Id is not available
+     *
+     * @param name name of the artist
+     */
+    public Artist(String name) {
+        this.name = name;
+    }
+
     public Artist() {}
 
     public int getArtistId() {
         return artistId;
+    }
+
+    public void setArtistId(int artistId) {
+        this.artistId = artistId;
     }
 
     public String getName() {

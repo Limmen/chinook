@@ -31,6 +31,7 @@ public class MediaTypeRepository {
      * @return MediaType with the specified id.
      */
     public MediaTypeEntity getMediaType(int mediaTypeId) {
+        log.debug("getMediaTypeEntity from Database");
         return jdbc.queryForObject("SELECT * FROM \"MediaType\" WHERE \"MediaTypeId\"=?", mediaTypeMapper, mediaTypeId);
     }
 
@@ -40,7 +41,7 @@ public class MediaTypeRepository {
      * @return list of mediatypes.
      */
     public List<MediaTypeEntity> getAllMediaTypes(){
-        log.info("getAllMediaTypes from Database");
+        log.debug("getAllMediaTypes from Database");
         return jdbc.query("SELECT * FROM \"MediaType\";", mediaTypeMapper);
     }
 

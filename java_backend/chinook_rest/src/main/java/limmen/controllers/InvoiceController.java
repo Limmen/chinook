@@ -42,7 +42,7 @@ public class InvoiceController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/invoices
+     * Method to handle HTTP GET-requests for /resources/invoices
      *
      * @return HTTP-response, JSON array of invoices
      */
@@ -65,7 +65,7 @@ public class InvoiceController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/invoices/{invoiceId}
+     * Method to handle HTTP GET-requests for /resources/invoices/{invoiceId}
      *
      * @param invoiceId id of the invoice
      * @return HTTP-response, JSON-representation of the invoice.

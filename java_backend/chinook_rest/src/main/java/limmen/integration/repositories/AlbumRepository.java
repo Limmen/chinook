@@ -31,6 +31,7 @@ public class AlbumRepository {
      * @return Album with albumId.
      */
     public Album getAlbum(int albumId) {
+        log.debug("getAlbum from Database");
         return jdbc.queryForObject("SELECT * FROM \"Album\" WHERE \"AlbumId\"=?", albumMapper, albumId);
     }
 
@@ -40,7 +41,7 @@ public class AlbumRepository {
      * @return list of albums
      */
     public List<Album> getAllAlbums(){
-        log.info("getAllAlbums from Database");
+        log.debug("getAllAlbums from Database");
         return jdbc.query("SELECT * FROM \"Album\";", albumMapper);
     }
 

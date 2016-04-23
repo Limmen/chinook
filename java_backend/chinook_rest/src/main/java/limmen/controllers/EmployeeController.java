@@ -42,7 +42,7 @@ public class EmployeeController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/employees
+     * Method to handle HTTP GET-requests for /resources/employees
      *
      * @return HTTP-response, JSON array of employees
      */
@@ -64,7 +64,8 @@ public class EmployeeController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/employees/{employeeId}
+     * Method to handle HTTP GET-requests for /resources/employees/{employeeId}
+     *
      * @param employeeId id of the employee
      * @return HTTP-response, JSON representation of the employee
      */

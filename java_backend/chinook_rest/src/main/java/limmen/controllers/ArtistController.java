@@ -42,7 +42,7 @@ public class ArtistController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/artists
+     * Method to handle HTTP GET-requests for /resources/artists
      *
      * @return HTTP-response, JSON array of artists
      */
@@ -62,7 +62,7 @@ public class ArtistController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/artists/{artistId}
+     * Method to handle HTTP GET-requests for /resources/artists/{artistId}
      *
      * @param artistId id of the artist.
      * @return HTTP-response, JSON representation of the artist
@@ -75,4 +75,15 @@ public class ArtistController {
         artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artistId)).withSelfRel());
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<ArtistRepresentation> createNewArtist(@RequestBody Artist artist) {
+        log.debug("HTTP POST-request /resources/artists");
+        ArtistRepresentation artistRepresentation = new ArtistRepresentation(artistService.createNewArtist(artist));
+        artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artist.getArtistId())).withSelfRel());
+        return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.CREATED);
+    }
+
+    //curl -H "Content-Type: application/json" -X POST -d '{"name":"testName"}' http://localhost:7777/resources/artists
 }

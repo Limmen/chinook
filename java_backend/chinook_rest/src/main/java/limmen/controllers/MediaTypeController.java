@@ -43,7 +43,7 @@ public class MediaTypeController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/mediatypes
+     * Method to handle HTTP GET-requests for /resources/mediatypes
      *
      * @return HTTP-response, JSON array of mediatypes
      */
@@ -63,7 +63,7 @@ public class MediaTypeController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/mediatypes/{mediatypeId}
+     * Method to handle HTTP GET-requests for /resources/mediatypes/{mediatypeId}
      *
      * @param mediaTypeId id of the mediatype
      * @return HTTP-response, JSON-representation of the mediatype

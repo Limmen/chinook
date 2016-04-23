@@ -31,6 +31,7 @@ public class InvoiceRepository {
      * @return Invoice with the specified id.
      */
     public Invoice getInvoice(int invoiceId) {
+        log.debug("getInvoice from Database");
         return jdbc.queryForObject("SELECT * FROM \"Invoice\" WHERE \"InvoiceId\"=?", invoiceMapper, invoiceId);
     }
 
@@ -40,7 +41,7 @@ public class InvoiceRepository {
      * @return list of invoices.
      */
     public List<Invoice> getAllInvoices(){
-        log.info("getAllInvoices from Database");
+        log.debug("getAllInvoices from Database");
         return jdbc.query("SELECT * FROM \"Invoice\";", invoiceMapper);
     }
 

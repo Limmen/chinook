@@ -42,7 +42,7 @@ public class AlbumController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/albums
+     * Method to handle HTTP GET-requests for /resources/albums
      *
      * @return HTTP-response, JSON array of albums
      */
@@ -64,7 +64,7 @@ public class AlbumController {
     }
 
     /**
-     * Method to handle HTTP-requests for /resources/albums/{albumId}
+     * Method to handle HTTP GET-requests for /resources/albums/{albumId}
      *
      * @param albumId id of the album
      * @return HTTP-response, JSON representation of the album

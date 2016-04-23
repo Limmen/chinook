@@ -32,6 +32,7 @@ public class PlaylistTrackRepository {
      * @return playlisttrack with the specified trackid and playlistid.
      */
     public PlaylistTrack getPlaylistTrack(int trackId, int playlistId) {
+        log.debug("getPlaylistTrack from Database");
         return jdbc.queryForObject("SELECT * FROM \"PlaylistTrack\" WHERE \"TrackId\"=? AND \"PlaylistId\"=? ",
                 playlistTrackMapper, trackId, playlistId);
     }
@@ -42,7 +43,7 @@ public class PlaylistTrackRepository {
      * @return list of playlisttracks.
      */
     public List<PlaylistTrack> getAllPlaylistTracks(){
-        log.info("getAllPlaylistTracks from Database");
+        log.debug("getAllPlaylistTracks from Database");
         return jdbc.query("SELECT * FROM \"PlaylistTrack\";", playlistTrackMapper);
     }
 

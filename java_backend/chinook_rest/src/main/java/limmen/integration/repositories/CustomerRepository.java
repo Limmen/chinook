@@ -31,6 +31,7 @@ public class CustomerRepository {
      * @return Customer with the specifed id.
      */
     public Customer getCustomer(int customerId) {
+        log.debug("getCustomer from Database");
         return jdbc.queryForObject("SELECT * FROM \"Customer\" WHERE \"CustomerId\"=?", customerMapper, customerId);
     }
 
@@ -40,7 +41,7 @@ public class CustomerRepository {
      * @return list of customers
      */
     public List<Customer> getAllCustomers(){
-        log.info("getAllCustomers from Database");
+        log.debug("getAllCustomers from Database");
         return jdbc.query("SELECT * FROM \"Customer\";", customerMapper);
     }
 
