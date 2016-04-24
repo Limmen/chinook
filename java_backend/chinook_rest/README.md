@@ -175,7 +175,7 @@ Returns a JSON response on the following format:
         "path":"/resources/artists/999999"
     }
 
-#### Using a not supported HTTP method (verb):
+#### Using a HTTP method (verb) that is not supported:
 
     curl -X POST  http://localhost:7777/
 

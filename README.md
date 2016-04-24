@@ -4,7 +4,7 @@
 
 ## Description
 
-This repo contains three separate projects:
+This repo contains two separate projects:
 
 * react_frontend
 
@@ -14,18 +14,14 @@ A JavaScript frontend that consumes a REST-API for the chinook database.
 
 A REST-API for the chinook database developed with Java
 
-* clojure_backend
-
-A REST-API for the chinook database developed with clojure
-
 ## Current state
 
 java_backend contains a fully functional RESP-API for HTTP/GET
+react_frontend contains a application for browsing all the resources of the rest API
 
 TODO:
 
-* clojure_backend
-* react_frontend
+* support CRUD operations from react_frontend
 * support PUT/POST/DELETE in java_backend
 
 ## How to run
