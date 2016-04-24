@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +78,12 @@ public class ArtistController {
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP POST-requests for /resources/artists
+     *
+     * @param artist posted artist data
+     * @return HTTP-response, JSON representation of the created artist
+     */
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> createNewArtist(@RequestBody Artist artist) {
@@ -85,6 +93,13 @@ public class ArtistController {
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.CREATED);
     }
 
+    /**
+     * Method to handle HTTP PUT-requests for /resources/artists/{artistId}
+     *
+     * @param artistId id of the artist
+     * @param artist put artist data
+     * @return HTTP-Response, JSON representation of the updated artist representation
+     */
     @CrossOrigin
     @RequestMapping(value = "/{artistId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> updateArtist(@PathVariable int artistId, @RequestBody Artist artist) {
@@ -95,6 +110,12 @@ public class ArtistController {
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
     }
 
+    /**
+     * Method to handle HTTP DELETE-requests for /resources/artists/{artistId}
+     *
+     * @param artistId id of the artist
+     * @return HTTP-Response, JSON representation of the deleted artist.
+     */
     @CrossOrigin
     @RequestMapping(value = "/{artistId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ArtistRepresentation> deleteArtist(@PathVariable int artistId) {
@@ -104,10 +125,15 @@ public class ArtistController {
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
     }
 
-    //TODO return HTTP 204 if updated artist not found
-    //TODO Update README:
-    //curl -H "Content-Type: application/json" -X POST -d '{"name":"testName"}' http://localhost:7777/resources/artists
-    //curl -H "Content-Type: application/json" -X PUT -d '{"name":"testNamess"}' http://localhost:7777/resources/artists/276
-    //curl -H "Content-Type: application/json" -X DELETE  http://localhost:7777/resources/artists/276
-    //TODO Add ExceptionHandling
+    /**
+     * ExceptionHandler for when a requested resource was not found.
+     *
+     * @param response HTTP response to send back to client
+     * @throws IOException
+     */
+    @ExceptionHandler(org.springframework.dao.EmptyResultDataAccessException.class)
+    void notFound(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value(), "Resource not Found");
+    }
+
 }

@@ -21,6 +21,8 @@ A rest-api for the Chinook database. Built with the Spring framework. Documentat
 The whole chinook database is modelled as REST resources.
 The URL for the resources are prefixed with "/resources/"
 
+![Chinook database model](./../../doc/data_model.png?raw=true "Chinook database model")
+
 ## Examples
 
 ### Request collection resources
@@ -35,7 +37,7 @@ Returns a JSON array of tracks
 
 ### Request single resources:
 
-Artist:
+#### Artist:
 
     curl localhost:7777/resources/artists/1
     
@@ -53,7 +55,7 @@ Returns artist with id 1:
         }
     }
 
-Track:
+#### Track:
 
     curl localhost:7777/resources/tracks/1
     
@@ -87,7 +89,64 @@ Returns track with id 1:
       }
     }
 
+### Add resources
+
+    curl -H "Content-Type: application/json" -X POST -d '{"name":"newArtist"}' http://localhost:7777/resources/artists
+    
+Returns the newly created resource: 
+    
+    {
+      "artist" : {
+        "artistId" : 276,
+        "name" : "newArtist"
+      },
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:7777/resources/artists/276"
+        }
+      }
+    }
+
+### Delete resources
+
+    curl -X DELETE  http://localhost:7777/resources/artists/276
+
+Returns the deleted resource:
+
+    
+    {
+      "artist" : {
+        "artistId" : 276,
+        "name" : "newArtist"
+      },
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:7777/resources/artists/276"
+        }
+      }
+    }
+
+### Update Resources
+
+    curl -H "Content-Type: application/json" -X PUT -d '{"name":"updatedName"}' http://localhost:7777/resources/artists/276
+    
+Returns the updated resource:
+    
+    {
+      "artist" : {
+        "artistId" : 276,
+        "name" : "updatedName"
+      },
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:7777/resources/artists/276"
+        }
+      }
+    }
+
 ### Error responses
+
+#### Invalid path:
 
     curl localhost:7777/wrong_path
 
@@ -101,11 +160,50 @@ Returns a JSON response on the following format:
         "path":"/wrong_path"
     }
 
+#### Requesting a resource that doesn't exists:
 
-## TODO
+    curl localhost:7777/resources/artists/999999
 
-Currently the API is read-only. POST/PUT/DELETE is yet to be implemented.
+Returns a JSON response on the following format:
 
+    {
+        "timestamp":1461499523041,
+        "status":404,
+        "error":"Not Found",
+        "exception":"org.springframework.dao.EmptyResultDataAccessException",
+        "message":"Resource not Found",
+        "path":"/resources/artists/999999"
+    }
+
+#### Using a not supported HTTP method (verb):
+
+    curl -X POST  http://localhost:7777/
+
+Returns a JSON response on the following format:
+
+    {
+        "timestamp":1461499887935,
+        "status":405,
+        "error":"Method Not Allowed",
+        "exception":"org.springframework.web.HttpRequestMethodNotSupportedException",
+        "message":"Request method 'POST' not supported",
+        "path":"/"
+    }
+
+#### Using a media type that is not supported:
+
+    curl -H "Content-Type: text/xml" -X POST -d '<XML>data</XML>' http://localhost:7777/resources/artists
+
+Returns a JSON response on the following format:
+    
+    {
+        "timestamp":1461500261831,
+        "status":415,
+        "error":"Unsupported Media Type",
+        "exception":"org.springframework.web.HttpMediaTypeNotSupportedException",
+        "message":"Content type 'text/xml' not supported",
+        "path":"/resources/artists"
+    }
 ## Documentation
 
 [JavaDoc](javadoc/index.html)
