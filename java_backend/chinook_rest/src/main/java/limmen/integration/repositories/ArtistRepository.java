@@ -64,7 +64,7 @@ public class ArtistRepository {
      */
     public int getMaxId() {
         log.debug("get max Id of artists");
-        return jdbc.queryForObject("SELECT max(\"ArtistId\") FROM \"Artist\";", maxIdMapper);
+        return jdbc.queryForObject("SELECT COALESCE(MAX(\"ArtistId\"),0) FROM \"Artist\";", maxIdMapper);
     }
 
     /**
@@ -79,9 +79,22 @@ public class ArtistRepository {
         return artist;
     }
 
+    /**
+     * Method to delete artist from the database.
+     *
+     * @param artistId id of the artist to delete
+     */
     public void deleteArtist(int artistId) {
         log.debug("delete artist {}", artistId);
         jdbc.update("DELETE FROM \"Artist\" WHERE \"ArtistId\" = ?;", artistId);
+    }
+
+    /**
+     * Method to delete all artists from the database.
+     */
+    public void deleteArtists() {
+        log.debug("delete all artists");
+        jdbc.update("DELETE  * FROM \"Artist\";");
     }
 
     private static final RowMapper<Artist> artistMapper = new RowMapper<Artist>() {

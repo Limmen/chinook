@@ -97,7 +97,7 @@ public class ArtistController {
      * Method to handle HTTP PUT-requests for /resources/artists/{artistId}
      *
      * @param artistId id of the artist
-     * @param artist put artist data
+     * @param artist   put artist data
      * @return HTTP-Response, JSON representation of the updated artist representation
      */
     @CrossOrigin
@@ -108,6 +108,27 @@ public class ArtistController {
         ArtistRepresentation artistRepresentation = new ArtistRepresentation(artistService.updateArtist(artist));
         artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artist.getArtistId())).withSelfRel());
         return new ResponseEntity<ArtistRepresentation>(artistRepresentation, HttpStatus.OK);
+    }
+
+    /**
+     * Method to handle PUT-requests for /resources/artists
+     *
+     * @param putArtists
+     * @return HTTP-Response, JSON representation of the updated artists resource
+     */
+    @CrossOrigin
+    @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<ArtistsArrayRepresentation> updateArtists(@RequestBody List<Artist> putArtists) {
+        log.debug("HTTP PUT-request /resources/artists");
+        List<ArtistRepresentation> artistRepresentations = new ArrayList();
+        List<Artist> artists = artistService.updateArtists(putArtists);
+        artists.forEach((artist) -> {
+            ArtistRepresentation artistRepresentation = new ArtistRepresentation(artist);
+            artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artist.getArtistId())).withSelfRel());
+            artistRepresentations.add(artistRepresentation);
+        });
+        ArtistsArrayRepresentation arrayRepresentation = new ArtistsArrayRepresentation(artistRepresentations);
+        return new ResponseEntity<ArtistsArrayRepresentation>(arrayRepresentation, HttpStatus.OK);
     }
 
     /**
@@ -133,6 +154,7 @@ public class ArtistController {
      */
     @ExceptionHandler(org.springframework.dao.EmptyResultDataAccessException.class)
     void notFound(HttpServletResponse response) throws IOException {
+        log.debug("org.springframework.dao.EmptyResultDataAccessException.class exception caught");
         response.sendError(HttpStatus.NOT_FOUND.value(), "Resource not Found");
     }
 

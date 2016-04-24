@@ -43,6 +43,14 @@ public interface ArtistService {
     public Artist updateArtist(Artist artist);
 
     /**
+     * Method to update the list of artists
+     *
+     * @param artists data to update artists list with
+     * @return new list of artists
+     */
+    public List<Artist> updateArtists(List<Artist> artists);
+
+    /**
      * Method to delete a artist.
      *
      * @param artistId id of the artist to delete

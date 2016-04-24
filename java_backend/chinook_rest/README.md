@@ -126,7 +126,7 @@ Returns the deleted resource:
       }
     }
 
-### Update Resources
+### Update single resource
 
     curl -H "Content-Type: application/json" -X PUT -d '{"name":"updatedName"}' http://localhost:7777/resources/artists/276
     
@@ -144,6 +144,35 @@ Returns the updated resource:
       }
     }
 
+### Update collection resource
+
+    curl -H "Content-Type: application/json" -X PUT -d '[{"name":"testNames1"}, {"name":"testNames2"}]' http://localhost:7777/resources/artists
+
+Returns the updates resource:
+
+    {
+      "artists" : [ {
+        "artist" : {
+          "artistId" : 1,
+          "name" : "testNames1"
+        },
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:7777/resources/artists/1"
+          }
+        }
+      }, {
+        "artist" : {
+          "artistId" : 2,
+          "name" : "testNames2"
+        },
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:7777/resources/artists/2"
+          }
+        }
+      } ]
+    }
 ### Error responses
 
 #### Invalid path:

@@ -47,6 +47,15 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    public List<Artist> updateArtists(List<Artist> artists) {
+        artistRepository.deleteArtists();
+        artists.forEach((artist) -> {
+           createNewArtist(artist);
+        });
+        return getAllArtists();
+    }
+
+    @Override
     public Artist deleteArtist(int artistId) {
         Artist artist = getArtist(artistId);
         artistRepository.deleteArtist(artistId);
