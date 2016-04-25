@@ -39,7 +39,7 @@ public class Customer {
     private int supportRepId;
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
      * @param customerId id of the customer
      * @param firstName first name of the customer
@@ -77,6 +77,10 @@ public class Customer {
 
     public int getCustomerId() {
         return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirstName() {
