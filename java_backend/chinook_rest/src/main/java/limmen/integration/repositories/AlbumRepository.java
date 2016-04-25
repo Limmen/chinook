@@ -45,10 +45,69 @@ public class AlbumRepository {
         return jdbc.query("SELECT * FROM \"Album\";", albumMapper);
     }
 
+    /**
+     * Method to update the database with a new album.
+     *
+     * @param album album to insert
+     * @return the inserted album
+     */
+    public Album createNewAlbum(Album album) {
+        log.info("Update Database with new Album. albumId: {}, title: {}, artistId: {}", album.getAlbumId(), album.getTitle(), album.getArtistId());
+        jdbc.update("INSERT INTO \"Album\" (\"AlbumId\", \"Title\", \"ArtistId\") VALUES (?, ?, ?);", album.getAlbumId(), album.getTitle(), album.getArtistId());
+        return album;
+    }
+
+    /**
+     * Method to query the database for the maximum id of all albums
+     *
+     * @return maxmum id
+     */
+    public int getMaxId() {
+        log.debug("get max Id of albums");
+        return jdbc.queryForObject("SELECT COALESCE(MAX(\"AlbumId\"),0) FROM \"Album\";", maxIdMapper);
+    }
+
+    /**
+     * Method to update the database with new data for a certain album.
+     *
+     * @param album data to update
+     * @return updated album
+     */
+    public Album updateAlbum(Album album) {
+        log.debug("update album {}", album.getAlbumId());
+        jdbc.update("UPDATE \"Album\" SET \"Name\" = ?, \"ArtistId\" = ? WHERE \"AlbumId\" = ?;", album.getTitle(), album.getArtistId(), album.getAlbumId());
+        return album;
+    }
+
+    /**
+     * Method to delete album from the database.
+     *
+     * @param albumId id of the album to delete
+     */
+    public void deleteAlbum(int albumId) {
+        log.debug("delete album {}", albumId);
+        jdbc.update("DELETE FROM \"Album\" WHERE \"AlbumId\" = ?;", albumId);
+    }
+
+    /**
+     * Method to delete all albums from the database.
+     */
+    public void deleteAlbums() {
+        log.debug("delete all albums");
+        jdbc.update("DELETE  * FROM \"Album\";");
+    }
+    
     private static final RowMapper<Album> albumMapper = new RowMapper<Album>() {
         public Album mapRow(ResultSet rs, int rowNum) throws SQLException {
             Album album = new Album(rs.getInt("AlbumId"), rs.getString("Title"), rs.getInt("ArtistId"));
             return album;
+        }
+    };
+
+    private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int id = rs.getInt(1);
+            return id;
         }
     };
 }

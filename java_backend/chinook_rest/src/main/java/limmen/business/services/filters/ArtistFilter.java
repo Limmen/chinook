@@ -8,25 +8,42 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Class for implementing filtering and sorting functionality for the Artist-Resource.
+ *
  * @author Kim Hammar on 2016-04-25.
  */
 public class ArtistFilter {
 
     private String sort;
-    private String id;
+    private String artistId;
     private String name;
 
+    /**
+     * Default constructor
+     */
     public ArtistFilter() {
     }
 
+    /**
+     * Method to filter a list of artists.
+     *
+     * @param artists list to filter
+     * @return filtered list
+     */
     public List<Artist> filter(List<Artist> artists) {
         if (name != null)
             artists = artists.stream().filter(artist -> artist.getName().equals(name)).collect(Collectors.toList());
-        if (id != null)
-            artists = artists.stream().filter(artist -> artist.getArtistId() == Integer.parseInt(id)).collect(Collectors.toList());
+        if (artistId != null)
+            artists = artists.stream().filter(artist -> artist.getArtistId() == Integer.parseInt(artistId)).collect(Collectors.toList());
         return artists;
     }
 
+    /**
+     * Method to sort a list of artists.
+     *
+     * @param artists list to sort
+     * @return sorted list
+     */
     public List<Artist> sort(List<Artist> artists) {
         if(sort == null)
             return artists;
@@ -68,18 +85,18 @@ public class ArtistFilter {
     public String getSort() {
         return sort;
     }
-    public void setId(String id) {
-        this.id = id;
+
+    public void setArtistId(String artistId) {
+        this.artistId = artistId;
     }
 
-    public String getId() {
-        return id;
+    public String getArtistId() {
+        return artistId;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getName() {
         return name;

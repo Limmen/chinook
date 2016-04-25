@@ -18,23 +18,39 @@ public class Album {
     @NotNull
     private int artistId;
 
-    public Album(){}
+    public Album() {
+    }
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
-     * @param albumId id of the album, unique
-     * @param title title of the album
+     * @param albumId  id of the album, unique
+     * @param title    title of the album
      * @param artistId id of the artists that produced the album
      */
-    public Album(int albumId, String title, int artistId){
+    public Album(int albumId, String title, int artistId) {
         this.albumId = albumId;
+        this.title = title;
+        this.artistId = artistId;
+    }
+
+    /**
+     * Alternative constructor when Id is not available.
+     *
+     * @param title    title of the album
+     * @param artistId id of the artist that produced the album
+     */
+    public Album(String title, int artistId) {
         this.title = title;
         this.artistId = artistId;
     }
 
     public int getAlbumId() {
         return albumId;
+    }
+
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
 
     public String getTitle() {
@@ -44,4 +60,5 @@ public class Album {
     public int getArtistId() {
         return artistId;
     }
+
 }

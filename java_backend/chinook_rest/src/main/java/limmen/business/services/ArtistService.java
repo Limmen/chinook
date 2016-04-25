@@ -21,10 +21,10 @@ public interface ArtistService {
     public List<Artist> getAllArtists();
 
     /**
-     * Method to get all artists.
+     * Method to get all artists (filtered).
      *
      * @param artistFilter properties to filter the list of artists on
-     * @return list of artists
+     * @return list of filtered artists
      */
     public List<Artist> getAllArtists(ArtistFilter artistFilter) throws SortException;
 

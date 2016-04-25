@@ -52,13 +52,13 @@ public class ArtistController {
      */
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<ArtistsArrayRepresentation> getAllArtists(@RequestParam(name = "artistId", required = false) String id,
+    public HttpEntity<ArtistsArrayRepresentation> getAllArtists(@RequestParam(name = "artistId", required = false) String artistId,
                                                                 @RequestParam(name = "name", required = false) String name,
                                                                 @RequestParam(name = "sort", required = false) String sort)
             throws SortException {
         log.debug("HTTP GET-request /resources/artists");
         ArtistFilter artistFilter = new ArtistFilter();
-        artistFilter.setId(id);
+        artistFilter.setArtistId(artistId);
         artistFilter.setName(name);
         artistFilter.setSort(sort);
         List<ArtistRepresentation> artistRepresentations = new ArrayList();
