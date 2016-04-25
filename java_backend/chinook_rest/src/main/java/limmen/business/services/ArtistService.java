@@ -1,5 +1,7 @@
 package limmen.business.services;
 
+import limmen.business.services.exceptions.SortException;
+import limmen.business.services.filters.ArtistFilter;
 import limmen.integration.entities.Artist;
 
 import java.util.List;
@@ -17,6 +19,14 @@ public interface ArtistService {
      * @return list of artists
      */
     public List<Artist> getAllArtists();
+
+    /**
+     * Method to get all artists.
+     *
+     * @param artistFilter properties to filter the list of artists on
+     * @return list of artists
+     */
+    public List<Artist> getAllArtists(ArtistFilter artistFilter) throws SortException;
 
     /**
      * Method to get a artist with a specified id.

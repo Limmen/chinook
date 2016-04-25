@@ -173,6 +173,37 @@ Returns the updates resource:
         }
       } ]
     }
+    
+### Request filtered resource
+
+    curl localhost:7777/resources/artists?name=AC/DC
+    
+Returns entrys that fulfills the filter:
+
+    {
+      "artists" : [ {
+        "artist" : {
+          "artistId" : 1,
+          "name" : "AC/DC"
+        },
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:7777/resources/artists/1"
+          }
+        }
+      } ]
+    }
+
+### Sort resources on given parameter
+
+#### Ascending order
+
+    curl localhost:7777/resources/artists?sort=+artistId
+
+#### Descending order
+
+    curl localhost:7777/resources/artists?sort=-artistId
+
 ### Error responses
 
 #### Invalid path:
@@ -231,6 +262,21 @@ Returns a JSON response on the following format:
         "error":"Unsupported Media Type",
         "exception":"org.springframework.web.HttpMediaTypeNotSupportedException",
         "message":"Content type 'text/xml' not supported",
+        "path":"/resources/artists"
+    }
+    
+#### Invalid query string:
+
+    curl localhost:7777/resources/artists?sort=-not_found_parameter
+
+Returns a JSON response on the following format:
+    
+    {
+        "timestamp":1461593056398,
+        "status":400,
+        "error":"Bad Request",
+        "exception":"limmen.business.services.exceptions.SortException",
+        "message":"Invalid Query String",
         "path":"/resources/artists"
     }
 ## Documentation

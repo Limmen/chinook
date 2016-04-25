@@ -3,6 +3,8 @@ package limmen.controllers;
 import limmen.business.representations.array_representations.ArtistsArrayRepresentation;
 import limmen.business.representations.entity_representation.ArtistRepresentation;
 import limmen.business.services.ArtistService;
+import limmen.business.services.exceptions.SortException;
+import limmen.business.services.filters.ArtistFilter;
 import limmen.integration.entities.Artist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,10 +52,17 @@ public class ArtistController {
      */
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<ArtistsArrayRepresentation> getAllArtists() {
+    public HttpEntity<ArtistsArrayRepresentation> getAllArtists(@RequestParam(name = "artistId", required = false) String id,
+                                                                @RequestParam(name = "name", required = false) String name,
+                                                                @RequestParam(name = "sort", required = false) String sort)
+            throws SortException {
         log.debug("HTTP GET-request /resources/artists");
+        ArtistFilter artistFilter = new ArtistFilter();
+        artistFilter.setId(id);
+        artistFilter.setName(name);
+        artistFilter.setSort(sort);
         List<ArtistRepresentation> artistRepresentations = new ArrayList();
-        List<Artist> artists = artistService.getAllArtists();
+        List<Artist> artists = artistService.getAllArtists(artistFilter);
         artists.forEach((artist) -> {
             ArtistRepresentation artistRepresentation = new ArtistRepresentation(artist);
             artistRepresentation.add(linkTo(methodOn(ArtistController.class).getArtist(artist.getArtistId())).withSelfRel());
@@ -158,4 +167,15 @@ public class ArtistController {
         response.sendError(HttpStatus.NOT_FOUND.value(), "Resource not Found");
     }
 
+    /**
+     * ExceptionHandler for when query string was invalid.
+     *
+     * @param response HTTP response to send back to client
+     * @throws IOException
+     */
+    @ExceptionHandler(SortException.class)
+    void invalidQueryString(HttpServletResponse response) throws IOException {
+        log.debug("invalid query string exception caught");
+        response.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid Query String");
+    }
 }

@@ -1,6 +1,8 @@
 package limmen.business.services.implementations;
 
 import limmen.business.services.ArtistService;
+import limmen.business.services.exceptions.SortException;
+import limmen.business.services.filters.ArtistFilter;
 import limmen.integration.entities.Artist;
 import limmen.integration.repositories.ArtistRepository;
 import org.slf4j.Logger;
@@ -23,6 +25,17 @@ public class ArtistServiceImpl implements ArtistService {
     @Inject
     public ArtistServiceImpl(final ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
+    }
+
+    @Override
+    public List<Artist> getAllArtists(ArtistFilter artistFilter) throws SortException {
+        List<Artist> artists = getAllArtists();
+        artists = artistFilter.filter(artists);
+        try {
+            return artistFilter.sort(artists);
+        } catch (Exception e) {
+            throw new SortException("Invalid query string for sorting: " + artistFilter.getSort());
+        }
     }
 
     @Override
@@ -50,7 +63,7 @@ public class ArtistServiceImpl implements ArtistService {
     public List<Artist> updateArtists(List<Artist> artists) {
         artistRepository.deleteArtists();
         artists.forEach((artist) -> {
-           createNewArtist(artist);
+            createNewArtist(artist);
         });
         return getAllArtists();
     }
@@ -61,4 +74,5 @@ public class ArtistServiceImpl implements ArtistService {
         artistRepository.deleteArtist(artistId);
         return artist;
     }
+
 }
