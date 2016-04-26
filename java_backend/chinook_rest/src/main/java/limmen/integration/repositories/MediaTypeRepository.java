@@ -45,10 +45,70 @@ public class MediaTypeRepository {
         return jdbc.query("SELECT * FROM \"MediaType\";", mediaTypeMapper);
     }
 
+
+    /**
+     * Method to update the database with a new mediaTypeEntity.
+     *
+     * @param mediaTypeEntity mediaTypeEntity to insert
+     * @return the inserted mediaTypeEntity
+     */
+    public MediaTypeEntity createNewMediaType(MediaTypeEntity mediaTypeEntity) {
+        log.info("Update Database with new MediaTypeEntity. mediaTypeId: {}, name: {}", mediaTypeEntity.getMediaTypeId(), mediaTypeEntity.getName());
+        jdbc.update("INSERT INTO \"MediaType\" (\"MediaTypeId\", \"Name\") VALUES (?, ?);", mediaTypeEntity.getMediaTypeId(), mediaTypeEntity.getName());
+        return mediaTypeEntity;
+    }
+
+    /**
+     * Method to query the database for the maximum id of all mediaTypeEntity
+     *
+     * @return maxmum id
+     */
+    public int getMaxId() {
+        log.debug("get max Id of mediaTypeEntity");
+        return jdbc.queryForObject("SELECT COALESCE(MAX(\"MediaTypeId\"),0) FROM \"MediaType\";", maxIdMapper);
+    }
+
+    /**
+     * Method to update the database with new data for a certain mediaTypeEntity.
+     *
+     * @param mediaTypeEntity data to update
+     * @return updated mediaTypeEntity
+     */
+    public MediaTypeEntity updateMediaType(MediaTypeEntity mediaTypeEntity) {
+        log.debug("update mediaTypeEntity {}", mediaTypeEntity.getMediaTypeId());
+        jdbc.update("UPDATE \"MediaType\" SET \"Name\" = ? WHERE \"MediaTypeId\" = ?;", mediaTypeEntity.getName(), mediaTypeEntity.getMediaTypeId());
+        return mediaTypeEntity;
+    }
+
+    /**
+     * Method to delete mediaTypeEntity from the database.
+     *
+     * @param mediaTypeId id of the mediaTypeEntity to delete
+     */
+    public void deleteMediaType(int mediaTypeId) {
+        log.debug("delete mediaTypeEntity {}", mediaTypeId);
+        jdbc.update("DELETE FROM \"MediaType\" WHERE \"MediaTypeId\" = ?;", mediaTypeId);
+    }
+
+    /**
+     * Method to delete all mediaTypeEntity from the database.
+     */
+    public void deleteMediaTypes() {
+        log.debug("delete all mediaTypeEntity");
+        jdbc.update("DELETE  * FROM \"MediaType\";");
+    }
+    
     private static final RowMapper<MediaTypeEntity> mediaTypeMapper = new RowMapper<MediaTypeEntity>() {
         public MediaTypeEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             MediaTypeEntity mediaTypeEntity = new MediaTypeEntity(rs.getInt("MediaTypeId"), rs.getString("Name"));
             return mediaTypeEntity;
+        }
+    };
+
+    private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int id = rs.getInt(1);
+            return id;
         }
     };
 }

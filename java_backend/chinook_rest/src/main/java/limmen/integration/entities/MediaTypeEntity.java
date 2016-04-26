@@ -15,7 +15,7 @@ public class MediaTypeEntity {
     private String name;
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
      * @param mediaTypeId id of the mediatype, unique.
      * @param name name of the mediatype.
@@ -29,6 +29,10 @@ public class MediaTypeEntity {
 
     public int getMediaTypeId() {
         return mediaTypeId;
+    }
+
+    public void setMediaTypeId(int mediaTypeId) {
+        this.mediaTypeId = mediaTypeId;
     }
 
     public String getName() {
