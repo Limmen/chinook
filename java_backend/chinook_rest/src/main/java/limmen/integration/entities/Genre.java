@@ -15,7 +15,7 @@ public class Genre {
     private String name;
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
      * @param genreId id of the genre, unique.
      * @param name name of the genre.
@@ -30,6 +30,10 @@ public class Genre {
 
     public int getGenreId() {
         return genreId;
+    }
+
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
     }
 
     public String getName() {

@@ -1,6 +1,8 @@
 package limmen.business.services.implementations;
 
 import limmen.business.services.GenreService;
+import limmen.business.services.exceptions.SortException;
+import limmen.business.services.filters.GenreFilter;
 import limmen.integration.entities.Genre;
 import limmen.integration.repositories.GenreRepository;
 import org.slf4j.Logger;
@@ -24,6 +26,16 @@ public class GenreServiceImpl implements GenreService {
     public GenreServiceImpl(final GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
     }
+    @Override
+    public List<Genre> getAllGenres(GenreFilter genreFilter) throws SortException {
+        List<Genre> genres = getAllGenres();
+        genres = genreFilter.filter(genres);
+        try {
+            return genreFilter.sort(genres);
+        } catch (Exception e) {
+            throw new SortException("Invalid query string for sorting: " + genreFilter.getSort());
+        }
+    }
 
     @Override
     public List<Genre> getAllGenres() {
@@ -33,5 +45,32 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Genre getGenre(int genreId) {
         return genreRepository.getGenre(genreId);
+    }
+
+    @Override
+    public Genre createNewGenre(Genre genre) {
+        genre.setGenreId(genreRepository.getMaxId() + 1);
+        return genreRepository.createNewGenre(genre);
+    }
+
+    @Override
+    public Genre updateGenre(Genre genre) {
+        return genreRepository.updateGenre(genre);
+    }
+
+    @Override
+    public List<Genre> updateGenres(List<Genre> genres) {
+        genreRepository.deleteGenres();
+        genres.forEach((genre) -> {
+            createNewGenre(genre);
+        });
+        return getAllGenres();
+    }
+
+    @Override
+    public Genre deleteGenre(int genreId) {
+        Genre genre = getGenre(genreId);
+        genreRepository.deleteGenre(genreId);
+        return genre;
     }
 }
