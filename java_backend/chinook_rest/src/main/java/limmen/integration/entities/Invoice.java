@@ -61,6 +61,10 @@ public class Invoice {
         return invoiceId;
     }
 
+    public void setInvoiceId(int invoiceId) {
+        this.invoiceId = invoiceId;
+    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -87,5 +91,9 @@ public class Invoice {
 
     public float getTotal() {
         return total;
+    }
+
+    public String getBillingState() {
+        return billingState;
     }
 }
