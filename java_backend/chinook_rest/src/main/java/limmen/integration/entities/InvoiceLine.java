@@ -20,7 +20,7 @@ public class InvoiceLine {
     private int quantity;
 
     /**
-     * Class constructor. Initializes an immutable entity class
+     * Class constructor. Initializes an entity class
      *
      * @param invoiceLineId id of the invoiceline, unique
      * @param invoiceId id of the invoice on this line
@@ -40,6 +40,10 @@ public class InvoiceLine {
 
     public int getInvoiceLineId() {
         return invoiceLineId;
+    }
+
+    public void setInvoiceLineId(int invoiceLineId) {
+        this.invoiceLineId = invoiceLineId;
     }
 
     public int getInvoiceId() {
