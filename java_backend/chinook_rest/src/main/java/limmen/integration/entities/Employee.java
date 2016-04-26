@@ -19,7 +19,7 @@ public class Employee {
     @Size(max = 20)
     private String firstName;
     @Size(max = 20)
-    private String Title;
+    private String title;
     private int reportsTo;
     private Date birthDate;
     private Date hireDate;
@@ -66,7 +66,7 @@ public class Employee {
         this.employeeId = employeeId;
         this.lastName = lastName;
         this.firstName = firstName;
-        Title = title;
+        title = title;
         this.reportsTo = reportsTo;
         this.birthDate = birthDate;
         this.hireDate = hireDate;
@@ -86,6 +86,10 @@ public class Employee {
         return employeeId;
     }
 
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -95,7 +99,7 @@ public class Employee {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public String getFirstName() {

@@ -25,15 +25,6 @@ public class Artist {
         this.name = name;
     }
 
-    /**
-     * Alternative constructor when Id is not available
-     *
-     * @param name name of the artist
-     */
-    public Artist(String name) {
-        this.name = name;
-    }
-
     public Artist() {}
 
     public int getArtistId() {

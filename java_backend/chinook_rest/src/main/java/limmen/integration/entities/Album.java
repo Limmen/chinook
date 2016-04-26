@@ -34,17 +34,6 @@ public class Album {
         this.artistId = artistId;
     }
 
-    /**
-     * Alternative constructor when Id is not available.
-     *
-     * @param title    title of the album
-     * @param artistId id of the artist that produced the album
-     */
-    public Album(String title, int artistId) {
-        this.title = title;
-        this.artistId = artistId;
-    }
-
     public int getAlbumId() {
         return albumId;
     }

@@ -45,6 +45,76 @@ public class EmployeeRepository {
         return jdbc.query("SELECT * FROM \"Employee\";", employeeMapper);
     }
 
+    /**
+     * Method to update the database with a new employee.
+     *
+     * @param employee employee to insert
+     * @return the inserted employee
+     */
+    public Employee createNewEmployee(Employee employee) {
+        log.info("Update Database with new Employee. employeeId: {}, firstName: {}, lastName: {}, title: {}, " +
+                "reportsTo: {}, birthDate: {}, hireDate: {}, address: {}, city: {}, state: {}, country: {}, postalCode: {}, phone: {}," +
+                "fax: {}, email: {}", employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(),
+                employee.getTitle(), employee.getReportsTo(), employee.getBirthDate(), employee.getHireDate(),
+                employee.getAddress(), employee.getCity(), employee.getState(), employee.getCountry(), employee.getPostalCode(),
+                employee.getPhone(), employee.getFax(), employee.getEmail());
+        jdbc.update("INSERT INTO \"Employee\" (\"EmployeeId\", \"FirstName\", \"LastName\", \"Title\", \"ReportsTo\"," +
+                "\"BirthDate\", \"HireDate\", \"Address\", \"City\", \"State\", \"Country\", \"PostalCode\"," +
+                "\"Phone\", \"Fax\", \"Email\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(),
+                employee.getTitle(), employee.getReportsTo(), employee.getBirthDate(), employee.getHireDate(),
+                employee.getAddress(), employee.getCity(), employee.getState(), employee.getCountry(), employee.getPostalCode(),
+                employee.getPhone(), employee.getFax(), employee.getEmail());
+        return employee;
+    }
+
+    /**
+     * Method to query the database for the maximum id of all employees
+     *
+     * @return maxmum id
+     */
+    public int getMaxId() {
+        log.debug("get max Id of employees");
+        return jdbc.queryForObject("SELECT COALESCE(MAX(\"EmployeeId\"),0) FROM \"Employee\";", maxIdMapper);
+    }
+
+    /**
+     * Method to update the database with new data for a certain employee.
+     *
+     * @param employee data to update
+     * @return updated employee
+     */
+    public Employee updateEmployee(Employee employee) {
+        log.debug("update employee {}", employee.getEmployeeId());
+        jdbc.update("UPDATE \"Employee\" SET \"FirstName\" = ?, \"LastName\" = ?, \"Title\" = ?, \"ReportsTo\" = ?," +
+                "\"BirthDate\" = ?, \"HireDate\" = ?, \"Address\" = ?, \"City\" = ?, \"State\" = ?, \"Country\" = ?," +
+                "\"PostalCode\" = ?, \"Phone\" = ?, \"Fax\" = ?, \"Email\" = ? WHERE \"EmployeeId\" = ?;",
+                employee.getFirstName(), employee.getLastName(),
+                employee.getTitle(), employee.getReportsTo(), employee.getBirthDate(), employee.getHireDate(),
+                employee.getAddress(), employee.getCity(), employee.getState(), employee.getCountry(),
+                employee.getPostalCode(),
+                employee.getPhone(), employee.getFax(), employee.getEmail(), employee.getEmployeeId());
+        return employee;
+    }
+
+    /**
+     * Method to delete employee from the database.
+     *
+     * @param employeeId id of the employee to delete
+     */
+    public void deleteEmployee(int employeeId) {
+        log.debug("delete employee {}", employeeId);
+        jdbc.update("DELETE FROM \"Employee\" WHERE \"EmployeeId\" = ?;", employeeId);
+    }
+
+    /**
+     * Method to delete all employees from the database.
+     */
+    public void deleteEmployees() {
+        log.debug("delete all employees");
+        jdbc.update("DELETE  * FROM \"Employee\";");
+    }
+    
     private static final RowMapper<Employee> employeeMapper = new RowMapper<Employee>() {
         public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
             Employee employee = new Employee(rs.getInt("EmployeeId"), rs.getString("LastName"), rs.getString("FirstName"),
@@ -53,6 +123,13 @@ public class EmployeeRepository {
                     rs.getString("Country"), rs.getString("PostalCode"), rs.getString("Phone"), rs.getString("Fax"),
                     rs.getString("Email"));
             return employee;
+        }
+    };
+
+    private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int id = rs.getInt(1);
+            return id;
         }
     };
 }
