@@ -32,6 +32,10 @@ public class Playlist {
         return playlistId;
     }
 
+    public void setPlaylistId(int playlistId) {
+        this.playlistId = playlistId;
+    }
+
     public String getName() {
         return name;
     }
