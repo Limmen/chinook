@@ -194,6 +194,42 @@ Returns entrys that fulfills the filter:
       } ]
     }
 
+Spaces encoding in URL:
+     
+    curl localhost:7777/resources/tracks?composer=Philip%20Glass
+    
+Returns:
+    
+    {
+      "tracks" : [ {
+        "track" : {
+          "trackId" : 3503,
+          "name" : "Koyaanisqatsi",
+          "albumId" : 347,
+          "mediaTypeId" : 2,
+          "genreId" : 10,
+          "composer" : "Philip Glass",
+          "milliseconds" : 206005,
+          "bytes" : 3305164,
+          "unitPrice" : 0.99
+        },
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:7777/resources/tracks/3503"
+          },
+          "album" : {
+            "href" : "http://localhost:7777/resources/albums/347"
+          },
+          "mediatype" : {
+            "href" : "http://localhost:7777/resources/mediatypes/2"
+          },
+          "genre" : {
+            "href" : "http://localhost:7777/resources/genres/10"
+          }
+        }
+      } ]
+    }
+
 ### Sort resources on given parameter
 
 #### Ascending order

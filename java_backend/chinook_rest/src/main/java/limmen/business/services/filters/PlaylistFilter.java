@@ -32,7 +32,7 @@ public class PlaylistFilter {
      */
     public List<Playlist> filter(List<Playlist> playlists) {
         if (name != null)
-            playlists = playlists.stream().filter(playlist -> playlist.getName().equals(name)).collect(Collectors.toList());
+            playlists = playlists.stream().filter(playlist -> { if(playlist.getName() != null) return playlist.getName().equals(name); else return false;}).collect(Collectors.toList());
         if (playlistId != null)
             playlists = playlists.stream().filter(playlist -> playlist.getPlaylistId() == Integer.parseInt(playlistId)).collect(Collectors.toList());
         return playlists;
@@ -63,6 +63,12 @@ public class PlaylistFilter {
         if (property.equals("name")) {
             comparator = (playlist1, playlist2) ->
             {
+                if(playlist1.getName() == null && playlist2.getName() == null)
+                    return 0;
+                if(playlist1.getName() == null)
+                    return -1;
+                if(playlist2.getName() == null)
+                    return 1;
                 if (playlist1.getName().compareTo(playlist2.getName()) > 0)
                     return 1;
                 else if (playlist1.getName().compareTo(playlist2.getName()) < 0)

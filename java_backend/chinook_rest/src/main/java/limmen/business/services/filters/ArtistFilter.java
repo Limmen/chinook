@@ -32,7 +32,8 @@ public class ArtistFilter {
      */
     public List<Artist> filter(List<Artist> artists) {
         if (name != null)
-            artists = artists.stream().filter(artist -> artist.getName().equals(name)).collect(Collectors.toList());
+            artists = artists.stream().filter(artist -> {if(artist.getName() != null) return artist.getName().equals(name);
+                else return false;}).collect(Collectors.toList());
         if (artistId != null)
             artists = artists.stream().filter(artist -> artist.getArtistId() == Integer.parseInt(artistId)).collect(Collectors.toList());
         return artists;
@@ -63,6 +64,12 @@ public class ArtistFilter {
         if (property.equals("name")) {
             comparator = (artist1, artist2) ->
             {
+                if(artist1.getName() == null && artist2.getName() == null)
+                    return 0;
+                if(artist1.getName() == null)
+                    return -1;
+                if(artist2.getName() == null)
+                    return 1;
                 if (artist1.getName().compareTo(artist2.getName()) > 0)
                     return 1;
                 else if (artist1.getName().compareTo(artist2.getName()) < 0)

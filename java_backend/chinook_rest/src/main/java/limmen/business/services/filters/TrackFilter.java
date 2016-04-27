@@ -1,6 +1,8 @@
 package limmen.business.services.filters;
 
 import limmen.integration.entities.Track;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,7 +26,7 @@ public class TrackFilter {
     private String milliseconds;
     private String bytes;
     private String unitPrice;
-
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     /**
      * Default constructor
      */
@@ -38,6 +40,7 @@ public class TrackFilter {
      * @return filtered list
      */
     public List<Track> filter(List<Track> tracks) {
+        log.debug("INSIDE FILTER METHOD, composer: {}, first track composer: {}", composer, tracks.get(0).getComposer());
         if (trackId != null)
             tracks = tracks.stream().filter(track -> track.getTrackId() == Integer.parseInt(trackId)).collect(Collectors.toList());
         if (albumId != null)
@@ -53,9 +56,9 @@ public class TrackFilter {
         if (unitPrice != null)
             tracks = tracks.stream().filter(track -> track.getUnitPrice() == Float.parseFloat(unitPrice)).collect(Collectors.toList());
         if (name != null)
-            tracks = tracks.stream().filter(track -> track.getName().equals(name)).collect(Collectors.toList());
+            tracks = tracks.stream().filter(track -> {if(track.getName() != null) return track.getName().equals(name); else return false;}).collect(Collectors.toList());
         if (composer != null)
-            tracks = tracks.stream().filter(track -> track.getComposer().equals(composer)).collect(Collectors.toList());
+            tracks = tracks.stream().filter(track -> {if(track.getComposer() != null) return track.getComposer().equals(composer); else  return false;}).collect(Collectors.toList());
         return tracks;
     }
 
@@ -144,6 +147,12 @@ public class TrackFilter {
         if (property.equals("name")) {
             comparator = (track1, track2) ->
             {
+                if(track1.getName() == null && track2.getName() == null)
+                    return 0;
+                if(track1.getName() == null)
+                    return -1;
+                if(track2.getName() == null)
+                    return 1;
                 if (track1.getName().compareTo(track2.getName()) > 0)
                     return 1;
                 else if (track1.getName().compareTo(track2.getName()) < 0)
@@ -154,6 +163,12 @@ public class TrackFilter {
         if (property.equals("composer")) {
             comparator = (track1, track2) ->
             {
+                if(track1.getComposer() == null && track2.getComposer() == null)
+                    return 0;
+                if(track1.getComposer() == null)
+                    return -1;
+                if(track2.getComposer() == null)
+                    return 1;
                 if (track1.getComposer().compareTo(track2.getComposer()) > 0)
                     return 1;
                 else if (track1.getComposer().compareTo(track2.getComposer()) < 0)

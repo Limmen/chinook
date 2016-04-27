@@ -32,7 +32,8 @@ public class GenreFilter {
      */
     public List<Genre> filter(List<Genre> genres) {
         if (name != null)
-            genres = genres.stream().filter(genre -> genre.getName().equals(name)).collect(Collectors.toList());
+            genres = genres.stream().filter(genre -> {if(genre.getName() != null)
+                return genre.getName().equals(name); else return false;}).collect(Collectors.toList());
         if (genreId != null)
             genres = genres.stream().filter(genre -> genre.getGenreId() == Integer.parseInt(genreId)).collect(Collectors.toList());
         return genres;
@@ -63,6 +64,12 @@ public class GenreFilter {
         if (property.equals("name")) {
             comparator = (genre1, genre2) ->
             {
+                if(genre1.getName() == null && genre2.getName() == null)
+                    return 0;
+                if(genre1.getName() == null)
+                    return -1;
+                if(genre2.getName() == null)
+                    return 1;
                 if (genre1.getName().compareTo(genre2.getName()) > 0)
                     return 1;
                 else if (genre1.getName().compareTo(genre2.getName()) < 0)

@@ -64,6 +64,7 @@ public class TrackController {
                                                               @RequestParam(name = "sort", required = false) String sort)
             throws SortException {
         log.debug("HTTP GET-request /resources/tracks");
+        log.debug("RECEIVED QUERY PARAM COMPOSER: {}", composer);
         TrackFilter trackFilter = new TrackFilter();
         trackFilter.setTrackId(trackId);
         trackFilter.setName(name);

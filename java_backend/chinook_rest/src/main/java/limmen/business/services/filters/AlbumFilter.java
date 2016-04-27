@@ -34,7 +34,8 @@ public class AlbumFilter {
      */
     public List<Album> filter(List<Album> albums) {
         if (title != null)
-            albums = albums.stream().filter(album -> album.getTitle().equals(title)).collect(Collectors.toList());
+            albums = albums.stream().filter(album -> {if(album.getTitle() != null)
+                return album.getTitle().equals(title); else return false;}).collect(Collectors.toList());
         if (albumId != null)
             albums = albums.stream().filter(album -> album.getAlbumId() == Integer.parseInt(albumId)).collect(Collectors.toList());
         if (artistId != null)
@@ -67,6 +68,12 @@ public class AlbumFilter {
         if (property.equals("title")) {
             comparator = (album1, album2) ->
             {
+                if(album1.getTitle() == null && album2.getTitle() == null)
+                    return 0;
+                if(album1.getTitle() == null)
+                    return -1;
+                if(album2.getTitle() == null)
+                    return 1;
                 if (album1.getTitle().compareTo(album2.getTitle()) > 0)
                     return 1;
                 else if (album1.getTitle().compareTo(album2.getTitle()) < 0)

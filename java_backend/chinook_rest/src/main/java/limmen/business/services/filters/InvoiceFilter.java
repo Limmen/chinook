@@ -46,17 +46,23 @@ public class InvoiceFilter {
         if (total != null)
             invoices = invoices.stream().filter(invoice -> invoice.getTotal() == Float.parseFloat(total)).collect(Collectors.toList());
         if (invoiceDate != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getInvoiceDate().equals(invoiceDate)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getInvoiceDate() != null)
+                return invoice.getInvoiceDate().equals(invoiceDate); else return false;}).collect(Collectors.toList());
         if (billingAddress != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getBillingAddress().equals(billingAddress)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getBillingAddress() != null)
+                return invoice.getBillingAddress().equals(billingAddress); else return false;}).collect(Collectors.toList());
         if (billingCity != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getBillingCity().equals(billingCity)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getBillingCity() != null)
+                return invoice.getBillingCity().equals(billingCity); else return false;}).collect(Collectors.toList());
         if (billingState != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getBillingState().equals(billingState)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getBillingState() != null)
+                return invoice.getBillingState().equals(billingState); else return false;}).collect(Collectors.toList());
         if (billingCountry != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getBillingCountry().equals(billingCountry)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getBillingCountry() != null)
+                return invoice.getBillingCountry().equals(billingCountry); else return false;}).collect(Collectors.toList());
         if (billingPostalCode != null)
-            invoices = invoices.stream().filter(invoice -> invoice.getBillingPostalCode().equals(billingPostalCode)).collect(Collectors.toList());
+            invoices = invoices.stream().filter(invoice -> {if(invoice.getBillingPostalCode() != null)
+                return invoice.getBillingPostalCode().equals(billingPostalCode); else return false;}).collect(Collectors.toList());
         return invoices;
     }
 
@@ -105,6 +111,12 @@ public class InvoiceFilter {
         if (property.equals("invoiceDate")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getInvoiceDate() == null && invoice2.getInvoiceDate() == null)
+                    return 0;
+                if(invoice1.getInvoiceDate() == null)
+                    return -1;
+                if(invoice2.getInvoiceDate() == null)
+                    return 1;
                 if (invoice1.getInvoiceDate().compareTo(invoice2.getInvoiceDate()) > 0)
                     return 1;
                 else if (invoice1.getInvoiceDate().compareTo(invoice2.getInvoiceDate()) < 0)
@@ -115,6 +127,12 @@ public class InvoiceFilter {
         if (property.equals("billingAddress")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getBillingAddress() == null && invoice2.getBillingAddress() == null)
+                    return 0;
+                if(invoice1.getBillingAddress() == null)
+                    return -1;
+                if(invoice2.getBillingAddress() == null)
+                    return 1;
                 if (invoice1.getBillingAddress().compareTo(invoice2.getBillingAddress()) > 0)
                     return 1;
                 else if (invoice1.getBillingAddress().compareTo(invoice2.getBillingAddress()) < 0)
@@ -125,6 +143,12 @@ public class InvoiceFilter {
         if (property.equals("billingCity")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getBillingCity() == null && invoice2.getBillingCity() == null)
+                    return 0;
+                if(invoice1.getBillingCity() == null)
+                    return -1;
+                if(invoice2.getBillingCity() == null)
+                    return 1;
                 if (invoice1.getBillingCity().compareTo(invoice2.getBillingCity()) > 0)
                     return 1;
                 else if (invoice1.getBillingCity().compareTo(invoice2.getBillingCity()) < 0)
@@ -135,6 +159,12 @@ public class InvoiceFilter {
         if (property.equals("billingState")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getBillingState() == null && invoice2.getBillingState() == null)
+                    return 0;
+                if(invoice1.getBillingState() == null)
+                    return -1;
+                if(invoice2.getBillingState() == null)
+                    return 1;
                 if (invoice1.getBillingState().compareTo(invoice2.getBillingState()) > 0)
                     return 1;
                 else if (invoice1.getBillingState().compareTo(invoice2.getBillingState()) < 0)
@@ -145,6 +175,12 @@ public class InvoiceFilter {
         if (property.equals("billingCountry")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getBillingCountry() == null && invoice2.getBillingCountry() == null)
+                    return 0;
+                if(invoice1.getBillingCountry() == null)
+                    return -1;
+                if(invoice2.getBillingCountry() == null)
+                    return 1;
                 if (invoice1.getBillingCountry().compareTo(invoice2.getBillingCountry()) > 0)
                     return 1;
                 else if (invoice1.getBillingCountry().compareTo(invoice2.getBillingCountry()) < 0)
@@ -155,6 +191,12 @@ public class InvoiceFilter {
         if (property.equals("billingPostalCode")) {
             comparator = (invoice1, invoice2) ->
             {
+                if(invoice1.getBillingPostalCode() == null && invoice2.getBillingPostalCode() == null)
+                    return 0;
+                if(invoice1.getBillingPostalCode() == null)
+                    return -1;
+                if(invoice2.getBillingPostalCode() == null)
+                    return 1;
                 if (invoice1.getBillingPostalCode().compareTo(invoice2.getBillingPostalCode()) > 0)
                     return 1;
                 else if (invoice1.getBillingPostalCode().compareTo(invoice2.getBillingPostalCode()) < 0)

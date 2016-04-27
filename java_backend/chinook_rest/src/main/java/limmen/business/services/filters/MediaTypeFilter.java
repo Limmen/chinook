@@ -32,7 +32,8 @@ public class MediaTypeFilter {
      */
     public List<MediaTypeEntity> filter(List<MediaTypeEntity> mediaTypeEntitys) {
         if (name != null)
-            mediaTypeEntitys = mediaTypeEntitys.stream().filter(mediaTypeEntity -> mediaTypeEntity.getName().equals(name)).collect(Collectors.toList());
+            mediaTypeEntitys = mediaTypeEntitys.stream().filter(mediaTypeEntity -> {if(mediaTypeEntity.getName() != null)
+                return mediaTypeEntity.getName().equals(name); else return false;}).collect(Collectors.toList());
         if (mediaTypeId != null)
             mediaTypeEntitys = mediaTypeEntitys.stream().filter(mediaTypeEntity -> mediaTypeEntity.getMediaTypeId() == Integer.parseInt(mediaTypeId)).collect(Collectors.toList());
         return mediaTypeEntitys;
@@ -63,6 +64,12 @@ public class MediaTypeFilter {
         if (property.equals("name")) {
             comparator = (mediaTypeEntity1, mediaTypeEntity2) ->
             {
+                if(mediaTypeEntity1.getName() == null && mediaTypeEntity2.getName() == null)
+                    return 0;
+                if(mediaTypeEntity1.getName() == null)
+                    return -1;
+                if(mediaTypeEntity2.getName() == null)
+                    return 1;
                 if (mediaTypeEntity1.getName().compareTo(mediaTypeEntity2.getName()) > 0)
                     return 1;
                 else if (mediaTypeEntity1.getName().compareTo(mediaTypeEntity2.getName()) < 0)

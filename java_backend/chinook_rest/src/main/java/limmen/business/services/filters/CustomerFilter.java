@@ -43,29 +43,40 @@ public class CustomerFilter {
      */
     public List<Customer> filter(List<Customer> customers) {
         if (firstName != null)
-            customers = customers.stream().filter(customer -> customer.getFirstName().equals(firstName)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getFirstName() != null)
+                return customer.getFirstName().equals(firstName); else return false;}).collect(Collectors.toList());
         if (customerId != null)
             customers = customers.stream().filter(customer -> customer.getCustomerId() == Integer.parseInt(customerId)).collect(Collectors.toList());
         if (lastName != null)
-            customers = customers.stream().filter(customer -> customer.getLastName().equals(lastName)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getLastName() != null)
+                return customer.getLastName().equals(lastName); else return false;}).collect(Collectors.toList());
         if (company != null)
-            customers = customers.stream().filter(customer -> customer.getCompany().equals(company)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getCompany() != null)
+                return customer.getCompany().equals(company); else return false; }).collect(Collectors.toList());
         if (address != null)
-            customers = customers.stream().filter(customer -> customer.getAddress().equals(address)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getAddress() != null)
+                return customer.getAddress().equals(address); else return false;}).collect(Collectors.toList());
         if (city != null)
-            customers = customers.stream().filter(customer -> customer.getCity().equals(city)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getCity() != null)
+                return customer.getCity().equals(city); else return false;}).collect(Collectors.toList());
         if (state != null)
-            customers = customers.stream().filter(customer -> customer.getState().equals(state)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getState() != null)
+                return customer.getState().equals(state); else return false;}).collect(Collectors.toList());
         if (country != null)
-            customers = customers.stream().filter(customer -> customer.getCountry().equals(country)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getCountry() != null)
+                return customer.getCountry().equals(country); else return false;}).collect(Collectors.toList());
         if (postalCode != null)
-            customers = customers.stream().filter(customer -> customer.getPostalCode().equals(postalCode)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getPostalCode() != null)
+                return customer.getPostalCode().equals(postalCode); else return false;}).collect(Collectors.toList());
         if (phone != null)
-            customers = customers.stream().filter(customer -> customer.getPhone().equals(phone)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getPhone() != null)
+                return customer.getPhone().equals(phone); else return false;}).collect(Collectors.toList());
         if (fax != null)
-            customers = customers.stream().filter(customer -> customer.getFax().equals(fax)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getFax() != null)
+                return customer.getFax().equals(fax); else return false;}).collect(Collectors.toList());
         if (email != null)
-            customers = customers.stream().filter(customer -> customer.getEmail().equals(email)).collect(Collectors.toList());
+            customers = customers.stream().filter(customer -> {if(customer.getEmail() != null)
+                return customer.getEmail().equals(email); else return false;}).collect(Collectors.toList());
         if (supportRepId != null)
             customers = customers.stream().filter(customer -> customer.getSupportRepId() == Integer.parseInt(supportRepId)).collect(Collectors.toList());
         return customers;
@@ -96,6 +107,12 @@ public class CustomerFilter {
         if (property.equals("firstName")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getFirstName() == null && customer2.getFirstName() == null)
+                    return 0;
+                if(customer1.getFirstName() == null)
+                    return -1;
+                if(customer2.getFirstName() == null)
+                    return 1;
                 if (customer1.getFirstName().compareTo(customer2.getFirstName()) > 0)
                     return 1;
                 else if (customer1.getFirstName().compareTo(customer2.getFirstName()) < 0)
@@ -106,6 +123,12 @@ public class CustomerFilter {
         if (property.equals("lastName")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getLastName() == null && customer2.getLastName() == null)
+                    return 0;
+                if(customer1.getLastName() == null)
+                    return -1;
+                if(customer2.getLastName() == null)
+                    return 1;
                 if (customer1.getLastName().compareTo(customer2.getLastName()) > 0)
                     return 1;
                 else if (customer1.getLastName().compareTo(customer2.getLastName()) < 0)
@@ -116,6 +139,12 @@ public class CustomerFilter {
         if (property.equals("company")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getCompany() == null && customer2.getCompany() == null)
+                    return 0;
+                if(customer1.getCompany() == null)
+                    return -1;
+                if(customer2.getCompany() == null)
+                    return 1;
                 if (customer1.getCompany().compareTo(customer2.getCompany()) > 0)
                     return 1;
                 else if (customer1.getCompany().compareTo(customer2.getCompany()) < 0)
@@ -126,6 +155,12 @@ public class CustomerFilter {
         if (property.equals("address")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getAddress() == null && customer2.getAddress() == null)
+                    return 0;
+                if(customer1.getAddress() == null)
+                    return -1;
+                if(customer2.getAddress() == null)
+                    return 1;
                 if (customer1.getAddress().compareTo(customer2.getAddress()) > 0)
                     return 1;
                 else if (customer1.getAddress().compareTo(customer2.getAddress()) < 0)
@@ -136,6 +171,12 @@ public class CustomerFilter {
         if (property.equals("city")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getCity() == null && customer2.getCity() == null)
+                    return 0;
+                if(customer1.getCity() == null)
+                    return -1;
+                if(customer2.getCity() == null)
+                    return 1;
                 if (customer1.getCity().compareTo(customer2.getCity()) > 0)
                     return 1;
                 else if (customer1.getCity().compareTo(customer2.getCity()) < 0)
@@ -146,6 +187,12 @@ public class CustomerFilter {
         if (property.equals("state")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getState() == null && customer2.getState() == null)
+                    return 0;
+                if(customer1.getState() == null)
+                    return -1;
+                if(customer2.getState() == null)
+                    return 1;
                 if (customer1.getState().compareTo(customer2.getState()) > 0)
                     return 1;
                 else if (customer1.getState().compareTo(customer2.getState()) < 0)
@@ -156,6 +203,12 @@ public class CustomerFilter {
         if (property.equals("country")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getCountry() == null && customer2.getCountry() == null)
+                    return 0;
+                if(customer1.getCountry() == null)
+                    return -1;
+                if(customer2.getCountry() == null)
+                    return 1;
                 if (customer1.getCountry().compareTo(customer2.getCountry()) > 0)
                     return 1;
                 else if (customer1.getCountry().compareTo(customer2.getCountry()) < 0)
@@ -166,6 +219,12 @@ public class CustomerFilter {
         if (property.equals("postalCode")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getPostalCode() == null && customer2.getPostalCode() == null)
+                    return 0;
+                if(customer1.getPostalCode() == null)
+                    return -1;
+                if(customer2.getPostalCode() == null)
+                    return 1;
                 if (customer1.getPostalCode().compareTo(customer2.getPostalCode()) > 0)
                     return 1;
                 else if (customer1.getPostalCode().compareTo(customer2.getPostalCode()) < 0)
@@ -176,6 +235,12 @@ public class CustomerFilter {
         if (property.equals("phone")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getPhone() == null && customer2.getPhone() == null)
+                    return 0;
+                if(customer1.getPhone() == null)
+                    return -1;
+                if(customer2.getPhone() == null)
+                    return 1;
                 if (customer1.getPhone().compareTo(customer2.getPhone()) > 0)
                     return 1;
                 else if (customer1.getPhone().compareTo(customer2.getPhone()) < 0)
@@ -186,6 +251,12 @@ public class CustomerFilter {
         if (property.equals("fax")) {
             comparator = (customer1, customer2) ->
             {
+                if(customer1.getFax() == null && customer2.getFax() == null)
+                    return 0;
+                if(customer1.getFax() == null)
+                    return -1;
+                if(customer2.getFax() == null)
+                    return 1;
                 if (customer1.getFax().compareTo(customer2.getFax()) > 0)
                     return 1;
                 else if (customer1.getFax().compareTo(customer2.getFax()) < 0)
@@ -196,9 +267,15 @@ public class CustomerFilter {
         if (property.equals("email")) {
             comparator = (customer1, customer2) ->
             {
-                if (customer1.getFirstName().compareTo(customer2.getEmail()) > 0)
+                if(customer1.getEmail() == null && customer2.getEmail() == null)
+                    return 0;
+                if(customer1.getEmail() == null)
+                    return -1;
+                if(customer2.getEmail() == null)
                     return 1;
-                else if (customer1.getFirstName().compareTo(customer2.getEmail()) < 0)
+                if (customer1.getEmail().compareTo(customer2.getEmail()) > 0)
+                    return 1;
+                else if (customer1.getEmail().compareTo(customer2.getEmail()) < 0)
                     return -1;
                 return 0;
             };

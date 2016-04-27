@@ -46,35 +46,48 @@ public class EmployeeFilter {
      */
     public List<Employee> filter(List<Employee> employees) {
         if (firstName != null)
-            employees = employees.stream().filter(employee -> employee.getFirstName().equals(firstName)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getFirstName() != null)
+                return employee.getFirstName().equals(firstName); else return false;}).collect(Collectors.toList());
         if (employeeId != null)
             employees = employees.stream().filter(employee -> employee.getEmployeeId() == Integer.parseInt(employeeId)).collect(Collectors.toList());
         if (lastName != null)
-            employees = employees.stream().filter(employee -> employee.getLastName().equals(lastName)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getLastName() != null)
+                return employee.getLastName().equals(lastName); else return false; }).collect(Collectors.toList());
         if (title != null)
-            employees = employees.stream().filter(employee -> employee.getTitle().equals(title)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getTitle() != null)
+                return employee.getTitle().equals(title); else return false;}).collect(Collectors.toList());
         if (reportsTo != null)
             employees = employees.stream().filter(employee -> employee.getReportsTo() == Integer.parseInt(reportsTo)).collect(Collectors.toList());
         if (birthDate != null)
-            employees = employees.stream().filter(employee -> employee.getBirthDate().equals(birthDate)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getBirthDate() != null)
+                return employee.getBirthDate().equals(birthDate); else return false;}).collect(Collectors.toList());
         if (hireDate != null)
-            employees = employees.stream().filter(employee -> employee.getHireDate().equals(hireDate)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getHireDate() != null)
+                return employee.getHireDate().equals(hireDate); else return false;}).collect(Collectors.toList());
         if (address != null)
-            employees = employees.stream().filter(employee -> employee.getAddress().equals(address)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getAddress() != null)
+                return employee.getAddress().equals(address); else return false;}).collect(Collectors.toList());
         if (city != null)
-            employees = employees.stream().filter(employee -> employee.getCity().equals(city)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getCity() != null)
+                return employee.getCity().equals(city); else return false;}).collect(Collectors.toList());
         if (state != null)
-            employees = employees.stream().filter(employee -> employee.getState().equals(state)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getState() != null)
+                return employee.getState().equals(state); else return false; }).collect(Collectors.toList());
         if (country != null)
-            employees = employees.stream().filter(employee -> employee.getCountry().equals(country)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getCountry() != null)
+                return employee.getCountry().equals(country); else return false;}).collect(Collectors.toList());
         if (postalCode != null)
-            employees = employees.stream().filter(employee -> employee.getPostalCode().equals(postalCode)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getPostalCode() != null)
+                return employee.getPostalCode().equals(postalCode); else return false;}).collect(Collectors.toList());
         if (phone != null)
-            employees = employees.stream().filter(employee -> employee.getPhone().equals(phone)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getPhone() != null)
+                return employee.getPhone().equals(phone); else return false;}).collect(Collectors.toList());
         if (fax != null)
-            employees = employees.stream().filter(employee -> employee.getFax().equals(fax)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getFax() != null)
+                return employee.getFax().equals(fax); else return false;}).collect(Collectors.toList());
         if (email != null)
-            employees = employees.stream().filter(employee -> employee.getEmail().equals(email)).collect(Collectors.toList());
+            employees = employees.stream().filter(employee -> {if(employee.getEmail() != null)
+                return employee.getEmail().equals(email); else return false;}).collect(Collectors.toList());
         return employees;
     }
 
@@ -103,6 +116,12 @@ public class EmployeeFilter {
         if (property.equals("firstName")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getFirstName() == null && employee2.getFirstName() == null)
+                    return 0;
+                if(employee1.getFirstName() == null)
+                    return -1;
+                if(employee2.getFirstName() == null)
+                    return 1;
                 if (employee1.getFirstName().compareTo(employee2.getFirstName()) > 0)
                     return 1;
                 else if (employee1.getFirstName().compareTo(employee2.getFirstName()) < 0)
@@ -113,6 +132,12 @@ public class EmployeeFilter {
         if (property.equals("lastName")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getLastName() == null && employee2.getLastName() == null)
+                    return 0;
+                if(employee1.getLastName() == null)
+                    return -1;
+                if(employee2.getLastName() == null)
+                    return 1;
                 if (employee1.getLastName().compareTo(employee2.getLastName()) > 0)
                     return 1;
                 else if (employee1.getLastName().compareTo(employee2.getLastName()) < 0)
@@ -123,6 +148,12 @@ public class EmployeeFilter {
         if (property.equals("title")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getTitle() == null && employee2.getTitle() == null)
+                    return 0;
+                if(employee1.getTitle() == null)
+                    return -1;
+                if(employee2.getTitle() == null)
+                    return 1;
                 if (employee1.getTitle().compareTo(employee2.getTitle()) > 0)
                     return 1;
                 else if (employee1.getTitle().compareTo(employee2.getTitle()) < 0)
@@ -143,6 +174,12 @@ public class EmployeeFilter {
         if (property.equals("birthDate")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getBirthDate() == null && employee2.getBirthDate() == null)
+                    return 0;
+                if(employee1.getBirthDate() == null)
+                    return -1;
+                if(employee2.getBirthDate() == null)
+                    return 1;
                 if (employee1.getBirthDate().compareTo(employee2.getBirthDate()) > 0)
                     return 1;
                 else if (employee1.getBirthDate().compareTo(employee2.getBirthDate()) < 0)
@@ -153,6 +190,12 @@ public class EmployeeFilter {
         if (property.equals("hireDate")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getHireDate() == null && employee2.getHireDate() == null)
+                    return 0;
+                if(employee1.getHireDate() == null)
+                    return -1;
+                if(employee2.getHireDate() == null)
+                    return 1;
                 if (employee1.getHireDate().compareTo(employee2.getHireDate()) > 0)
                     return 1;
                 else if (employee1.getHireDate().compareTo(employee2.getHireDate()) < 0)
@@ -163,6 +206,12 @@ public class EmployeeFilter {
         if (property.equals("address")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getAddress() == null && employee2.getAddress() == null)
+                    return 0;
+                if(employee1.getAddress() == null)
+                    return -1;
+                if(employee2.getAddress() == null)
+                    return 1;
                 if (employee1.getAddress().compareTo(employee2.getAddress()) > 0)
                     return 1;
                 else if (employee1.getAddress().compareTo(employee2.getAddress()) < 0)
@@ -173,6 +222,12 @@ public class EmployeeFilter {
         if (property.equals("city")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getCity() == null && employee2.getCity() == null)
+                    return 0;
+                if(employee1.getCity() == null)
+                    return -1;
+                if(employee2.getCity() == null)
+                    return 1;
                 if (employee1.getCity().compareTo(employee2.getCity()) > 0)
                     return 1;
                 else if (employee1.getCity().compareTo(employee2.getCity()) < 0)
@@ -183,6 +238,12 @@ public class EmployeeFilter {
         if (property.equals("state")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getState() == null && employee2.getState() == null)
+                    return 0;
+                if(employee1.getState() == null)
+                    return -1;
+                if(employee2.getState() == null)
+                    return 1;
                 if (employee1.getState().compareTo(employee2.getState()) > 0)
                     return 1;
                 else if (employee1.getState().compareTo(employee2.getState()) < 0)
@@ -193,6 +254,12 @@ public class EmployeeFilter {
         if (property.equals("country")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getCountry() == null && employee2.getCountry() == null)
+                    return 0;
+                if(employee1.getCountry() == null)
+                    return -1;
+                if(employee2.getCountry() == null)
+                    return 1;
                 if (employee1.getCountry().compareTo(employee2.getCountry()) > 0)
                     return 1;
                 else if (employee1.getCountry().compareTo(employee2.getCountry()) < 0)
@@ -203,6 +270,12 @@ public class EmployeeFilter {
         if (property.equals("postalCode")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getPostalCode() == null && employee2.getPostalCode() == null)
+                    return 0;
+                if(employee1.getPostalCode() == null)
+                    return -1;
+                if(employee2.getPostalCode() == null)
+                    return 1;
                 if (employee1.getPostalCode().compareTo(employee2.getPostalCode()) > 0)
                     return 1;
                 else if (employee1.getPostalCode().compareTo(employee2.getPostalCode()) < 0)
@@ -213,6 +286,12 @@ public class EmployeeFilter {
         if (property.equals("phone")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getPhone() == null && employee2.getPhone() == null)
+                    return 0;
+                if(employee1.getPhone() == null)
+                    return -1;
+                if(employee2.getPhone() == null)
+                    return 1;
                 if (employee1.getPhone().compareTo(employee2.getPhone()) > 0)
                     return 1;
                 else if (employee1.getPhone().compareTo(employee2.getPhone()) < 0)
@@ -223,6 +302,12 @@ public class EmployeeFilter {
         if (property.equals("fax")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getFax() == null && employee2.getFax() == null)
+                    return 0;
+                if(employee1.getFax() == null)
+                    return -1;
+                if(employee2.getFax() == null)
+                    return 1;
                 if (employee1.getFax().compareTo(employee2.getFax()) > 0)
                     return 1;
                 else if (employee1.getFax().compareTo(employee2.getFax()) < 0)
@@ -233,6 +318,12 @@ public class EmployeeFilter {
         if (property.equals("email")) {
             comparator = (employee1, employee2) ->
             {
+                if(employee1.getEmail() == null && employee2.getEmail() == null)
+                    return 0;
+                if(employee1.getEmail() == null)
+                    return -1;
+                if(employee2.getEmail() == null)
+                    return 1;
                 if (employee1.getEmail().compareTo(employee2.getEmail()) > 0)
                     return 1;
                 else if (employee1.getEmail().compareTo(employee2.getEmail()) < 0)
