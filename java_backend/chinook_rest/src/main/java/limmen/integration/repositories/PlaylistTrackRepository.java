@@ -47,6 +47,52 @@ public class PlaylistTrackRepository {
         return jdbc.query("SELECT * FROM \"PlaylistTrack\";", playlistTrackMapper);
     }
 
+    /**
+     * Method to update the database with a new playlistTrack.
+     *
+     * @param playlistTrack playlistTrack to insert
+     * @return the inserted playlistTrack
+     */
+    public PlaylistTrack createNewPlaylistTrack(PlaylistTrack playlistTrack) {
+        log.info("Update Database with new PlaylistTrack. TrackId: {}, PlaylistId: {}", playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
+        jdbc.update("INSERT INTO \"PlaylistTrack\" (\"TrackId\", \"PlaylistId\") VALUES (?, ?);", playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
+        return playlistTrack;
+    }
+
+    /**
+     * Method to update the database with new data for a certain playlistTrack.
+     *
+     * @param playlistTrack data to update
+     * @return updated playlistTrack
+     */
+    public PlaylistTrack updatePlaylistTrack(PlaylistTrack playlistTrack) {
+        log.info("Update PlaylistTrack. TrackId: {}, PlaylistId: {}", playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
+        jdbc.update("UPDATE \"PlaylistTrack\" SET \"TrackId\" = ?, \"PlaylistId\" = ? " +
+                "WHERE \"TrackId\" = ? AND \"PlaylistTrackId\" = ?;", playlistTrack.getTrackId(), playlistTrack.getPlaylistId(),
+                playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
+        return playlistTrack;
+    }
+
+    /**
+     * Method to delete playlistTrack from the database.
+     *
+     * @param trackId id of the track.
+     * @param playlistId id of the playlist
+     */
+    public void deletePlaylistTrack(int trackId, int playlistId) {
+        log.debug("delete playlistTrack, TrackId: {}, PlaylistId: {}", trackId, playlistId);
+        jdbc.update("DELETE FROM \"PlaylistTrack\" WHERE \"TrackId\" = ? AND \"PlaylistId\" = ?;",
+                trackId, playlistId);
+    }
+
+    /**
+     * Method to delete all playlistTracks from the database.
+     */
+    public void deletePlaylistTracks() {
+        log.debug("delete all playlistTracks");
+        jdbc.update("DELETE  * FROM \"PlaylistTrack\";");
+    }
+    
     private static final RowMapper<PlaylistTrack> playlistTrackMapper = new RowMapper<PlaylistTrack>() {
         public PlaylistTrack mapRow(ResultSet rs, int rowNum) throws SQLException {
             PlaylistTrack playlistTrack = new PlaylistTrack(rs.getInt("TrackId"), rs.getInt("PlaylistId"));
