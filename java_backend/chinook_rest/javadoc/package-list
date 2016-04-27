@@ -2,6 +2,8 @@ limmen
 limmen.business.representations.array_representations
 limmen.business.representations.entity_representation
 limmen.business.services
+limmen.business.services.exceptions
+limmen.business.services.filters
 limmen.business.services.implementations
 limmen.controllers
 limmen.integration

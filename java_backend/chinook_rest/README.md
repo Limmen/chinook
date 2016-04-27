@@ -6,15 +6,94 @@
 
 A rest-api for the Chinook database. Built with the Spring framework. Documentation for the database can be found in [doc](../../doc)
 
+Table of Contents
+=================
+
+  * [REST-API for the Chinook database](#rest-api-for-the-chinook-database)
+    * [Description](#description)
+    * [Installation](#installation)
+      * [Docker](#docker)
+        * [Bild Spring Docker image with maven](#bild-spring-docker-image-with-maven)
+        * [Build Postgres Docker image](#build-postgres-docker-image)
+        * [Start Postgres container](#start-postgres-container)
+        * [Start the Spring container linked](#start-the-spring-container-linked)
+        * [Stop the containers](#stop-the-containers)
+        * [Delete containers](#delete-containers)
+        * [Watch all running containers](#watch-all-running-containers)
+        * [Watch logs of running containers](#watch-logs-of-running-containers)
+    * [Resources](#resources)
+    * [Examples](#examples)
+      * [Request collection resources](#request-collection-resources)
+      * [Request single resources:](#request-single-resources)
+        * [Artist:](#artist)
+        * [Track:](#track)
+      * [Add resources](#add-resources)
+      * [Delete resources](#delete-resources)
+      * [Update single resource](#update-single-resource)
+      * [Update collection resource](#update-collection-resource)
+      * [Request filtered resource](#request-filtered-resource)
+      * [Sort resources on given parameter](#sort-resources-on-given-parameter)
+        * [Ascending order](#ascending-order)
+        * [Descending order](#descending-order)
+      * [Error responses](#error-responses)
+        * [Invalid path:](#invalid-path)
+        * [Requesting a resource that doesn't exists:](#requesting-a-resource-that-doesnt-exists)
+        * [Using a HTTP method (verb) that is not supported:](#using-a-http-method-verb-that-is-not-supported)
+        * [Using a media type that is not supported:](#using-a-media-type-that-is-not-supported)
+        * [Invalid query string:](#invalid-query-string)
+    * [Documentation](#documentation)
+    * [Copyright and license](#copyright-and-license)
+
+
 ## Installation
 
-1. `git clone https://github.com/Limmen/chinook`
-2. `cd chinook/java_backend/chinook_rest/`
-3. `mvn clean install` , downloads dependencies and runs tests
+1. `$ git clone https://github.com/Limmen/chinook`
+2. `$ cd chinook/java_backend/chinook_rest/`
+3. `$ mvn clean install` , downloads dependencies and runs tests
 4. The application is packaged in a "fat jar" that includes dependencies on a tomcat server, run with: `java -jar target/chinook_rest-0.0.1-SNAPSHOT.jar`
 5. The server is now up and running and accepts HTTP requests. The primary entry point is at:
 
    http://localhost:7777
+   
+### Docker
+
+#### Bild Spring Docker image with maven
+
+    $ mvn package docker:build
+
+#### Build Postgres Docker image
+
+    $ sudo docker build -t chinook_rest-postgres src/main/docker/postgres/
+
+#### Start Postgres container
+
+    $ sudo docker run --name chinook_rest-postgres -d chinook_rest-postgres
+    
+#### Start the Spring container linked
+
+    $ docker run --name chinook_rest --link chinook_rest-postgres:postgres -p 7777:7777 -d chinook_rest
+
+#### Stop the containers
+
+    $ docker stop chinook_rest
+
+    $ docker stop chinook_rest-postgres
+
+#### Delete containers
+
+    $ docker rm chinook_rest
+    
+    $ docker rm chinook_rest-postgres
+
+#### Watch all running containers 
+
+    $ docker ps -a
+    
+#### Watch logs of running containers
+
+    $ docker logs chinook_rest
+    
+    $ docker logs chinook_rest-postgres
 
 ## Resources
 
@@ -27,11 +106,11 @@ The URL for the resources are prefixed with "/resources/"
 
 ### Request collection resources
 
-    curl localhost:7777/resources/artists
+    $ curl localhost:7777/resources/artists
     
 Returns a JSON array of all artists
 
-    curl localhost:7777/resources/tracks
+    $ curl localhost:7777/resources/tracks
     
 Returns a JSON array of tracks
 
@@ -39,7 +118,7 @@ Returns a JSON array of tracks
 
 #### Artist:
 
-    curl localhost:7777/resources/artists/1
+    $ curl localhost:7777/resources/artists/1
     
 Returns artist with id 1:
 
@@ -57,7 +136,7 @@ Returns artist with id 1:
 
 #### Track:
 
-    curl localhost:7777/resources/tracks/1
+    $ curl localhost:7777/resources/tracks/1
     
 Returns track with id 1:
 
@@ -91,7 +170,7 @@ Returns track with id 1:
 
 ### Add resources
 
-    curl -H "Content-Type: application/json" -X POST -d '{"name":"newArtist"}' http://localhost:7777/resources/artists
+    $ curl -H "Content-Type: application/json" -X POST -d '{"name":"newArtist"}' http://localhost:7777/resources/artists
     
 Returns the newly created resource: 
     
@@ -109,7 +188,7 @@ Returns the newly created resource:
 
 ### Delete resources
 
-    curl -X DELETE  http://localhost:7777/resources/artists/276
+    $ curl -X DELETE  http://localhost:7777/resources/artists/276
 
 Returns the deleted resource:
 
@@ -128,7 +207,7 @@ Returns the deleted resource:
 
 ### Update single resource
 
-    curl -H "Content-Type: application/json" -X PUT -d '{"name":"updatedName"}' http://localhost:7777/resources/artists/276
+    $ curl -H "Content-Type: application/json" -X PUT -d '{"name":"updatedName"}' http://localhost:7777/resources/artists/276
     
 Returns the updated resource:
     
@@ -146,7 +225,7 @@ Returns the updated resource:
 
 ### Update collection resource
 
-    curl -H "Content-Type: application/json" -X PUT -d '[{"name":"testNames1"}, {"name":"testNames2"}]' http://localhost:7777/resources/artists
+    $ curl -H "Content-Type: application/json" -X PUT -d '[{"name":"testNames1"}, {"name":"testNames2"}]' http://localhost:7777/resources/artists
 
 Returns the updates resource:
 
@@ -176,7 +255,7 @@ Returns the updates resource:
     
 ### Request filtered resource
 
-    curl localhost:7777/resources/artists?name=AC/DC
+    $ curl localhost:7777/resources/artists?name=AC/DC
     
 Returns entrys that fulfills the filter:
 
@@ -196,7 +275,7 @@ Returns entrys that fulfills the filter:
 
 Spaces encoding in URL:
      
-    curl localhost:7777/resources/tracks?composer=Philip%20Glass
+    $ curl localhost:7777/resources/tracks?composer=Philip%20Glass
     
 Returns:
     
@@ -234,17 +313,17 @@ Returns:
 
 #### Ascending order
 
-    curl localhost:7777/resources/artists?sort=+artistId
+    $ curl localhost:7777/resources/artists?sort=+artistId
 
 #### Descending order
 
-    curl localhost:7777/resources/artists?sort=-artistId
+    $ curl localhost:7777/resources/artists?sort=-artistId
 
 ### Error responses
 
 #### Invalid path:
 
-    curl localhost:7777/wrong_path
+    $ curl localhost:7777/wrong_path
 
 Returns a JSON response on the following format:
     
@@ -258,7 +337,7 @@ Returns a JSON response on the following format:
 
 #### Requesting a resource that doesn't exists:
 
-    curl localhost:7777/resources/artists/999999
+    $ curl localhost:7777/resources/artists/999999
 
 Returns a JSON response on the following format:
 
@@ -273,7 +352,7 @@ Returns a JSON response on the following format:
 
 #### Using a HTTP method (verb) that is not supported:
 
-    curl -X POST  http://localhost:7777/
+    $ curl -X POST  http://localhost:7777/
 
 Returns a JSON response on the following format:
 
@@ -288,7 +367,7 @@ Returns a JSON response on the following format:
 
 #### Using a media type that is not supported:
 
-    curl -H "Content-Type: text/xml" -X POST -d '<XML>data</XML>' http://localhost:7777/resources/artists
+    $ curl -H "Content-Type: text/xml" -X POST -d '<XML>data</XML>' http://localhost:7777/resources/artists
 
 Returns a JSON response on the following format:
     
@@ -303,7 +382,7 @@ Returns a JSON response on the following format:
     
 #### Invalid query string:
 
-    curl localhost:7777/resources/artists?sort=-not_found_parameter
+    $ curl localhost:7777/resources/artists?sort=-not_found_parameter
 
 Returns a JSON response on the following format:
     
