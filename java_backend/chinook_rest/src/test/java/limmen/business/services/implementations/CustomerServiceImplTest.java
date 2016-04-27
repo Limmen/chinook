@@ -71,10 +71,10 @@ public class CustomerServiceImplTest {
     public void testCreateNewCustomer() {
         when(customerRepository.createNewCustomer(customerOne)).thenReturn(customerOne);
         when(customerRepository.createNewCustomer(customerTwo)).thenReturn(customerTwo);
-        assertEquals("Asserting getCustomer", customerOne, customerService.createNewCustomer(customerOne));
-        assertEquals("Asserting getCustomer", customerTwo, customerService.createNewCustomer(customerTwo));
-        assertNotEquals("Asserting getCustomer", customerOne, customerService.createNewCustomer(customerTwo));
-        assertNotEquals("Asserting getCustomer", customerTwo, customerService.createNewCustomer(customerOne));
+        assertEquals("Asserting createNewCustomer", customerOne, customerService.createNewCustomer(customerOne));
+        assertEquals("Asserting createNewCustomer", customerTwo, customerService.createNewCustomer(customerTwo));
+        assertNotEquals("Asserting createNewCustomer", customerOne, customerService.createNewCustomer(customerTwo));
+        assertNotEquals("Asserting createNewCustomer", customerTwo, customerService.createNewCustomer(customerOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class CustomerServiceImplTest {
     public void testUpdateCustomer() {
         when(customerRepository.updateCustomer(customerOne)).thenReturn(customerOne);
         when(customerRepository.updateCustomer(customerTwo)).thenReturn(customerTwo);
-        assertEquals("Asserting getCustomer", customerOne, customerService.updateCustomer(customerOne));
-        assertEquals("Asserting getCustomer", customerTwo, customerService.updateCustomer(customerTwo));
-        assertNotEquals("Asserting getCustomer", customerOne, customerService.updateCustomer(customerTwo));
-        assertNotEquals("Asserting getCustomer", customerTwo, customerService.updateCustomer(customerOne));
+        assertEquals("Asserting updateCustomer", customerOne, customerService.updateCustomer(customerOne));
+        assertEquals("Asserting updateCustomer", customerTwo, customerService.updateCustomer(customerTwo));
+        assertNotEquals("Asserting updateCustomer", customerOne, customerService.updateCustomer(customerTwo));
+        assertNotEquals("Asserting updateCustomer", customerTwo, customerService.updateCustomer(customerOne));
     }
 }

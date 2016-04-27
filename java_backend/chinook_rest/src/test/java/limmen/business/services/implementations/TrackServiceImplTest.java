@@ -72,10 +72,10 @@ public class TrackServiceImplTest {
     public void testCreateNewTrack() {
         when(trackRepository.createNewTrack(trackOne)).thenReturn(trackOne);
         when(trackRepository.createNewTrack(trackTwo)).thenReturn(trackTwo);
-        assertEquals("Asserting getTrack", trackOne, trackService.createNewTrack(trackOne));
-        assertEquals("Asserting getTrack", trackTwo, trackService.createNewTrack(trackTwo));
-        assertNotEquals("Asserting getTrack", trackOne, trackService.createNewTrack(trackTwo));
-        assertNotEquals("Asserting getTrack", trackTwo, trackService.createNewTrack(trackOne));
+        assertEquals("Asserting createNewTrack", trackOne, trackService.createNewTrack(trackOne));
+        assertEquals("Asserting createNewTrack", trackTwo, trackService.createNewTrack(trackTwo));
+        assertNotEquals("Asserting createNewTrack", trackOne, trackService.createNewTrack(trackTwo));
+        assertNotEquals("Asserting createNewTrack", trackTwo, trackService.createNewTrack(trackOne));
     }
 
     /**
@@ -85,9 +85,9 @@ public class TrackServiceImplTest {
     public void testUpdateTrack() {
         when(trackRepository.updateTrack(trackOne)).thenReturn(trackOne);
         when(trackRepository.updateTrack(trackTwo)).thenReturn(trackTwo);
-        assertEquals("Asserting getTrack", trackOne, trackService.updateTrack(trackOne));
-        assertEquals("Asserting getTrack", trackTwo, trackService.updateTrack(trackTwo));
-        assertNotEquals("Asserting getTrack", trackOne, trackService.updateTrack(trackTwo));
-        assertNotEquals("Asserting getTrack", trackTwo, trackService.updateTrack(trackOne));
+        assertEquals("Asserting updateTrack", trackOne, trackService.updateTrack(trackOne));
+        assertEquals("Asserting updateTrack", trackTwo, trackService.updateTrack(trackTwo));
+        assertNotEquals("Asserting updateTrack", trackOne, trackService.updateTrack(trackTwo));
+        assertNotEquals("Asserting updateTrack", trackTwo, trackService.updateTrack(trackOne));
     }
 }

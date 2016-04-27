@@ -71,10 +71,10 @@ public class InvoiceServiceImplTest {
     public void testCreateNewInvoice() {
         when(invoiceRepository.createNewInvoice(invoiceOne)).thenReturn(invoiceOne);
         when(invoiceRepository.createNewInvoice(invoiceTwo)).thenReturn(invoiceTwo);
-        assertEquals("Asserting getInvoice", invoiceOne, invoiceService.createNewInvoice(invoiceOne));
-        assertEquals("Asserting getInvoice", invoiceTwo, invoiceService.createNewInvoice(invoiceTwo));
-        assertNotEquals("Asserting getInvoice", invoiceOne, invoiceService.createNewInvoice(invoiceTwo));
-        assertNotEquals("Asserting getInvoice", invoiceTwo, invoiceService.createNewInvoice(invoiceOne));
+        assertEquals("Asserting createNewInvoice", invoiceOne, invoiceService.createNewInvoice(invoiceOne));
+        assertEquals("Asserting createNewInvoice", invoiceTwo, invoiceService.createNewInvoice(invoiceTwo));
+        assertNotEquals("Asserting createNewInvoice", invoiceOne, invoiceService.createNewInvoice(invoiceTwo));
+        assertNotEquals("Asserting createNewInvoice", invoiceTwo, invoiceService.createNewInvoice(invoiceOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class InvoiceServiceImplTest {
     public void testUpdateInvoice() {
         when(invoiceRepository.updateInvoice(invoiceOne)).thenReturn(invoiceOne);
         when(invoiceRepository.updateInvoice(invoiceTwo)).thenReturn(invoiceTwo);
-        assertEquals("Asserting getInvoice", invoiceOne, invoiceService.updateInvoice(invoiceOne));
-        assertEquals("Asserting getInvoice", invoiceTwo, invoiceService.updateInvoice(invoiceTwo));
-        assertNotEquals("Asserting getInvoice", invoiceOne, invoiceService.updateInvoice(invoiceTwo));
-        assertNotEquals("Asserting getInvoice", invoiceTwo, invoiceService.updateInvoice(invoiceOne));
+        assertEquals("Asserting updateInvoice", invoiceOne, invoiceService.updateInvoice(invoiceOne));
+        assertEquals("Asserting updateInvoice", invoiceTwo, invoiceService.updateInvoice(invoiceTwo));
+        assertNotEquals("Asserting updateInvoice", invoiceOne, invoiceService.updateInvoice(invoiceTwo));
+        assertNotEquals("Asserting updateInvoice", invoiceTwo, invoiceService.updateInvoice(invoiceOne));
     }
 }

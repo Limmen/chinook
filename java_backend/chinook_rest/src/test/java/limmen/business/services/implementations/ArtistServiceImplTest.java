@@ -71,10 +71,10 @@ public class ArtistServiceImplTest {
     public void testCreateNewArtist() {
         when(artistRepository.createNewArtist(artistOne)).thenReturn(artistOne);
         when(artistRepository.createNewArtist(artistTwo)).thenReturn(artistTwo);
-        assertEquals("Asserting getArtist", artistOne, artistService.createNewArtist(artistOne));
-        assertEquals("Asserting getArtist", artistTwo, artistService.createNewArtist(artistTwo));
-        assertNotEquals("Asserting getArtist", artistOne, artistService.createNewArtist(artistTwo));
-        assertNotEquals("Asserting getArtist", artistTwo, artistService.createNewArtist(artistOne));
+        assertEquals("Asserting createNewArtist", artistOne, artistService.createNewArtist(artistOne));
+        assertEquals("Asserting createNewArtist", artistTwo, artistService.createNewArtist(artistTwo));
+        assertNotEquals("Asserting createNewArtist", artistOne, artistService.createNewArtist(artistTwo));
+        assertNotEquals("Asserting createNewArtist", artistTwo, artistService.createNewArtist(artistOne));
     }
 
     /**
@@ -84,10 +84,10 @@ public class ArtistServiceImplTest {
     public void testUpdateArtist() {
         when(artistRepository.updateArtist(artistOne)).thenReturn(artistOne);
         when(artistRepository.updateArtist(artistTwo)).thenReturn(artistTwo);
-        assertEquals("Asserting getArtist", artistOne, artistService.updateArtist(artistOne));
-        assertEquals("Asserting getArtist", artistTwo, artistService.updateArtist(artistTwo));
-        assertNotEquals("Asserting getArtist", artistOne, artistService.updateArtist(artistTwo));
-        assertNotEquals("Asserting getArtist", artistTwo, artistService.updateArtist(artistOne));
+        assertEquals("Asserting updateArtist", artistOne, artistService.updateArtist(artistOne));
+        assertEquals("Asserting updateArtist", artistTwo, artistService.updateArtist(artistTwo));
+        assertNotEquals("Asserting updateArtist", artistOne, artistService.updateArtist(artistTwo));
+        assertNotEquals("Asserting updateArtist", artistTwo, artistService.updateArtist(artistOne));
     }
 
 }

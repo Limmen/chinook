@@ -71,10 +71,10 @@ public class GenreServiceImplTest {
     public void testCreateNewGenre() {
         when(genreRepository.createNewGenre(genreOne)).thenReturn(genreOne);
         when(genreRepository.createNewGenre(genreTwo)).thenReturn(genreTwo);
-        assertEquals("Asserting getGenre", genreOne, genreService.createNewGenre(genreOne));
-        assertEquals("Asserting getGenre", genreTwo, genreService.createNewGenre(genreTwo));
-        assertNotEquals("Asserting getGenre", genreOne, genreService.createNewGenre(genreTwo));
-        assertNotEquals("Asserting getGenre", genreTwo, genreService.createNewGenre(genreOne));
+        assertEquals("Asserting createNewGenre", genreOne, genreService.createNewGenre(genreOne));
+        assertEquals("Asserting createNewGenre", genreTwo, genreService.createNewGenre(genreTwo));
+        assertNotEquals("Asserting createNewGenre", genreOne, genreService.createNewGenre(genreTwo));
+        assertNotEquals("Asserting createNewGenre", genreTwo, genreService.createNewGenre(genreOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class GenreServiceImplTest {
     public void testUpdateGenre() {
         when(genreRepository.updateGenre(genreOne)).thenReturn(genreOne);
         when(genreRepository.updateGenre(genreTwo)).thenReturn(genreTwo);
-        assertEquals("Asserting getGenre", genreOne, genreService.updateGenre(genreOne));
-        assertEquals("Asserting getGenre", genreTwo, genreService.updateGenre(genreTwo));
-        assertNotEquals("Asserting getGenre", genreOne, genreService.updateGenre(genreTwo));
-        assertNotEquals("Asserting getGenre", genreTwo, genreService.updateGenre(genreOne));
+        assertEquals("Asserting updateGenre", genreOne, genreService.updateGenre(genreOne));
+        assertEquals("Asserting updateGenre", genreTwo, genreService.updateGenre(genreTwo));
+        assertNotEquals("Asserting updateGenre", genreOne, genreService.updateGenre(genreTwo));
+        assertNotEquals("Asserting updateGenre", genreTwo, genreService.updateGenre(genreOne));
     }
 }

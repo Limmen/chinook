@@ -71,10 +71,10 @@ public class EmployeeServiceImplTest {
     public void testCreateNewEmployee() {
         when(employeeRepository.createNewEmployee(employeeOne)).thenReturn(employeeOne);
         when(employeeRepository.createNewEmployee(employeeTwo)).thenReturn(employeeTwo);
-        assertEquals("Asserting getEmployee", employeeOne, employeeService.createNewEmployee(employeeOne));
-        assertEquals("Asserting getEmployee", employeeTwo, employeeService.createNewEmployee(employeeTwo));
-        assertNotEquals("Asserting getEmployee", employeeOne, employeeService.createNewEmployee(employeeTwo));
-        assertNotEquals("Asserting getEmployee", employeeTwo, employeeService.createNewEmployee(employeeOne));
+        assertEquals("Asserting createNewEmployee", employeeOne, employeeService.createNewEmployee(employeeOne));
+        assertEquals("Asserting createNewEmployee", employeeTwo, employeeService.createNewEmployee(employeeTwo));
+        assertNotEquals("Asserting createNewEmployee", employeeOne, employeeService.createNewEmployee(employeeTwo));
+        assertNotEquals("Asserting createNewEmployee", employeeTwo, employeeService.createNewEmployee(employeeOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class EmployeeServiceImplTest {
     public void testUpdateEmployee() {
         when(employeeRepository.updateEmployee(employeeOne)).thenReturn(employeeOne);
         when(employeeRepository.updateEmployee(employeeTwo)).thenReturn(employeeTwo);
-        assertEquals("Asserting getEmployee", employeeOne, employeeService.updateEmployee(employeeOne));
-        assertEquals("Asserting getEmployee", employeeTwo, employeeService.updateEmployee(employeeTwo));
-        assertNotEquals("Asserting getEmployee", employeeOne, employeeService.updateEmployee(employeeTwo));
-        assertNotEquals("Asserting getEmployee", employeeTwo, employeeService.updateEmployee(employeeOne));
+        assertEquals("Asserting updateEmployee", employeeOne, employeeService.updateEmployee(employeeOne));
+        assertEquals("Asserting updateEmployee", employeeTwo, employeeService.updateEmployee(employeeTwo));
+        assertNotEquals("Asserting updateEmployee", employeeOne, employeeService.updateEmployee(employeeTwo));
+        assertNotEquals("Asserting updateEmployee", employeeTwo, employeeService.updateEmployee(employeeOne));
     }
 }

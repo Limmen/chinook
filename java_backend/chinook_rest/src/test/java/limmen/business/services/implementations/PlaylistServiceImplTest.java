@@ -71,10 +71,10 @@ public class PlaylistServiceImplTest {
     public void testCreateNewPlaylist() {
         when(playlistRepository.createNewPlaylist(playlistOne)).thenReturn(playlistOne);
         when(playlistRepository.createNewPlaylist(playlistTwo)).thenReturn(playlistTwo);
-        assertEquals("Asserting getPlaylist", playlistOne, playlistService.createNewPlaylist(playlistOne));
-        assertEquals("Asserting getPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistTwo));
-        assertNotEquals("Asserting getPlaylist", playlistOne, playlistService.createNewPlaylist(playlistTwo));
-        assertNotEquals("Asserting getPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistOne));
+        assertEquals("Asserting createNewPlaylist", playlistOne, playlistService.createNewPlaylist(playlistOne));
+        assertEquals("Asserting createNewPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistTwo));
+        assertNotEquals("Asserting createNewPlaylist", playlistOne, playlistService.createNewPlaylist(playlistTwo));
+        assertNotEquals("Asserting createNewPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class PlaylistServiceImplTest {
     public void testUpdatePlaylist() {
         when(playlistRepository.updatePlaylist(playlistOne)).thenReturn(playlistOne);
         when(playlistRepository.updatePlaylist(playlistTwo)).thenReturn(playlistTwo);
-        assertEquals("Asserting getPlaylist", playlistOne, playlistService.updatePlaylist(playlistOne));
-        assertEquals("Asserting getPlaylist", playlistTwo, playlistService.updatePlaylist(playlistTwo));
-        assertNotEquals("Asserting getPlaylist", playlistOne, playlistService.updatePlaylist(playlistTwo));
-        assertNotEquals("Asserting getPlaylist", playlistTwo, playlistService.updatePlaylist(playlistOne));
+        assertEquals("Asserting updatePlaylist", playlistOne, playlistService.updatePlaylist(playlistOne));
+        assertEquals("Asserting updatePlaylist", playlistTwo, playlistService.updatePlaylist(playlistTwo));
+        assertNotEquals("Asserting updatePlaylist", playlistOne, playlistService.updatePlaylist(playlistTwo));
+        assertNotEquals("Asserting updatePlaylist", playlistTwo, playlistService.updatePlaylist(playlistOne));
     }
 }

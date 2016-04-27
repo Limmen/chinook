@@ -71,10 +71,10 @@ public class AlbumServiceImplTest {
     public void testCreateNewAlbum() {
         when(albumRepository.createNewAlbum(albumOne)).thenReturn(albumOne);
         when(albumRepository.createNewAlbum(albumTwo)).thenReturn(albumTwo);
-        assertEquals("Asserting getAlbum", albumOne, albumService.createNewAlbum(albumOne));
-        assertEquals("Asserting getAlbum", albumTwo, albumService.createNewAlbum(albumTwo));
-        assertNotEquals("Asserting getAlbum", albumOne, albumService.createNewAlbum(albumTwo));
-        assertNotEquals("Asserting getAlbum", albumTwo, albumService.createNewAlbum(albumOne));
+        assertEquals("Asserting createNewAlbum", albumOne, albumService.createNewAlbum(albumOne));
+        assertEquals("Asserting createNewAlbum", albumTwo, albumService.createNewAlbum(albumTwo));
+        assertNotEquals("Asserting createNewAlbum", albumOne, albumService.createNewAlbum(albumTwo));
+        assertNotEquals("Asserting createNewAlbum", albumTwo, albumService.createNewAlbum(albumOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class AlbumServiceImplTest {
     public void testUpdateAlbum() {
         when(albumRepository.updateAlbum(albumOne)).thenReturn(albumOne);
         when(albumRepository.updateAlbum(albumTwo)).thenReturn(albumTwo);
-        assertEquals("Asserting getAlbum", albumOne, albumService.updateAlbum(albumOne));
-        assertEquals("Asserting getAlbum", albumTwo, albumService.updateAlbum(albumTwo));
-        assertNotEquals("Asserting getAlbum", albumOne, albumService.updateAlbum(albumTwo));
-        assertNotEquals("Asserting getAlbum", albumTwo, albumService.updateAlbum(albumOne));
+        assertEquals("Asserting updateAlbum", albumOne, albumService.updateAlbum(albumOne));
+        assertEquals("Asserting updateAlbum", albumTwo, albumService.updateAlbum(albumTwo));
+        assertNotEquals("Asserting updateAlbum", albumOne, albumService.updateAlbum(albumTwo));
+        assertNotEquals("Asserting updateAlbum", albumTwo, albumService.updateAlbum(albumOne));
     }
 }

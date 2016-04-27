@@ -71,10 +71,10 @@ public class PlaylistTrackServiceImplTest {
     public void testCreateNewPlaylistTrack() {
         when(playlistTrackRepository.createNewPlaylistTrack(playlistTrackOne)).thenReturn(playlistTrackOne);
         when(playlistTrackRepository.createNewPlaylistTrack(playlistTrackTwo)).thenReturn(playlistTrackTwo);
-        assertEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
-        assertEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
-        assertNotEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
-        assertNotEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting createNewPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting createNewPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting createNewPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting createNewPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
     }
 
     /**
@@ -84,9 +84,9 @@ public class PlaylistTrackServiceImplTest {
     public void testUpdatePlaylistTrack() {
         when(playlistTrackRepository.updatePlaylistTrack(playlistTrackOne)).thenReturn(playlistTrackOne);
         when(playlistTrackRepository.updatePlaylistTrack(playlistTrackTwo)).thenReturn(playlistTrackTwo);
-        assertEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
-        assertEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
-        assertNotEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
-        assertNotEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting updatePlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting updatePlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting updatePlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting updatePlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
     }
 }
