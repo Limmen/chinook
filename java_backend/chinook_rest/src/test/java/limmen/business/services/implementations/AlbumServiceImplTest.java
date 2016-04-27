@@ -63,4 +63,30 @@ public class AlbumServiceImplTest {
         assertNotEquals("Asserting getAlbum", albumOne, albumService.getAlbum(2));
         assertNotEquals("Asserting getAlbum", albumTwo, albumService.getAlbum(1));
     }
+
+    /**
+     * Test of the createNewAlbum method
+     */
+    @Test
+    public void testCreateNewAlbum() {
+        when(albumRepository.createNewAlbum(albumOne)).thenReturn(albumOne);
+        when(albumRepository.createNewAlbum(albumTwo)).thenReturn(albumTwo);
+        assertEquals("Asserting getAlbum", albumOne, albumService.createNewAlbum(albumOne));
+        assertEquals("Asserting getAlbum", albumTwo, albumService.createNewAlbum(albumTwo));
+        assertNotEquals("Asserting getAlbum", albumOne, albumService.createNewAlbum(albumTwo));
+        assertNotEquals("Asserting getAlbum", albumTwo, albumService.createNewAlbum(albumOne));
+    }
+
+    /**
+     * Test of the updateAlbum method
+     */
+    @Test
+    public void testUpdateAlbum() {
+        when(albumRepository.updateAlbum(albumOne)).thenReturn(albumOne);
+        when(albumRepository.updateAlbum(albumTwo)).thenReturn(albumTwo);
+        assertEquals("Asserting getAlbum", albumOne, albumService.updateAlbum(albumOne));
+        assertEquals("Asserting getAlbum", albumTwo, albumService.updateAlbum(albumTwo));
+        assertNotEquals("Asserting getAlbum", albumOne, albumService.updateAlbum(albumTwo));
+        assertNotEquals("Asserting getAlbum", albumTwo, albumService.updateAlbum(albumOne));
+    }
 }

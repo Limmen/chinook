@@ -64,4 +64,30 @@ public class TrackServiceImplTest {
         assertNotEquals("Asserting getTrack", trackOne, trackService.getTrack(2));
         assertNotEquals("Asserting getTrack", trackTwo, trackService.getTrack(1));
     }
+
+    /**
+     * Test of the createNewTrack method
+     */
+    @Test
+    public void testCreateNewTrack() {
+        when(trackRepository.createNewTrack(trackOne)).thenReturn(trackOne);
+        when(trackRepository.createNewTrack(trackTwo)).thenReturn(trackTwo);
+        assertEquals("Asserting getTrack", trackOne, trackService.createNewTrack(trackOne));
+        assertEquals("Asserting getTrack", trackTwo, trackService.createNewTrack(trackTwo));
+        assertNotEquals("Asserting getTrack", trackOne, trackService.createNewTrack(trackTwo));
+        assertNotEquals("Asserting getTrack", trackTwo, trackService.createNewTrack(trackOne));
+    }
+
+    /**
+     * Test of the updateTrack method
+     */
+    @Test
+    public void testUpdateTrack() {
+        when(trackRepository.updateTrack(trackOne)).thenReturn(trackOne);
+        when(trackRepository.updateTrack(trackTwo)).thenReturn(trackTwo);
+        assertEquals("Asserting getTrack", trackOne, trackService.updateTrack(trackOne));
+        assertEquals("Asserting getTrack", trackTwo, trackService.updateTrack(trackTwo));
+        assertNotEquals("Asserting getTrack", trackOne, trackService.updateTrack(trackTwo));
+        assertNotEquals("Asserting getTrack", trackTwo, trackService.updateTrack(trackOne));
+    }
 }

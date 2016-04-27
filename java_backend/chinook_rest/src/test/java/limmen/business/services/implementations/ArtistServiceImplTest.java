@@ -63,4 +63,31 @@ public class ArtistServiceImplTest {
         assertNotEquals("Asserting getArtist", artistOne, artistService.getArtist(2));
         assertNotEquals("Asserting getArtist", artistTwo, artistService.getArtist(1));
     }
+
+    /**
+     * Test of the createNewArtist method
+     */
+    @Test
+    public void testCreateNewArtist() {
+        when(artistRepository.createNewArtist(artistOne)).thenReturn(artistOne);
+        when(artistRepository.createNewArtist(artistTwo)).thenReturn(artistTwo);
+        assertEquals("Asserting getArtist", artistOne, artistService.createNewArtist(artistOne));
+        assertEquals("Asserting getArtist", artistTwo, artistService.createNewArtist(artistTwo));
+        assertNotEquals("Asserting getArtist", artistOne, artistService.createNewArtist(artistTwo));
+        assertNotEquals("Asserting getArtist", artistTwo, artistService.createNewArtist(artistOne));
+    }
+
+    /**
+     * Test of the updateArtist method
+     */
+    @Test
+    public void testUpdateArtist() {
+        when(artistRepository.updateArtist(artistOne)).thenReturn(artistOne);
+        when(artistRepository.updateArtist(artistTwo)).thenReturn(artistTwo);
+        assertEquals("Asserting getArtist", artistOne, artistService.updateArtist(artistOne));
+        assertEquals("Asserting getArtist", artistTwo, artistService.updateArtist(artistTwo));
+        assertNotEquals("Asserting getArtist", artistOne, artistService.updateArtist(artistTwo));
+        assertNotEquals("Asserting getArtist", artistTwo, artistService.updateArtist(artistOne));
+    }
+
 }

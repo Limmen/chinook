@@ -63,4 +63,30 @@ public class PlaylistTrackServiceImplTest {
         assertNotEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.getPlaylistTrack(2, 2));
         assertNotEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.getPlaylistTrack(1, 1));
     }
+
+    /**
+     * Test of the createNewPlaylistTrack method
+     */
+    @Test
+    public void testCreateNewPlaylistTrack() {
+        when(playlistTrackRepository.createNewPlaylistTrack(playlistTrackOne)).thenReturn(playlistTrackOne);
+        when(playlistTrackRepository.createNewPlaylistTrack(playlistTrackTwo)).thenReturn(playlistTrackTwo);
+        assertEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.createNewPlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.createNewPlaylistTrack(playlistTrackOne));
+    }
+
+    /**
+     * Test of the updatePlaylistTrack method
+     */
+    @Test
+    public void testUpdatePlaylistTrack() {
+        when(playlistTrackRepository.updatePlaylistTrack(playlistTrackOne)).thenReturn(playlistTrackOne);
+        when(playlistTrackRepository.updatePlaylistTrack(playlistTrackTwo)).thenReturn(playlistTrackTwo);
+        assertEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
+        assertEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting getPlaylistTrack", playlistTrackOne, playlistTrackService.updatePlaylistTrack(playlistTrackTwo));
+        assertNotEquals("Asserting getPlaylistTrack", playlistTrackTwo, playlistTrackService.updatePlaylistTrack(playlistTrackOne));
+    }
 }

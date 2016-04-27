@@ -63,4 +63,30 @@ public class CustomerServiceImplTest {
         assertNotEquals("Asserting getCustomer", customerOne, customerService.getCustomer(2));
         assertNotEquals("Asserting getCustomer", customerTwo, customerService.getCustomer(1));
     }
+
+    /**
+     * Test of the createNewCustomer method
+     */
+    @Test
+    public void testCreateNewCustomer() {
+        when(customerRepository.createNewCustomer(customerOne)).thenReturn(customerOne);
+        when(customerRepository.createNewCustomer(customerTwo)).thenReturn(customerTwo);
+        assertEquals("Asserting getCustomer", customerOne, customerService.createNewCustomer(customerOne));
+        assertEquals("Asserting getCustomer", customerTwo, customerService.createNewCustomer(customerTwo));
+        assertNotEquals("Asserting getCustomer", customerOne, customerService.createNewCustomer(customerTwo));
+        assertNotEquals("Asserting getCustomer", customerTwo, customerService.createNewCustomer(customerOne));
+    }
+
+    /**
+     * Test of the updateCustomer method
+     */
+    @Test
+    public void testUpdateCustomer() {
+        when(customerRepository.updateCustomer(customerOne)).thenReturn(customerOne);
+        when(customerRepository.updateCustomer(customerTwo)).thenReturn(customerTwo);
+        assertEquals("Asserting getCustomer", customerOne, customerService.updateCustomer(customerOne));
+        assertEquals("Asserting getCustomer", customerTwo, customerService.updateCustomer(customerTwo));
+        assertNotEquals("Asserting getCustomer", customerOne, customerService.updateCustomer(customerTwo));
+        assertNotEquals("Asserting getCustomer", customerTwo, customerService.updateCustomer(customerOne));
+    }
 }

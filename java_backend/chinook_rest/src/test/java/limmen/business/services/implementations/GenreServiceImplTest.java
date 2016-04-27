@@ -63,4 +63,30 @@ public class GenreServiceImplTest {
         assertNotEquals("Asserting getGenre", genreOne, genreService.getGenre(2));
         assertNotEquals("Asserting getGenre", genreTwo, genreService.getGenre(1));
     }
+
+    /**
+     * Test of the createNewGenre method
+     */
+    @Test
+    public void testCreateNewGenre() {
+        when(genreRepository.createNewGenre(genreOne)).thenReturn(genreOne);
+        when(genreRepository.createNewGenre(genreTwo)).thenReturn(genreTwo);
+        assertEquals("Asserting getGenre", genreOne, genreService.createNewGenre(genreOne));
+        assertEquals("Asserting getGenre", genreTwo, genreService.createNewGenre(genreTwo));
+        assertNotEquals("Asserting getGenre", genreOne, genreService.createNewGenre(genreTwo));
+        assertNotEquals("Asserting getGenre", genreTwo, genreService.createNewGenre(genreOne));
+    }
+
+    /**
+     * Test of the updateGenre method
+     */
+    @Test
+    public void testUpdateGenre() {
+        when(genreRepository.updateGenre(genreOne)).thenReturn(genreOne);
+        when(genreRepository.updateGenre(genreTwo)).thenReturn(genreTwo);
+        assertEquals("Asserting getGenre", genreOne, genreService.updateGenre(genreOne));
+        assertEquals("Asserting getGenre", genreTwo, genreService.updateGenre(genreTwo));
+        assertNotEquals("Asserting getGenre", genreOne, genreService.updateGenre(genreTwo));
+        assertNotEquals("Asserting getGenre", genreTwo, genreService.updateGenre(genreOne));
+    }
 }

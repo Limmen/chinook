@@ -63,4 +63,30 @@ public class MediaTypeServiceImplTest {
         assertNotEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.getMediaType(2));
         assertNotEquals("Asserting getMediaType", mediaTypeTwo, mediaTypeService.getMediaType(1));
     }
+
+    /**
+     * Test of the createNewMediaType method
+     */
+    @Test
+    public void testCreateNewMediaType() {
+        when(mediaTypeRepository.createNewMediaType(mediaTypeOne)).thenReturn(mediaTypeOne);
+        when(mediaTypeRepository.createNewMediaType(mediaTypeTwo)).thenReturn(mediaTypeTwo);
+        assertEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.createNewMediaType(mediaTypeOne));
+        assertEquals("Asserting getMediaType", mediaTypeTwo, mediaTypeService.createNewMediaType(mediaTypeTwo));
+        assertNotEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.createNewMediaType(mediaTypeTwo));
+        assertNotEquals("Asserting getMediaType", mediaTypeTwo, mediaTypeService.createNewMediaType(mediaTypeOne));
+    }
+
+    /**
+     * Test of the updateMediaType method
+     */
+    @Test
+    public void testUpdateMediaType() {
+        when(mediaTypeRepository.updateMediaType(mediaTypeOne)).thenReturn(mediaTypeOne);
+        when(mediaTypeRepository.updateMediaType(mediaTypeTwo)).thenReturn(mediaTypeTwo);
+        assertEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.updateMediaType(mediaTypeOne));
+        assertEquals("Asserting getMediaType", mediaTypeTwo, mediaTypeService.updateMediaType(mediaTypeTwo));
+        assertNotEquals("Asserting getMediaType", mediaTypeOne, mediaTypeService.updateMediaType(mediaTypeTwo));
+        assertNotEquals("Asserting getMediaType", mediaTypeTwo, mediaTypeService.updateMediaType(mediaTypeOne));
+    }
 }

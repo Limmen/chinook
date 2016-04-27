@@ -63,4 +63,30 @@ public class PlaylistServiceImplTest {
         assertNotEquals("Asserting getPlaylist", playlistOne, playlistService.getPlaylist(2));
         assertNotEquals("Asserting getPlaylist", playlistTwo, playlistService.getPlaylist(1));
     }
+
+    /**
+     * Test of the createNewPlaylist method
+     */
+    @Test
+    public void testCreateNewPlaylist() {
+        when(playlistRepository.createNewPlaylist(playlistOne)).thenReturn(playlistOne);
+        when(playlistRepository.createNewPlaylist(playlistTwo)).thenReturn(playlistTwo);
+        assertEquals("Asserting getPlaylist", playlistOne, playlistService.createNewPlaylist(playlistOne));
+        assertEquals("Asserting getPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistTwo));
+        assertNotEquals("Asserting getPlaylist", playlistOne, playlistService.createNewPlaylist(playlistTwo));
+        assertNotEquals("Asserting getPlaylist", playlistTwo, playlistService.createNewPlaylist(playlistOne));
+    }
+
+    /**
+     * Test of the updatePlaylist method
+     */
+    @Test
+    public void testUpdatePlaylist() {
+        when(playlistRepository.updatePlaylist(playlistOne)).thenReturn(playlistOne);
+        when(playlistRepository.updatePlaylist(playlistTwo)).thenReturn(playlistTwo);
+        assertEquals("Asserting getPlaylist", playlistOne, playlistService.updatePlaylist(playlistOne));
+        assertEquals("Asserting getPlaylist", playlistTwo, playlistService.updatePlaylist(playlistTwo));
+        assertNotEquals("Asserting getPlaylist", playlistOne, playlistService.updatePlaylist(playlistTwo));
+        assertNotEquals("Asserting getPlaylist", playlistTwo, playlistService.updatePlaylist(playlistOne));
+    }
 }

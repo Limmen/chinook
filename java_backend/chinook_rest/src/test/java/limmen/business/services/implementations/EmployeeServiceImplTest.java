@@ -63,4 +63,30 @@ public class EmployeeServiceImplTest {
         assertNotEquals("Asserting getEmployee", employeeOne, employeeService.getEmployee(2));
         assertNotEquals("Asserting getEmployee", employeeTwo, employeeService.getEmployee(1));
     }
+
+    /**
+     * Test of the createNewEmployee method
+     */
+    @Test
+    public void testCreateNewEmployee() {
+        when(employeeRepository.createNewEmployee(employeeOne)).thenReturn(employeeOne);
+        when(employeeRepository.createNewEmployee(employeeTwo)).thenReturn(employeeTwo);
+        assertEquals("Asserting getEmployee", employeeOne, employeeService.createNewEmployee(employeeOne));
+        assertEquals("Asserting getEmployee", employeeTwo, employeeService.createNewEmployee(employeeTwo));
+        assertNotEquals("Asserting getEmployee", employeeOne, employeeService.createNewEmployee(employeeTwo));
+        assertNotEquals("Asserting getEmployee", employeeTwo, employeeService.createNewEmployee(employeeOne));
+    }
+
+    /**
+     * Test of the updateEmployee method
+     */
+    @Test
+    public void testUpdateEmployee() {
+        when(employeeRepository.updateEmployee(employeeOne)).thenReturn(employeeOne);
+        when(employeeRepository.updateEmployee(employeeTwo)).thenReturn(employeeTwo);
+        assertEquals("Asserting getEmployee", employeeOne, employeeService.updateEmployee(employeeOne));
+        assertEquals("Asserting getEmployee", employeeTwo, employeeService.updateEmployee(employeeTwo));
+        assertNotEquals("Asserting getEmployee", employeeOne, employeeService.updateEmployee(employeeTwo));
+        assertNotEquals("Asserting getEmployee", employeeTwo, employeeService.updateEmployee(employeeOne));
+    }
 }
