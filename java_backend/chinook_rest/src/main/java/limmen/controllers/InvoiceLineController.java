@@ -113,7 +113,7 @@ public class InvoiceLineController {
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoiceLineRepresentation> createNewInvoiceLine(@RequestBody InvoiceLine invoiceLine) {
-        log.debug("HTTP POST-request /resources/invoiceLines");
+        log.debug("HTTP POST-request /resources/invoicelines");
         InvoiceLineRepresentation invoiceLineRepresentation = new InvoiceLineRepresentation(invoiceLineService.createNewInvoiceLine(invoiceLine));
         invoiceLineRepresentation.add(linkTo(methodOn(InvoiceLineController.class).
                 getInvoiceLine(invoiceLine.getInvoiceLineId())).withSelfRel());
@@ -134,7 +134,7 @@ public class InvoiceLineController {
     @CrossOrigin
     @RequestMapping(value = "/{invoiceLineId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoiceLineRepresentation> updateInvoiceLine(@PathVariable int invoiceLineId, @RequestBody InvoiceLine invoiceLine) {
-        log.debug("HTTP PUT-request /resources/invoiceLines/{}", invoiceLineId);
+        log.debug("HTTP PUT-request /resources/invoicelines/{}", invoiceLineId);
         invoiceLine.setInvoiceLineId(invoiceLineId);
         InvoiceLineRepresentation invoiceLineRepresentation = new InvoiceLineRepresentation(invoiceLineService.updateInvoiceLine(invoiceLine));
         invoiceLineRepresentation.add(linkTo(methodOn(InvoiceLineController.class).
@@ -155,7 +155,7 @@ public class InvoiceLineController {
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoiceLinesArrayRepresentation> updateInvoiceLines(@RequestBody List<InvoiceLine> putInvoiceLines) {
-        log.debug("HTTP PUT-request /resources/invoiceLines");
+        log.debug("HTTP PUT-request /resources/invoicelines");
         List<InvoiceLineRepresentation> invoiceLineRepresentations = new ArrayList();
         List<InvoiceLine> invoiceLines = invoiceLineService.updateInvoiceLines(putInvoiceLines);
         invoiceLines.forEach((invoiceLine) -> {
@@ -181,7 +181,7 @@ public class InvoiceLineController {
     @CrossOrigin
     @RequestMapping(value = "/{invoiceLineId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<InvoiceLineRepresentation> deleteInvoiceLine(@PathVariable int invoiceLineId) {
-        log.debug("HTTP DELETE-request /resources/invoiceLines/{}", invoiceLineId);
+        log.debug("HTTP DELETE-request /resources/invoicelines/{}", invoiceLineId);
         InvoiceLineRepresentation invoiceLineRepresentation = new InvoiceLineRepresentation(invoiceLineService.deleteInvoiceLine(invoiceLineId));
         invoiceLineRepresentation.add(linkTo(methodOn(InvoiceLineController.class).
                 getInvoiceLine(invoiceLineId)).withSelfRel());

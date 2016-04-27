@@ -45,12 +45,83 @@ public class TrackRepository {
         return jdbc.query("SELECT * FROM \"Track\";", trackMapper);
     }
 
+    /**
+     * Method to update the database with a new track.
+     *
+     * @param track track to insert
+     * @return the inserted track
+     */
+    public Track createNewTrack(Track track) {
+        log.info("Update Database with new Track. trackId: {}, name: {}, albumId: {}, mediaTypeId: {}," +
+                " genreId: {}, composer: {}, milliseconds: {}, bytes: {}, unitPrice: {}", track.getTrackId(), track.getName(),
+                track.getAlbumId(), track.getMediaTypeId(), track.getGenreId(), track.getComposer(),
+                track.getMilliseconds(), track.getBytes(), track.getUnitPrice());
+        jdbc.update("INSERT INTO \"Track\" (\"TrackId\", \"Name\", \"AlbumId\", \"MediaTypeId\"," +
+                "\"GenreId\", \"Composer\", \"Milliseconds\", \"Bytes\", \"UnitPrice\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                track.getTrackId(), track.getName(),
+                track.getAlbumId(), track.getMediaTypeId(), track.getGenreId(), track.getComposer(),
+                track.getMilliseconds(), track.getBytes(), track.getUnitPrice());
+        return track;
+    }
+
+    /**
+     * Method to query the database for the maximum id of all tracks
+     *
+     * @return maxmum id
+     */
+    public int getMaxId() {
+        log.debug("get max Id of tracks");
+        return jdbc.queryForObject("SELECT COALESCE(MAX(\"TrackId\"),0) FROM \"Track\";", maxIdMapper);
+    }
+
+    /**
+     * Method to update the database with new data for a certain track.
+     *
+     * @param track data to update
+     * @return updated track
+     */
+    public Track updateTrack(Track track) {
+        log.debug("update track {}", track.getTrackId());
+        jdbc.update("UPDATE \"Track\" SET \"Name\" = ?, \"AlbumId\" = ?, \"MediaTypeId\" = ?, \"GenreId\" = ?," +
+                "\"Composer\" = ?, \"Milliseconds\" = ?, \"Bytes\" = ?, \"UnitPrice\" = ? WHERE \"TrackId\" = ?;",
+                track.getName(),
+                track.getAlbumId(), track.getMediaTypeId(), track.getGenreId(), track.getComposer(),
+                track.getMilliseconds(), track.getBytes(), track.getUnitPrice(), track.getTrackId());
+        return track;
+    }
+
+    /**
+     * Method to delete track from the database.
+     *
+     * @param trackId id of the track to delete
+     */
+    public void deleteTrack(int trackId) {
+        log.debug("delete track {}", trackId);
+        jdbc.update("DELETE FROM \"Track\" WHERE \"TrackId\" = ?;", trackId);
+    }
+
+    /**
+     * Method to delete all tracks from the database.
+     */
+    public void deleteTracks() {
+        log.debug("delete all tracks");
+        jdbc.update("DELETE  * FROM \"Track\";");
+    }
+
+
     private static final RowMapper<Track> trackMapper = new RowMapper<Track>() {
         public Track mapRow(ResultSet rs, int rowNum) throws SQLException {
             Track track = new Track(rs.getInt("TrackId"), rs.getString("Name"), rs.getInt("AlbumId"),
                     rs.getInt("MediaTypeId"), rs.getInt("GenreId"), rs.getString("Composer"), rs.getInt("Milliseconds"),
                     rs.getInt("Bytes"), rs.getFloat("UnitPrice"));
             return track;
+        }
+    };
+
+    private static final RowMapper<Integer> maxIdMapper = new RowMapper<Integer>() {
+        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int id = rs.getInt(1);
+            return id;
         }
     };
 }

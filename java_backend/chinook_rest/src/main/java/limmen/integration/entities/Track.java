@@ -27,7 +27,7 @@ public class Track {
     private float unitPrice;
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
      * @param trackId id of the track, unique.
      * @param name name of the track.
@@ -56,6 +56,10 @@ public class Track {
 
     public int getTrackId() {
         return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
     }
 
     public String getName() {

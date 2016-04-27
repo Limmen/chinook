@@ -82,7 +82,7 @@ public class MediaTypeController {
     @CrossOrigin
     @RequestMapping(value = "/{mediaTypeId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypeRepresentation> getMediaType(@PathVariable int mediaTypeId) {
-        log.debug("HTTP GET-request /resources/mediaTypes/{}", mediaTypeId);
+        log.debug("HTTP GET-request /resources/mediatypes/{}", mediaTypeId);
         MediaTypeRepresentation mediaTypeRepresentation = new MediaTypeRepresentation(mediaTypeService.getMediaType(mediaTypeId));
         mediaTypeRepresentation.add(linkTo(methodOn(MediaTypeController.class).getMediaType(mediaTypeId)).withSelfRel());
         return new ResponseEntity<MediaTypeRepresentation>(mediaTypeRepresentation, HttpStatus.OK);
@@ -97,7 +97,7 @@ public class MediaTypeController {
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypeRepresentation> createNewMediaType(@RequestBody MediaTypeEntity mediaType) {
-        log.debug("HTTP POST-request /resources/mediaTypes");
+        log.debug("HTTP POST-request /resources/mediatypes");
         MediaTypeRepresentation mediaTypeRepresentation = new MediaTypeRepresentation(mediaTypeService.createNewMediaType(mediaType));
         mediaTypeRepresentation.add(linkTo(methodOn(MediaTypeController.class).getMediaType(mediaType.getMediaTypeId())).withSelfRel());
         return new ResponseEntity<MediaTypeRepresentation>(mediaTypeRepresentation, HttpStatus.CREATED);
@@ -113,7 +113,7 @@ public class MediaTypeController {
     @CrossOrigin
     @RequestMapping(value = "/{mediaTypeId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypeRepresentation> updateMediaType(@PathVariable int mediaTypeId, @RequestBody MediaTypeEntity mediaType) {
-        log.debug("HTTP PUT-request /resources/mediaTypes/{}", mediaTypeId);
+        log.debug("HTTP PUT-request /resources/mediatypes/{}", mediaTypeId);
         mediaType.setMediaTypeId(mediaTypeId);
         MediaTypeRepresentation mediaTypeRepresentation = new MediaTypeRepresentation(mediaTypeService.updateMediaType(mediaType));
         mediaTypeRepresentation.add(linkTo(methodOn(MediaTypeController.class).getMediaType(mediaType.getMediaTypeId())).withSelfRel());
@@ -129,7 +129,7 @@ public class MediaTypeController {
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypesArrayRepresentation> updateMediaTypes(@RequestBody List<MediaTypeEntity> putMediaTypes) {
-        log.debug("HTTP PUT-request /resources/mediaTypes");
+        log.debug("HTTP PUT-request /resources/mediatypes");
         List<MediaTypeRepresentation> mediaTypeRepresentations = new ArrayList();
         List<MediaTypeEntity> mediaTypes = mediaTypeService.updateMediaTypes(putMediaTypes);
         mediaTypes.forEach((mediaType) -> {
@@ -150,7 +150,7 @@ public class MediaTypeController {
     @CrossOrigin
     @RequestMapping(value = "/{mediaTypeId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<MediaTypeRepresentation> deleteMediaType(@PathVariable int mediaTypeId) {
-        log.debug("HTTP DELETE-request /resources/mediaTypes/{}", mediaTypeId);
+        log.debug("HTTP DELETE-request /resources/mediatypes/{}", mediaTypeId);
         MediaTypeRepresentation mediaTypeRepresentation = new MediaTypeRepresentation(mediaTypeService.deleteMediaType(mediaTypeId));
         mediaTypeRepresentation.add(linkTo(methodOn(MediaTypeController.class).getMediaType(mediaTypeId)).withSelfRel());
         return new ResponseEntity<MediaTypeRepresentation>(mediaTypeRepresentation, HttpStatus.OK);

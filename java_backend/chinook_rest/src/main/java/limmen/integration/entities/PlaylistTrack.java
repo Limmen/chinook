@@ -14,7 +14,7 @@ public class PlaylistTrack {
     private int playlistId;
 
     /**
-     * Class constructor. Initializes an immutable entity class.
+     * Class constructor. Initializes an entity class.
      *
      * @param trackId id of the track.
      * @param playlistId id of the playlist.
