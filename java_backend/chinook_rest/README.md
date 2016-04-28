@@ -57,10 +57,16 @@ Table of Contents
    
 ### Docker
 
-#### Bild Spring Docker image with maven
+#### Bild Spring Docker image
+
+With maven: 
 
     $ mvn package docker:build
 
+With docker:
+
+    $ sudo docker build -t chinook_rest src/main/docker/
+    
 #### Build Postgres Docker image
 
     $ sudo docker build -t chinook_rest-postgres src/main/docker/postgres/

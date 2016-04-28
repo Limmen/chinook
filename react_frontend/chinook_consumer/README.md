@@ -22,9 +22,11 @@ Tools used:
 * ESLint
   * JavaScript linting utility (a type of static analysis).
 
-## Screenshot
+## Screenshots
 
-TODO
+![Screen 1](./screenshots/screen_1.png?raw=true "Screen 1")
+
+![Screen 2](./screenshots/screen_2.png?raw=true "Screen 2")
 
 ## Installation
 
@@ -33,40 +35,40 @@ TODO
 
 ## Generating new components with yeoman
 ```bash
-yo react-webpack:component my/namespaced/components/name
+$ yo react-webpack:component my/namespaced/components/name
 ```
 
 The above command will create a new component, as well as its stylesheet and a basic testcase.
 
 ## Generating new stateless functional components with yeoman
 ```
-yo react-webpack:component my/namespaced/components/name --stateless
+$ yo react-webpack:component my/namespaced/components/name --stateless
 ```
 
 ## Usage
 The following commands are available in your project:
 ```bash
 # Start for development
-npm start # or
-npm run serve
+$ npm start # or
+$ npm run serve
 
 # Start the dev-server with the dist version
-npm run serve:dist
+$ npm run serve:dist
 
 # Just build the dist version and copy static files
-npm run dist
+$ npm run dist
 
 # Run unit tests
-npm test
+$ npm test
 
 # Lint all files in src (also automatically done AFTER tests are run)
-npm run lint
+$ npm run lint
 
 # Clean up the dist directory
-npm run clean
+$ npm run clean
 
 # Just copy the static assets
-npm run copy
+$ npm run copy
 ```
 ### Naming Components
 Uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components).
