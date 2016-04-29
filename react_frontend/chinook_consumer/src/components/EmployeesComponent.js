@@ -6,7 +6,7 @@
 
 'use strict';
 
-import React from 'react';
+import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
 import Dimensions from 'react-dimensions'
@@ -23,17 +23,141 @@ class EmployeesComponent extends React.Component {
       employees: [],
       url: "http://localhost:7777/resources/employees",
       employee: {},
+      employeeUrl: "",
       reportsto: {}
     }
   };
+  handleFirstNameChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        firstName: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
 
+  handleLastNameChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        lastName: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleReportsToChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        reportsTo: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleTitleChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        title: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleBirthDateChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        birthDate: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleHireDateChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        hireDate: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleAddressChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        address: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleCityChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        city: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleCountryChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        country: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handlePostalCodeChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        postalCode: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleStateChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        state: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handlePhoneChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        phone: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleFaxChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        fax: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleEmailChange(e) {
+    var newState = React.addons.update(this.state, {
+      employee: {
+        email: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
   loadEmployeesFromServer() {
     $.ajax({
       type: "GET",
       url: this.state.url,
       dataType: 'json',
       success: (employeesData) => {
-        console.log(JSON.stringify(employeesData))
         this.setState({employees: employeesData.employees})
       },
       error: (xhr, status, err) => {
@@ -48,7 +172,6 @@ class EmployeesComponent extends React.Component {
       url: url,
       dataType: 'json',
       success: (employeeData) => {
-        console.log(JSON.stringify(employeeData))
         this.setState({reportsto: employeeData.employee})
       },
       error: (xhr, status, err) => {
@@ -58,12 +181,89 @@ class EmployeesComponent extends React.Component {
   }
 
   updateEmployee(index) {
-    //this.setState({customer: index})
-    this.setState({employee: this.state.employees[index].employee})
+    this.setState({employee: this.state.employees[index].employee, employeeUrl: this.state.employees[index]._links.self.href})
   }
 
-  deleteEmployee(index) {
+  addEmployee() {
+    this.setState({employee: {}})
+  }
 
+  postEmployeeToServer() {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          firstName: this.state.employee.firstName,
+          lastName: this.state.employee.lastName,
+          reportsTo: this.state.employee.reportsTo,
+          title : this.state.employee.title,
+          birthDate: this.state.employee.birthDate,
+          hireDate: this.state.employee.hireDate,
+          address: this.state.employee.address,
+          city: this.state.employee.city,
+          country: this.state.employee.country,
+          postalCode: this.state.employee.postalCode,
+          state: this.state.employee.state,
+          phone: this.state.employee.phone,
+          fax: this.state.employee.fax,
+          email: this.state.employee.email,
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+  }
+
+  putEmployeeToServer() {
+    $.ajax({
+      type: "PUT",
+      url: this.state.employeeUrl,
+      data: JSON.stringify(
+        {
+          firstName: this.state.employee.firstName,
+          lastName: this.state.employee.lastName,
+          reportsTo: this.state.employee.reportsTo,
+          title : this.state.employee.title,
+          birthDate: this.state.employee.birthDate,
+          hireDate: this.state.employee.hireDate,
+          address: this.state.employee.address,
+          city: this.state.employee.city,
+          country: this.state.employee.country,
+          postalCode: this.state.employee.postalCode,
+          state: this.state.employee.state,
+          phone: this.state.employee.phone,
+          fax: this.state.employee.fax,
+          email: this.state.employee.email,
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.employeeUrl, status, err.toString());
+      }
+    });
+  }
+
+  deleteEmployeeFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.employeeUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.employeeUrl, status, err.toString());
+      }
+    });
   }
 
   componentDidMount() {
@@ -78,118 +278,128 @@ class EmployeesComponent extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">Edit Employee</h4>
+                <h4 className="modal-title">Create new Employee</h4>
               </div>
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label for="employee_id" className="col-sm-4">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_id"
-                             placeholder="Employee Id"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label for="employee_firstname" className="col-sm-4">First Name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_firstname"
-                             placeholder="First Name"/>
+                             placeholder="First Name"
+                             onChange={this.handleFirstNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_lastname" className="col-sm-4">Last name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_lastname"
-                             placeholder="Last Name"/>
+                             placeholder="Last Name"
+                             onChange={this.handleLastNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_reportsto"
-                             placeholder="Reports to"/>
+                             placeholder="Reports to"
+                             onChange={this.handleReportsToChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_birthdate"
-                             placeholder="Birthdate"/>
+                             placeholder="Birthdate"
+                             onChange={this.handleBirthDateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_hiredate" className="col-sm-4">Hire date</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_hiredate"
-                             placeholder="Hire date"/>
+                             placeholder="Hire date"
+                             onChange={this.handleHireDateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_address" className="col-sm-4">Address</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_address"
-                             placeholder="Address"/>
+                             placeholder="Address"
+                             onChange={this.handleAddressChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_city" className="col-sm-4">City</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_city"
-                             placeholder="City"/>
+                             placeholder="City"
+                             onChange={this.handleCityChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_state" className="col-sm-4">State</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_state"
-                             placeholder="State"/>
+                             placeholder="State"
+                             onChange={this.handleStateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_country" className="col-sm-4">Country</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_country"
-                             placeholder="Country"/>
+                             placeholder="Country"
+                             onChange={this.handleCountryChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_postalcode" className="col-sm-4">Postalcode</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_postalcode"
-                             placeholder="Postalcode"/>
+                             placeholder="Postalcode"
+                             onChange={this.handlePostalCodeChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_phone" className="col-sm-4">Phone</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_phone"
-                             placeholder="Phone"/>
+                             placeholder="Phone"
+                             onChange={this.handlePhoneChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_fax" className="col-sm-4">Fax</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_fax"
-                             placeholder="Fax"/>
+                             placeholder="Fax"
+                             onChange={this.handleFaxChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_email" className="col-sm-4">Email</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_email"
-                             placeholder="Email"/>
+                             placeholder="Email"
+                             onChange={this.handleEmailChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_title" className="col-sm-4">Title</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_title"
-                             placeholder="Title"/>
+                             placeholder="Title"
+                             onChange={this.handleTitleChange.bind(this)}/>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal"
+                        onClick={this.postEmployeeToServer.bind(this)}>Submit
+                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -205,113 +415,123 @@ class EmployeesComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label for="employee_id" className="col-sm-4">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_id"
-                             value={this.state.employee.employeeId}/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label for="employee_firstname" className="col-sm-4">First Name</label>
+                    <label className="col-sm-4" for="employee_firstname">First Name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_firstname"
-                             value={this.state.employee.firstName}/>
+                             value={this.state.employee.firstName}
+                             onChange={this.handleFirstNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_lastname" className="col-sm-4">Last name</label>
+                    <label className="col-sm-4" for="employee_lastname">Last name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_lastname"
-                             value={this.state.employee.lastName}/>
+                             value={this.state.employee.lastName}
+                             onChange={this.handleLastNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_reportsto"
-                             value={this.state.employee.reportsTo}/>
+                             value={this.state.employee.reportsTo}
+                             onChange={this.handleReportsToChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_birthdate"
-                             value={this.state.employee.birthDate}/>
+                             value={this.state.employee.birthDate}
+                             onChange={this.handleBirthDateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_hiredate" className="col-sm-4">Hire date</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_hiredate"
-                             value={this.state.employee.hireDate}/>
+                             value={this.state.employee.hireDate}
+                             onChange={this.handleHireDateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_address" className="col-sm-4">Address</label>
+                    <label className="col-sm-4" for="employee_address">Address</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_address"
-                             value={this.state.employee.address}/>
+                             value={this.state.employee.address}
+                             onChange={this.handleAddressChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_city" className="col-sm-4">city</label>
+                    <label className="col-sm-4" for="employee_city">City</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_city"
-                             value={this.state.employee.city}/>
+                             value={this.state.employee.city}
+                             onChange={this.handleCityChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_state" className="col-sm-4">State</label>
+                    <label className="col-sm-4" for="employee_state">State</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_state"
-                             value={this.state.employee.state}/>
+                             value={this.state.employee.state}
+                             onChange={this.handleStateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_country" className="col-sm-4">Country</label>
+                    <label className="col-sm-4" for="employee_country">Country</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_country"
-                             value={this.state.employee.country}/>
+                             value={this.state.employee.country}
+                             onChange={this.handleCountryChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_postalcode" className="col-sm-4">Postalcode</label>
+                    <label className="col-sm-4" for="employee_postalcode">PostalCode</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_postalcode"
-                             value={this.state.employee.postalcode}/>
+                             value={this.state.employee.postalCode}
+                             onChange={this.handlePostalCodeChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_phone" className="col-sm-4">Phone</label>
+                    <label className="col-sm-4" for="employee_phone">Phone</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_phone"
-                             value={this.state.employee.phone}/>
+                             value={this.state.employee.phone}
+                             onChange={this.handlePhoneChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_fax" className="col-sm-4">Fax</label>
+                    <label className="col-sm-4" for="employee_fax">Fax</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_fax"
-                             value={this.state.employee.fax}/>
+                             value={this.state.employee.fax}
+                             onChange={this.handleFaxChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label for="employee_email" className="col-sm-4">Email</label>
+                    <label className="col-sm-4" for="employee_email">Email</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_email"
-                             value={this.state.employee.email}/>
+                             value={this.state.employee.email}
+                             onChange={this.handleEmailChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_title" className="col-sm-4">Title</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="employee_title"
-                             value={this.state.employee.title}/>
+                             value={this.state.employee.title}
+                             onChange={this.handleTitleChange.bind(this)}/>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal"
+                        onClick={this.putEmployeeToServer.bind(this)}>Submit
+                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -402,8 +622,12 @@ class EmployeesComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button>
-                <button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteEmployeeFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -586,7 +810,7 @@ class EmployeesComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteEmployee.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateEmployee.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>
@@ -596,7 +820,8 @@ class EmployeesComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
+                onClick={this.addEmployee.bind(this)}>
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

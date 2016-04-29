@@ -30,17 +30,27 @@
         <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="153" column="98" selection-start-line="148" selection-start-column="16" selection-end-line="153" selection-end-column="98" />
+              <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="134" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomersComponent.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmployeesComponent.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/EmployeesComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.54268295">
+              <caret line="488" column="46" selection-start-line="488" selection-start-column="46" selection-end-line="488" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomersComponent.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/CustomersComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70980394">
-              <caret line="218" column="41" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
+            <state vertical-scroll-proportion="-5.7818184">
+              <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="196" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -95,7 +105,6 @@
         <option value="$PROJECT_DIR$/src/components/GenresComponent.js" />
         <option value="$PROJECT_DIR$/src/components/InvoiceLinesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/InvoicesComponent.js" />
-        <option value="$PROJECT_DIR$/src/components/EmployeesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/MediaTypesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/PlaylistsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/PlaylistTracksComponent.js" />
@@ -104,6 +113,7 @@
         <option value="$PROJECT_DIR$/src/components/ArtistsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/AlbumsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/CustomersComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/EmployeesComponent.js" />
       </list>
     </option>
   </component>
@@ -815,12 +825,12 @@
       <workItem from="1461319003624" duration="4932000" />
       <workItem from="1461402021032" duration="112000" />
       <workItem from="1461831228878" duration="7845000" />
-      <workItem from="1461906138678" duration="3337000" />
+      <workItem from="1461906138678" duration="5603000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65916000" />
+    <option name="totallyTimeSpent" value="68182000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1114,13 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/EmployeesComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0751445">
-          <caret line="386" column="58" selection-start-line="386" selection-start-column="58" selection-end-line="386" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FooterComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36416185">
@@ -1241,18 +1244,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
+    <entry file="file://$PROJECT_DIR$/src/components/CustomersComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="98" selection-start-line="148" selection-start-column="16" selection-end-line="153" selection-end-column="98" />
+        <state vertical-scroll-proportion="-5.7818184">
+          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="196" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CustomersComponent.js">
+    <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70980394">
-          <caret line="218" column="41" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="134" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/EmployeesComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54268295">
+          <caret line="488" column="46" selection-start-line="488" selection-start-column="46" selection-end-line="488" selection-end-column="46" />
           <folding />
         </state>
       </provider>
