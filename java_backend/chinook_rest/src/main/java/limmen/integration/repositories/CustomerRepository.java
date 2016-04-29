@@ -84,7 +84,8 @@ public class CustomerRepository {
     public Customer updateCustomer(Customer customer) {
         log.debug("update customer {}", customer.getCustomerId());
         jdbc.update("UPDATE \"Customer\" SET \"FirstName\" = ?, \"LastName\" = ?, \"Company\" = ?, \"Address\" = ?," +
-                "\"City\" = ?, \"State\" = ?, \"Country\" = ?, \"PostalCode\" = ? WHERE \"CustomerId\" = ?;", customer.getFirstName(),
+                "\"City\" = ?, \"State\" = ?, \"Country\" = ?, \"PostalCode\" = ?, \"Phone\" = ?, \"Fax\" = ?," +
+                "\"Email\" = ?, \"SupportRepId\" = ? WHERE \"CustomerId\" = ?;", customer.getFirstName(),
                 customer.getLastName(), customer.getCompany(), customer.getAddress(), customer.getCity(),
                 customer.getState(), customer.getCountry(), customer.getPostalCode(),customer.getPhone(), customer.getFax(),
                 customer.getEmail(), customer.getSupportRepId(), customer.getCustomerId());

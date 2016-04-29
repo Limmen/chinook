@@ -6,7 +6,7 @@
 
 'use strict';
 
-import React from 'react';
+import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
 import Dimensions from 'react-dimensions'
@@ -22,9 +22,118 @@ class CustomersComponent extends React.Component {
       customers: [],
       url: "http://localhost:7777/resources/customers",
       customer: {},
+      customerUrl: "",
       employee: {}
     }
   };
+
+  handleFirstNameChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        firstName: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleLastNameChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        lastName: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleCompanyChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        company: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleAddressChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        address: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleCityChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        city: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleCountryChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        country: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handlePostalCodeChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        postalCode: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleStateChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        state: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handlePhoneChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        phone: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleFaxChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        fax: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleEmailChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        email: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
+
+  handleSupportRepIdChange(e) {
+    var newState = React.addons.update(this.state, {
+      customer: {
+        supportRepId: {$set: e.target.value}
+      }
+    });
+    this.setState(newState);
+  }
 
   loadCustomersFromServer() {
     $.ajax({
@@ -57,12 +166,88 @@ class CustomersComponent extends React.Component {
   }
 
   updateCustomer(index) {
-    //this.setState({customer: index})
-    this.setState({customer: this.state.customers[index].customer})
+    this.setState({
+      customer: this.state.customers[index].customer,
+      customerUrl: this.state.customers[index]._links.self.href
+    })
   }
 
-  deleteCustomer(index) {
+  addCustomer() {
+    this.setState({customer: {}})
+  }
 
+  postCustomerToServer() {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          firstName: this.state.customer.firstName,
+          lastName: this.state.customer.lastName,
+          company: this.state.customer.company,
+          address: this.state.customer.address,
+          city: this.state.customer.city,
+          country: this.state.customer.country,
+          postalCode: this.state.customer.postalCode,
+          state: this.state.customer.state,
+          phone: this.state.customer.phone,
+          fax: this.state.customer.fax,
+          email: this.state.customer.email,
+          supportRepId: this.state.customer.supportRepId
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadCustomersFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+  }
+
+  putCustomerToServer() {
+    $.ajax({
+      type: "PUT",
+      url: this.state.customerUrl,
+      data: JSON.stringify(
+        {
+          firstName: this.state.customer.firstName,
+          lastName: this.state.customer.lastName,
+          company: this.state.customer.company,
+          address: this.state.customer.address,
+          city: this.state.customer.city,
+          country: this.state.customer.country,
+          postalCode: this.state.customer.postalCode,
+          state: this.state.customer.state,
+          phone: this.state.customer.phone,
+          fax: this.state.customer.fax,
+          email: this.state.customer.email,
+          supportRepId: this.state.customer.supportRepId
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadCustomersFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.customerUrl, status, err.toString());
+      }
+    });
+  }
+
+  deleteCustomerFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.customerUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadCustomersFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.customerUrl, status, err.toString());
+      }
+    });
   }
 
   componentDidMount() {
@@ -82,90 +267,107 @@ class CustomersComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_id"
-                             value={this.state.customer.customerId}/>
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label className="col-sm-4" for="customer_firstname">First Name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_firstname"
-                             value={this.state.customer.firstName}/>
+                             value={this.state.customer.firstName}
+                             onChange={this.handleFirstNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_lastname">Last name</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_lastname"
-                             value={this.state.customer.lastName}/>
+                             value={this.state.customer.lastName}
+                             onChange={this.handleLastNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_company">Company</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_company"
-                             value={this.state.customer.company}/>
+                             value={this.state.customer.company}
+                             onChange={this.handleCompanyChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_address">Address</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_address"
-                             value={this.state.customer.address}/>
+                             value={this.state.customer.address}
+                             onChange={this.handleAddressChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_city">City</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_city" value={this.state.customer.city}/>
+                      <input type="text" className="form-control" id="customer_city"
+                             value={this.state.customer.city}
+                             onChange={this.handleCityChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_state">State</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_state"
-                             value={this.state.customer.state}/>
+                             value={this.state.customer.state}
+                             onChange={this.handleStateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_country">Country</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_country"
-                             value={this.state.customer.country}/>
+                             value={this.state.customer.country}
+                             onChange={this.handleCountryChange.bind(this)}/>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-sm-4" for="customer_postalcode">PostalCode</label>
+                    <div className="col-sm-8 margin_bottom">
+                      <input type="text" className="form-control" id="customer_postalcode"
+                             value={this.state.customer.postalCode}
+                             onChange={this.handlePostalCodeChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_phone">Phone</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_phone"
-                             value={this.state.customer.phone}/>
+                             value={this.state.customer.phone}
+                             onChange={this.handlePhoneChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_fax">Fax</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_fax" value={this.state.customer.fax}/>
+                      <input type="text" className="form-control" id="customer_fax"
+                             value={this.state.customer.fax}
+                             onChange={this.handleFaxChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_email"
-                             value={this.state.customer.email}/>
+                             value={this.state.customer.email}
+                             onChange={this.handleEmailChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_supportedRepId"
-                             value={this.state.customer.supportRepId}/>
+                             value={this.state.customer.supportRepId}
+                             onChange={this.handleSupportRepIdChange.bind(this)}/>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal"
+                        onClick={this.putCustomerToServer.bind(this)}>Submit
+                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -181,81 +383,97 @@ class CustomersComponent extends React.Component {
               <div className="modal-body row">
                 <div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_id" placeholder="id"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label className="col-sm-4" for="customer_firstname">First Name</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_firstname" placeholder="first name"/>
+                      <input type="text" className="form-control" id="customer_firstname" placeholder="first name"
+                             onChange={this.handleFirstNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_lastname">Last name</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_lastname" placeholder="last name"/>
+                      <input type="text" className="form-control" id="customer_lastname" placeholder="last name"
+                             onChange={this.handleLastNameChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_company">Company</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_company" placeholder="company"/>
+                      <input type="text" className="form-control" id="customer_company" placeholder="company"
+                             onChange={this.handleCompanyChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_address">Address</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_address" placeholder="address"/>
+                      <input type="text" className="form-control" id="customer_address" placeholder="address"
+                             onChange={this.handleAddressChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_city">City</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_city" placeholder="city"/>
+                      <input type="text" className="form-control" id="customer_city" placeholder="city"
+                             onChange={this.handleCityChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_state">State</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_state" placeholder="state"/>
+                      <input type="text" className="form-control" id="customer_state" placeholder="state"
+                             onChange={this.handleStateChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_country">Country</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_country" placeholder="country"/>
+                      <input type="text" className="form-control" id="customer_country" placeholder="country"
+                             onChange={this.handleCountryChange.bind(this)}/>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-sm-4" for="customer_postalcode">PostalCode</label>
+                    <div className="col-sm-8 margin_bottom">
+                      <input type="text" className="form-control" id="customer_postalcode"
+                             placeholder="postalCode"
+                             onChange={this.handlePostalCodeChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_phone">Phone</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_phone" placeholder="phone"/>
+                      <input type="text" className="form-control" id="customer_phone" placeholder="phone"
+                             onChange={this.handlePhoneChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_fax">Fax</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_fax" placeholder="fax"/>
+                      <input type="text" className="form-control" id="customer_fax" placeholder="fax"
+                             onChange={this.handleFaxChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_email" placeholder="email"/>
+                      <input type="text" className="form-control" id="customer_email" placeholder="email"
+                             onChange={this.handleEmailChange.bind(this)}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
                     <div className="col-sm-8 margin_bottom">
                       <input type="text" className="form-control" id="customer_supportedRepId"
-                             placeholder="employee id"/>
+                             placeholder="employee id"
+                             onChange={this.handleSupportRepIdChange.bind(this)}/>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal"
+                        onClick={this.postCustomerToServer.bind(this)}>Submit
+                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -269,8 +487,12 @@ class CustomersComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button>
-                <button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteCustomerFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -463,7 +685,7 @@ class CustomersComponent extends React.Component {
               flexGrow={1}
             />
             <Column
-              header={<Cell>fax</Cell>}
+              header={<Cell>Fax</Cell>}
               cell={props => (
 <Cell {...props}>
         {this.state.customers[props.rowIndex].customer.fax}
@@ -510,7 +732,7 @@ class CustomersComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteCustomer.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateCustomer.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>
@@ -520,7 +742,8 @@ class CustomersComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
+                onClick={this.addCustomer.bind(this)}>
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>
