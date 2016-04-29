@@ -12,8 +12,9 @@ const DateInputComponent = React.createClass({
 
   // setValue() will set the value of the component, which in
   // turn will validate it and the rest of the form
-  changeValue(event) {
-    this.setValue(event.currentTarget.value);
+  changeValue(date) {
+    console.log("CHANGE EVENT!!!!")
+    this.setValue(date);
   },
 
 
@@ -34,8 +35,7 @@ const DateInputComponent = React.createClass({
           <DatePicker id="employee_hiredate" className="form-control"
                       dateFormat="YYYY-MM-DD"
                       selected={this.getValue()}
-                      onChange={this.changeValue}
-                      placeholder={this.props.placeholder}/>
+                      onChange={this.changeValue} />
         <span>{errorMessage}</span>
       </div>
     );

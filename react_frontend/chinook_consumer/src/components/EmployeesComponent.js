@@ -280,12 +280,12 @@ class EmployeesComponent extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_birthdate">BirthDate</label>
                     <DateInputComponent name="birthDate" validationError="this field is required" required id="employee_birthdate"
-                                        placeholder="birth date" value={this.state.employee.birthDate}/>
+                                        placeholder="birth date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_hiredate">HireDate</label>
                     <DateInputComponent name="hireDate" validationError="this field is required" required id="employee_hiredate"
-                                        placeholder="birth date" value={this.state.employee.hireDate}/>
+                                        placeholder="hire date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_address">Address</label>
@@ -557,7 +557,7 @@ class EmployeesComponent extends React.Component {
               flexGrow={1}
             />
             <Column
-              header={<Cell>fax</Cell>}
+              header={<Cell>Fax</Cell>}
               cell={props => (
 <Cell {...props}>
         {this.state.employees[props.rowIndex].employee.fax}

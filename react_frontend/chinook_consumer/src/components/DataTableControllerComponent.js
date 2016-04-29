@@ -17,7 +17,7 @@ class DataTableControllerComponent extends React.Component {
       <div className="datatablecontroller-component">
         <div className="center-block align_center">
         <ul className="nav nav-pills nav-stacked">
-          <li className={(this.props.location.path === '/' || this.props.location.path === '/artists') ? 'active' : ''}>
+          <li className={this.props.location.path === '/artists' ? 'active' : ''}>
             <Link to="/artists">Artists</Link>
           </li>
           <li className={this.props.location.path === '/albums' ? 'active' : ''}>
