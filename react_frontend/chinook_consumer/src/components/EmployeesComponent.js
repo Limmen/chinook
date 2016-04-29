@@ -10,10 +10,12 @@ import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
 import $ from "jquery";
 import Dimensions from 'react-dimensions'
-
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 
 require('styles//DataTable.css');
 require('styles//Employees.css');
+require('react-datepicker/dist/react-datepicker.css');
 
 class EmployeesComponent extends React.Component {
   constructor(props, context) {
@@ -27,6 +29,7 @@ class EmployeesComponent extends React.Component {
       reportsto: {}
     }
   };
+
   handleFirstNameChange(e) {
     var newState = React.addons.update(this.state, {
       employee: {
@@ -63,19 +66,19 @@ class EmployeesComponent extends React.Component {
     this.setState(newState);
   }
 
-  handleBirthDateChange(e) {
+  handleBirthDateChange(date) {
     var newState = React.addons.update(this.state, {
       employee: {
-        birthDate: {$set: e.target.value}
+        birthDate: {$set: date}
       }
     });
     this.setState(newState);
   }
 
-  handleHireDateChange(e) {
+  handleHireDateChange(date) {
     var newState = React.addons.update(this.state, {
       employee: {
-        hireDate: {$set: e.target.value}
+        hireDate: {$set: date}
       }
     });
     this.setState(newState);
@@ -152,6 +155,7 @@ class EmployeesComponent extends React.Component {
     });
     this.setState(newState);
   }
+
   loadEmployeesFromServer() {
     $.ajax({
       type: "GET",
@@ -181,7 +185,10 @@ class EmployeesComponent extends React.Component {
   }
 
   updateEmployee(index) {
-    this.setState({employee: this.state.employees[index].employee, employeeUrl: this.state.employees[index]._links.self.href})
+    this.setState({
+      employee: this.state.employees[index].employee,
+      employeeUrl: this.state.employees[index]._links.self.href
+    })
   }
 
   addEmployee() {
@@ -197,7 +204,7 @@ class EmployeesComponent extends React.Component {
           firstName: this.state.employee.firstName,
           lastName: this.state.employee.lastName,
           reportsTo: this.state.employee.reportsTo,
-          title : this.state.employee.title,
+          title: this.state.employee.title,
           birthDate: this.state.employee.birthDate,
           hireDate: this.state.employee.hireDate,
           address: this.state.employee.address,
@@ -229,7 +236,7 @@ class EmployeesComponent extends React.Component {
           firstName: this.state.employee.firstName,
           lastName: this.state.employee.lastName,
           reportsTo: this.state.employee.reportsTo,
-          title : this.state.employee.title,
+          title: this.state.employee.title,
           birthDate: this.state.employee.birthDate,
           hireDate: this.state.employee.hireDate,
           address: this.state.employee.address,
@@ -309,17 +316,19 @@ class EmployeesComponent extends React.Component {
                   <div className="form-group">
                     <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_birthdate"
-                             placeholder="Birthdate"
-                             onChange={this.handleBirthDateChange.bind(this)}/>
+                      <DatePicker id="employee_hiredate" className="form-control"
+                                  dateFormat="YYYY-MM-DD"
+                                  selected={this.state.employee.birthDate}
+                                  onChange={this.handleBirthDateChange.bind(this)}/>;
                     </div>
                   </div>
                   <div className="form-group">
                     <label for="employee_hiredate" className="col-sm-4">Hire date</label>
                     <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_hiredate"
-                             placeholder="Hire date"
-                             onChange={this.handleHireDateChange.bind(this)}/>
+                      <DatePicker id="employee_hiredate" className="form-control"
+                                  dateFormat="YYYY-MM-DD"
+                                  selected={this.state.employee.hireDate}
+                                  onChange={this.handleHireDateChange.bind(this)}/>;
                     </div>
                   </div>
                   <div className="form-group">

@@ -66,7 +66,7 @@ public class Employee {
         this.employeeId = employeeId;
         this.lastName = lastName;
         this.firstName = firstName;
-        title = title;
+        this.title = title;
         this.reportsTo = reportsTo;
         this.birthDate = birthDate;
         this.hireDate = hireDate;

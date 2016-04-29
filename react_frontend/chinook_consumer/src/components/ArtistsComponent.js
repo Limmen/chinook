@@ -7,12 +7,12 @@
 
 import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
-
-
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 require('styles//DataTable.css');
 require('styles//Artists.css');
+
 
 class ArtistsComponent extends React.Component {
   constructor(props, context) {
@@ -22,7 +22,8 @@ class ArtistsComponent extends React.Component {
       artists: [],
       url: "http://localhost:7777/resources/artists",
       artist: {},
-      artistUrl: ""
+      artistUrl: "",
+      canSubmit: false
     }
   };
 
@@ -53,15 +54,12 @@ class ArtistsComponent extends React.Component {
     this.setState({artist: this.state.artists[index].artist, artistUrl: this.state.artists[index]._links.self.href})
   }
 
-  addArtist() {
-    this.setState({artist: {}})
-  }
-
-  postArtistToServer() {
+  postArtistToServer(data) {
+    console.log("post artist to serv");
     $.ajax({
       type: "POST",
       url: this.state.url,
-      data: JSON.stringify({name: this.state.artist.name}),
+      data: JSON.stringify({name: data.name}),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (response) => {
@@ -73,11 +71,11 @@ class ArtistsComponent extends React.Component {
     });
   }
 
-  putArtistToServer() {
+  putArtistToServer(data) {
     $.ajax({
       type: "PUT",
       url: this.state.artistUrl,
-      data: JSON.stringify({name: this.state.artist.name}),
+      data: JSON.stringify({name: data.name}),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (response) => {
@@ -87,6 +85,7 @@ class ArtistsComponent extends React.Component {
         console.error(this.state.artistUrl, status, err.toString());
       }
     });
+    $("#editModal").modal('hide');
   }
 
   deleteArtistFromServer() {
@@ -107,6 +106,18 @@ class ArtistsComponent extends React.Component {
     this.loadArtistsFromServer();
   }
 
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="artists-component">
@@ -119,20 +130,17 @@ class ArtistsComponent extends React.Component {
               </div>
               <div className="modal-body row">
                 <div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="artist_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_name"
-                             value={this.state.artist.name}
-                             onChange={this.handleNameChange.bind(this)}/>
+                  <Formsy.Form onValidSubmit={this.putArtistToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                    <div className="form-group">
+                      <label className="col-sm-4" for="artist_name">Name</label>
+                      <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
+                                  placeholder="title" value={this.state.artist.name}/>
                     </div>
-                  </div>
+                    <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                  </Formsy.Form>
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.putArtistToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -167,21 +175,16 @@ class ArtistsComponent extends React.Component {
                 <h4 className="modal-title">Create new Artist</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postArtistToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="artist_title">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_title" placeholder="title"
-                             value={this.state.artist.name}
-                             onChange={this.handleNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="artist_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
+                    placeholder="title"/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.postArtistToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -240,8 +243,7 @@ class ArtistsComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
-                onClick={this.addArtist.bind(this)}>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

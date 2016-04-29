@@ -8,7 +8,6 @@
 
 import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
 
 require('styles//DataTable.css');
