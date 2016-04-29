@@ -1,7 +1,11 @@
 import React from 'react/addons';
 import Formsy from 'formsy-react';
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 
-const TextInputComponent = React.createClass({
+require('react-datepicker/dist/react-datepicker.css');
+
+const DateInputComponent = React.createClass({
 
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
@@ -27,12 +31,15 @@ const TextInputComponent = React.createClass({
 
     return (
       <div className="col-sm-8 margin_bottom">
-        <input type="text" className="form-control"
-               onChange={this.changeValue} value={this.getValue()} placeholder={this.props.placeholder}/>
+          <DatePicker id="employee_hiredate" className="form-control"
+                      dateFormat="YYYY-MM-DD"
+                      selected={this.getValue()}
+                      onChange={this.changeValue}
+                      placeholder={this.props.placeholder}/>
         <span>{errorMessage}</span>
       </div>
     );
   }
 });
 
-export default TextInputComponent
+export default DateInputComponent

@@ -24,7 +24,7 @@ class AppComponent extends React.Component {
         <div className="row">
           <div className="col-sm-3"></div>
           <div className="col-sm-6">
-            <DataTableControllerComponent />
+            <DataTableControllerComponent location={this.props.routes[this.props.routes.length-1]} />
             {this.props.children}
           </div>
           <div className="col-sm-3"></div>

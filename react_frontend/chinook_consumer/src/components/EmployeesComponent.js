@@ -8,14 +8,14 @@
 
 import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
+import DateInputComponent from './DateInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Employees.css');
-require('react-datepicker/dist/react-datepicker.css');
+
 
 class EmployeesComponent extends React.Component {
   constructor(props, context) {
@@ -26,135 +26,10 @@ class EmployeesComponent extends React.Component {
       url: "http://localhost:7777/resources/employees",
       employee: {},
       employeeUrl: "",
-      reportsto: {}
+      reportsTo: {},
+      canSubmit: false
     }
   };
-
-  handleFirstNameChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        firstName: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleLastNameChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        lastName: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleReportsToChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        reportsTo: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleTitleChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        title: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleBirthDateChange(date) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        birthDate: {$set: date}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleHireDateChange(date) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        hireDate: {$set: date}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleAddressChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        address: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleCityChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        city: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleCountryChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        country: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handlePostalCodeChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        postalCode: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleStateChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        state: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handlePhoneChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        phone: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleFaxChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        fax: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleEmailChange(e) {
-    var newState = React.addons.update(this.state, {
-      employee: {
-        email: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
 
   loadEmployeesFromServer() {
     $.ajax({
@@ -176,7 +51,7 @@ class EmployeesComponent extends React.Component {
       url: url,
       dataType: 'json',
       success: (employeeData) => {
-        this.setState({reportsto: employeeData.employee})
+        this.setState({reportsTo: employeeData.employee})
       },
       error: (xhr, status, err) => {
         console.error(url, status, err.toString());
@@ -191,30 +66,26 @@ class EmployeesComponent extends React.Component {
     })
   }
 
-  addEmployee() {
-    this.setState({employee: {}})
-  }
-
-  postEmployeeToServer() {
+  postEmployeeToServer(data) {
     $.ajax({
       type: "POST",
       url: this.state.url,
       data: JSON.stringify(
         {
-          firstName: this.state.employee.firstName,
-          lastName: this.state.employee.lastName,
-          reportsTo: this.state.employee.reportsTo,
-          title: this.state.employee.title,
-          birthDate: this.state.employee.birthDate,
-          hireDate: this.state.employee.hireDate,
-          address: this.state.employee.address,
-          city: this.state.employee.city,
-          country: this.state.employee.country,
-          postalCode: this.state.employee.postalCode,
-          state: this.state.employee.state,
-          phone: this.state.employee.phone,
-          fax: this.state.employee.fax,
-          email: this.state.employee.email,
+          firstName:data.firstName,
+          lastName: data.lastName,
+          reportsTo:data.reportsTo,
+          title: data.title,
+          birthDate: data.birthDate,
+          hireDate: data.hireDate,
+          address: data.address,
+          city: data.city,
+          country: data.country,
+          postalCode: data.postalCode,
+          state: data.state,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
         }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -225,28 +96,29 @@ class EmployeesComponent extends React.Component {
         console.error(this.state.url, status, err.toString());
       }
     });
+    $("#addModal").modal('hide');
   }
 
-  putEmployeeToServer() {
+  putEmployeeToServer(data) {
     $.ajax({
       type: "PUT",
       url: this.state.employeeUrl,
       data: JSON.stringify(
         {
-          firstName: this.state.employee.firstName,
-          lastName: this.state.employee.lastName,
-          reportsTo: this.state.employee.reportsTo,
-          title: this.state.employee.title,
-          birthDate: this.state.employee.birthDate,
-          hireDate: this.state.employee.hireDate,
-          address: this.state.employee.address,
-          city: this.state.employee.city,
-          country: this.state.employee.country,
-          postalCode: this.state.employee.postalCode,
-          state: this.state.employee.state,
-          phone: this.state.employee.phone,
-          fax: this.state.employee.fax,
-          email: this.state.employee.email,
+          firstName:data.firstName,
+          lastName: data.lastName,
+          reportsTo:data.reportsTo,
+          title: data.title,
+          birthDate: data.birthDate,
+          hireDate: data.hireDate,
+          address: data.address,
+          city: data.city,
+          country: data.country,
+          postalCode: data.postalCode,
+          state: data.state,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
         }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -257,6 +129,7 @@ class EmployeesComponent extends React.Component {
         console.error(this.state.employeeUrl, status, err.toString());
       }
     });
+    $("#editModal").modal('hide');
   }
 
   deleteEmployeeFromServer() {
@@ -277,6 +150,18 @@ class EmployeesComponent extends React.Component {
     this.loadEmployeesFromServer();
   }
 
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="employees-component">
@@ -288,127 +173,81 @@ class EmployeesComponent extends React.Component {
                 <h4 className="modal-title">Create new Employee</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label for="employee_firstname" className="col-sm-4">First Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_firstname"
-                             placeholder="First Name"
-                             onChange={this.handleFirstNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_firstname">First Name</label>
+                    <TextInputComponent name="firstName" validationError="this field is required" required id="employee_firstname"
+                                        placeholder="first name" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_lastname" className="col-sm-4">Last name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_lastname"
-                             placeholder="Last Name"
-                             onChange={this.handleLastNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_lastname">Last Name</label>
+                    <TextInputComponent name="lastName" validationError="this field is required" required id="employee_lastname"
+                                        placeholder="last name" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_reportsto"
-                             placeholder="Reports to"
-                             onChange={this.handleReportsToChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_reportsto">Reports to Employee</label>
+                    <TextInputComponent name="reportsTo" validations="isInt"validationError="Employee id needs to be a integer" required id="employee_reportsto"
+                                        placeholder="employee id" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <DatePicker id="employee_hiredate" className="form-control"
-                                  dateFormat="YYYY-MM-DD"
-                                  selected={this.state.employee.birthDate}
-                                  onChange={this.handleBirthDateChange.bind(this)}/>;
-                    </div>
+                    <label className="col-sm-4" for="employee_birthdate">BirthDate</label>
+                    <DateInputComponent name="birthDate" validationError="this field is required" required id="employee_birthdate"
+                                        placeholder="birth date" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_hiredate" className="col-sm-4">Hire date</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <DatePicker id="employee_hiredate" className="form-control"
-                                  dateFormat="YYYY-MM-DD"
-                                  selected={this.state.employee.hireDate}
-                                  onChange={this.handleHireDateChange.bind(this)}/>;
-                    </div>
+                    <label className="col-sm-4" for="employee_hiredate">HireDate</label>
+                    <DateInputComponent name="hireDate" validationError="this field is required" required id="employee_hiredate"
+                                        placeholder="birth date" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_address" className="col-sm-4">Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_address"
-                             placeholder="Address"
-                             onChange={this.handleAddressChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_address">Address</label>
+                    <TextInputComponent name="address" validationError="this field is required" required id="employee_address"
+                                        placeholder="address" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_city" className="col-sm-4">City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_city"
-                             placeholder="City"
-                             onChange={this.handleCityChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_city">City</label>
+                    <TextInputComponent name="city" validationError="this field is required" required id="employee_city"
+                                        placeholder="city" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_state" className="col-sm-4">State</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_state"
-                             placeholder="State"
-                             onChange={this.handleStateChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_state">State</label>
+                    <TextInputComponent name="state" validationError="this field is required" required id="employee_state"
+                                        placeholder="state" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_country" className="col-sm-4">Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_country"
-                             placeholder="Country"
-                             onChange={this.handleCountryChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_country">Country</label>
+                    <TextInputComponent name="country" validationError="this field is required" required id="employee_country"
+                                        placeholder="country" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_postalcode" className="col-sm-4">Postalcode</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_postalcode"
-                             placeholder="Postalcode"
-                             onChange={this.handlePostalCodeChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_postalcode">PostalCode</label>
+                    <TextInputComponent name="postalCode" validationError="this field is required" required id="employee_postalcode"
+                                        placeholder="postalcode" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_phone" className="col-sm-4">Phone</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_phone"
-                             placeholder="Phone"
-                             onChange={this.handlePhoneChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_phone">Phone</label>
+                    <TextInputComponent name="phone" validationError="this field is required" required id="employee_phone"
+                                        placeholder="phone" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_fax" className="col-sm-4">Fax</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_fax"
-                             placeholder="Fax"
-                             onChange={this.handleFaxChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_fax">Fax</label>
+                    <TextInputComponent name="fax" validationError="this field is required" required id="employee_fax"
+                                        placeholder="fax" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_email" className="col-sm-4">Email</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_email"
-                             placeholder="Email"
-                             onChange={this.handleEmailChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_email">Email</label>
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required id="employee_email"
+                                        placeholder="email" />
                   </div>
                   <div className="form-group">
-                    <label for="employee_title" className="col-sm-4">Title</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_title"
-                             placeholder="Title"
-                             onChange={this.handleTitleChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_title">Title</label>
+                    <TextInputComponent name="title" validationError="this field is required" required id="employee_title"
+                                        placeholder="title" />
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.postEmployeeToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -422,125 +261,81 @@ class EmployeesComponent extends React.Component {
                 <h4 className="modal-title">Edit Employee</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_firstname">First Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_firstname"
-                             value={this.state.employee.firstName}
-                             onChange={this.handleFirstNameChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="firstName" validationError="this field is required" required id="employee_firstname"
+                                        placeholder="first name" value={this.state.employee.firstName}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="employee_lastname">Last name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_lastname"
-                             value={this.state.employee.lastName}
-                             onChange={this.handleLastNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_lastname">Last Name</label>
+                    <TextInputComponent name="lastName" validationError="this field is required" required id="employee_lastname"
+                                        placeholder="last name" value={this.state.employee.lastName}/>
                   </div>
                   <div className="form-group">
-                    <label for="employee_reportsto" className="col-sm-4">Reports to employee id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_reportsto"
-                             value={this.state.employee.reportsTo}
-                             onChange={this.handleReportsToChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_reportsto">Reports to Employee</label>
+                    <TextInputComponent name="reportsTo" validations="isInt"validationError="Employee id needs to be a integer" required id="employee_reportsto"
+                                        placeholder="employee id" value={this.state.employee.reportsTo}/>
                   </div>
                   <div className="form-group">
-                    <label for="employee_birthdate" className="col-sm-4">Birthdate</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_birthdate"
-                             value={this.state.employee.birthDate}
-                             onChange={this.handleBirthDateChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_birthdate">BirthDate</label>
+                    <DateInputComponent name="birthDate" validationError="this field is required" required id="employee_birthdate"
+                                        placeholder="birth date" value={this.state.employee.birthDate}/>
                   </div>
                   <div className="form-group">
-                    <label for="employee_hiredate" className="col-sm-4">Hire date</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_hiredate"
-                             value={this.state.employee.hireDate}
-                             onChange={this.handleHireDateChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_hiredate">HireDate</label>
+                    <DateInputComponent name="hireDate" validationError="this field is required" required id="employee_hiredate"
+                                        placeholder="birth date" value={this.state.employee.hireDate}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_address">Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_address"
-                             value={this.state.employee.address}
-                             onChange={this.handleAddressChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="address" validationError="this field is required" required id="employee_address"
+                                        placeholder="address" value={this.state.employee.reportsTo}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_city">City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_city"
-                             value={this.state.employee.city}
-                             onChange={this.handleCityChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="city" validationError="this field is required" required id="employee_city"
+                                        placeholder="city" value={this.state.employee.city}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_state">State</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_state"
-                             value={this.state.employee.state}
-                             onChange={this.handleStateChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="state" validationError="this field is required" required id="employee_state"
+                                        placeholder="state" value={this.state.employee.state}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_country">Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_country"
-                             value={this.state.employee.country}
-                             onChange={this.handleCountryChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="country" validationError="this field is required" required id="employee_country"
+                                        placeholder="country" value={this.state.employee.country}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_postalcode">PostalCode</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_postalcode"
-                             value={this.state.employee.postalCode}
-                             onChange={this.handlePostalCodeChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="postalCode" validationError="this field is required" required id="employee_postalcode"
+                                        placeholder="postalcode" value={this.state.employee.postalCode}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_phone">Phone</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_phone"
-                             value={this.state.employee.phone}
-                             onChange={this.handlePhoneChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="phone" validationError="this field is required" required id="employee_phone"
+                                        placeholder="phone" value={this.state.employee.phone}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_fax">Fax</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_fax"
-                             value={this.state.employee.fax}
-                             onChange={this.handleFaxChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="fax" validationError="this field is required" required id="employee_fax"
+                                        placeholder="fax" value={this.state.employee.fax}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_email">Email</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_email"
-                             value={this.state.employee.email}
-                             onChange={this.handleEmailChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required id="employee_email"
+                                        placeholder="email" value={this.state.employee.email}/>
                   </div>
                   <div className="form-group">
-                    <label for="employee_title" className="col-sm-4">Title</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="employee_title"
-                             value={this.state.employee.title}
-                             onChange={this.handleTitleChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="employee_title">Title</label>
+                    <TextInputComponent name="title" validationError="this field is required" required id="employee_title"
+                                        placeholder="title" value={this.state.employee.title}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.putEmployeeToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -557,63 +352,63 @@ class EmployeesComponent extends React.Component {
                 <div>
                   <label className="col-sm-4">Id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.employeeId} &nbsp;</p>
+                    <p>{this.state.reportsTo.employeeId} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">First Name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.firstName} &nbsp;</p>
+                    <p>{this.state.reportsTo.firstName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Last name</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.lastName} &nbsp;</p>
+                    <p>{this.state.reportsTo.lastName} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Reports to empoyee id</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p> {this.state.reportsto.reportsTo} &nbsp;</p>
+                    <p> {this.state.reportsTo.reportsTo} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Birthdate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.birthDate}&nbsp;</p>
+                    <p>{this.state.reportsTo.birthDate}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">hireDate</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.hireDate}&nbsp;</p>
+                    <p>{this.state.reportsTo.hireDate}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Address</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.address}&nbsp;</p>
+                    <p>{this.state.reportsTo.address}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">City</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.city}&nbsp;</p>
+                    <p>{this.state.reportsTo.city}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">State</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.state}&nbsp;</p>
+                    <p>{this.state.reportsTo.state}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Country</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.country}&nbsp;</p>
+                    <p>{this.state.reportsTo.country}&nbsp;</p>
                   </div>
                   <label className="col-sm-4">Postalcode</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.postalCode} &nbsp;</p>
+                    <p>{this.state.reportsTo.postalCode} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Phone</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.phone} &nbsp;</p>
+                    <p>{this.state.reportsTo.phone} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Fax</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.fax} &nbsp;</p>
+                    <p>{this.state.reportsTo.fax} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Email</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.email} &nbsp;</p>
+                    <p>{this.state.reportsTo.email} &nbsp;</p>
                   </div>
                   <label className="col-sm-4">Title</label>
                   <div className="col-sm-8 margin_bottom">
-                    <p>{this.state.reportsto.title} &nbsp;</p>
+                    <p>{this.state.reportsTo.title} &nbsp;</p>
                   </div>
                 </div>
               </div>
@@ -829,8 +624,7 @@ class EmployeesComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
-                onClick={this.addEmployee.bind(this)}>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

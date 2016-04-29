@@ -9,6 +9,8 @@
 import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Albums.css');
@@ -22,27 +24,10 @@ class AlbumsComponent extends React.Component {
       url: "http://localhost:7777/resources/albums",
       album: {},
       albumUrl: "",
-      artist: {}
+      artist: {},
+      canSubmit: false
     }
   };
-
-  handleTitleChange(e) {
-    var newState = React.addons.update(this.state, {
-      album: {
-        title: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleArtistIdChange(e) {
-    var newState = React.addons.update(this.state, {
-      album: {
-        artistId: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
 
   loadAlbumsFromServer() {
     $.ajax({
@@ -75,14 +60,16 @@ class AlbumsComponent extends React.Component {
   updateAlbum(index) {
     this.setState({album: this.state.albums[index].album, albumUrl: this.state.albums[index]._links.self.href})
   }
-  addAlbum(){
-    this.setState({album: {}})
-  }
-  postAlbumToServer() {
+
+  postAlbumToServer(data) {
     $.ajax({
       type: "POST",
       url: this.state.url,
-      data: JSON.stringify({title: this.state.album.title, artistId: this.state.album.artistId}),
+      data: JSON.stringify(
+        {
+          title: data.title,
+          artistId: data.artistId
+        }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (response) => {
@@ -92,13 +79,18 @@ class AlbumsComponent extends React.Component {
         console.error(this.state.url, status, err.toString());
       }
     });
+    $("#addModal").modal('hide');
   }
 
-  putAlbumToServer() {
+  putAlbumToServer(data) {
     $.ajax({
       type: "PUT",
       url: this.state.albumUrl,
-      data: JSON.stringify({title: this.state.album.title, artistId: this.state.album.artistId}),
+      data: JSON.stringify(
+        {
+          title: data.title,
+          artistId: data.artistId
+        }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: (response) => {
@@ -108,6 +100,7 @@ class AlbumsComponent extends React.Component {
         console.error(this.state.albumUrl, status, err.toString());
       }
     });
+    $("#editModal").modal('hide');
   }
 
   deleteAlbumFromServer() {
@@ -127,6 +120,17 @@ class AlbumsComponent extends React.Component {
     this.loadAlbumsFromServer();
   }
 
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
   render() {
     return (
       <div className="albums-component">
@@ -138,24 +142,19 @@ class AlbumsComponent extends React.Component {
                 <h4 className="modal-title">Edit Album</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="album_title">Title</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_title"
-                             value={this.state.album.title}
-                             onChange={this.handleTitleChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="title" validationError="this field is required" required id="album_title"
+                                        placeholder="title" value={this.state.album.title}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="album_artist">Artist Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_artist"
-                             value={this.state.album.artistId}
-                             onChange={this.handleArtistIdChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="artist_id">ArtistId</label>
+                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer" required id="artist_id"
+                                        placeholder="artist id" value={this.state.album.artistId}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal"
@@ -220,29 +219,21 @@ class AlbumsComponent extends React.Component {
                 <h4 className="modal-title">Create new Album</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="album_title">Title</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_title" placeholder="title"
-                             value={this.state.album.title}
-                             onChange={this.handleTitleChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="title" validationError="this field is required" required id="album_title"
+                                        placeholder="title"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="album_artist">Artist Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_artist" placeholder="artist id"
-                             value={this.state.album.artistId}
-                             onChange={this.handleArtistIdChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="artist_id">ArtistId</label>
+                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer" required id="artist_id"
+                                        placeholder="artist id"/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.postAlbumToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -313,8 +304,7 @@ class AlbumsComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
-                onClick={this.addAlbum.bind(this)}>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

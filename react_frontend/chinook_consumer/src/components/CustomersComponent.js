@@ -8,8 +8,9 @@
 
 import React from 'react/addons';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//Customers.css');
 require('styles//DataTable.css');
@@ -23,117 +24,10 @@ class CustomersComponent extends React.Component {
       url: "http://localhost:7777/resources/customers",
       customer: {},
       customerUrl: "",
-      employee: {}
+      employee: {},
+      canSubmit: false
     }
   };
-
-  handleFirstNameChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        firstName: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleLastNameChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        lastName: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleCompanyChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        company: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleAddressChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        address: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleCityChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        city: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleCountryChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        country: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handlePostalCodeChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        postalCode: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleStateChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        state: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handlePhoneChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        phone: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleFaxChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        fax: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleEmailChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        email: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
-
-  handleSupportRepIdChange(e) {
-    var newState = React.addons.update(this.state, {
-      customer: {
-        supportRepId: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
 
   loadCustomersFromServer() {
     $.ajax({
@@ -172,28 +66,24 @@ class CustomersComponent extends React.Component {
     })
   }
 
-  addCustomer() {
-    this.setState({customer: {}})
-  }
-
-  postCustomerToServer() {
+  postCustomerToServer(data) {
     $.ajax({
       type: "POST",
       url: this.state.url,
       data: JSON.stringify(
         {
-          firstName: this.state.customer.firstName,
-          lastName: this.state.customer.lastName,
-          company: this.state.customer.company,
-          address: this.state.customer.address,
-          city: this.state.customer.city,
-          country: this.state.customer.country,
-          postalCode: this.state.customer.postalCode,
-          state: this.state.customer.state,
-          phone: this.state.customer.phone,
-          fax: this.state.customer.fax,
-          email: this.state.customer.email,
-          supportRepId: this.state.customer.supportRepId
+          firstName: data.firstName,
+          lastName: data.lastName,
+          company: data.company,
+          address: data.address,
+          city: data.city,
+          country: data.country,
+          postalCode: data.postalCode,
+          state: data.state,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
+          supportRepId: data.supportRepId
         }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -204,26 +94,27 @@ class CustomersComponent extends React.Component {
         console.error(this.state.url, status, err.toString());
       }
     });
+    $("#addModal").modal('hide');
   }
 
-  putCustomerToServer() {
+  putCustomerToServer(data) {
     $.ajax({
       type: "PUT",
       url: this.state.customerUrl,
       data: JSON.stringify(
         {
-          firstName: this.state.customer.firstName,
-          lastName: this.state.customer.lastName,
-          company: this.state.customer.company,
-          address: this.state.customer.address,
-          city: this.state.customer.city,
-          country: this.state.customer.country,
-          postalCode: this.state.customer.postalCode,
-          state: this.state.customer.state,
-          phone: this.state.customer.phone,
-          fax: this.state.customer.fax,
-          email: this.state.customer.email,
-          supportRepId: this.state.customer.supportRepId
+          firstName: data.firstName,
+          lastName: data.lastName,
+          company: data.company,
+          address: data.address,
+          city: data.city,
+          country: data.country,
+          postalCode: data.postalCode,
+          state: data.state,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
+          supportRepId: data.supportRepId
         }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -234,6 +125,7 @@ class CustomersComponent extends React.Component {
         console.error(this.state.customerUrl, status, err.toString());
       }
     });
+    $("#editModal").modal('hide');
   }
 
   deleteCustomerFromServer() {
@@ -254,6 +146,18 @@ class CustomersComponent extends React.Component {
     this.loadCustomersFromServer();
   }
 
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="customers-component">
@@ -265,109 +169,94 @@ class CustomersComponent extends React.Component {
                 <h4 className="modal-title">Edit Customer</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putCustomerToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_firstname">First Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_firstname"
-                             value={this.state.customer.firstName}
-                             onChange={this.handleFirstNameChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="firstName" validationError="this field is required" required
+                                        id="customer_firstname"
+                                        placeholder="first name"
+                                        value={this.state.customer.firstName}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_lastname">Last name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_lastname"
-                             value={this.state.customer.lastName}
-                             onChange={this.handleLastNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="customer_lastname">Last Name</label>
+                    <TextInputComponent name="lastName" validationError="this field is required" required
+                                        id="customer_lastname"
+                                        placeholder="last name"
+                                        value={this.state.customer.lastName}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_company">Company</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_company"
-                             value={this.state.customer.company}
-                             onChange={this.handleCompanyChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="company" validationError="this field is required" required
+                                        id="customer_company"
+                                        placeholder="company"
+                                        value={this.state.customer.company}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_address">Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_address"
-                             value={this.state.customer.address}
-                             onChange={this.handleAddressChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="address" validationError="this field is required" required
+                                        id="customer_address"
+                                        placeholder="address"
+                                        value={this.state.customer.address}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_city">City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_city"
-                             value={this.state.customer.city}
-                             onChange={this.handleCityChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="city" validationError="this field is required" required id="customer_city"
+                                        placeholder="city"
+                                        value={this.state.customer.city}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_state">State</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_state"
-                             value={this.state.customer.state}
-                             onChange={this.handleStateChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="state" validationError="this field is required" required
+                                        id="customer_state"
+                                        placeholder="state"
+                                        value={this.state.customer.state}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_country">Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_country"
-                             value={this.state.customer.country}
-                             onChange={this.handleCountryChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="country" validationError="this field is required" required
+                                        id="customer_country"
+                                        placeholder="country"
+                                        value={this.state.customer.country}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_postalcode">PostalCode</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_postalcode"
-                             value={this.state.customer.postalCode}
-                             onChange={this.handlePostalCodeChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="postalCode" validationError="this field is required" required
+                                        id="customer_postalcode"
+                                        placeholder="postal code"
+                                        value={this.state.customer.postalCode}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_phone">Phone</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_phone"
-                             value={this.state.customer.phone}
-                             onChange={this.handlePhoneChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="phone" validationError="this field is required" required
+                                        id="customer_phone"
+                                        placeholder="phone"
+                                        value={this.state.customer.phone}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_fax">Fax</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_fax"
-                             value={this.state.customer.fax}
-                             onChange={this.handleFaxChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="fax" validationError="this field is required" required id="customer_fax"
+                                        placeholder="fax"
+                                        value={this.state.customer.fax}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_email"
-                             value={this.state.customer.email}
-                             onChange={this.handleEmailChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required
+                                        id="customer_email"
+                                        placeholder="email"
+                                        value={this.state.customer.email}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_supportedRepId"
-                             value={this.state.customer.supportRepId}
-                             onChange={this.handleSupportRepIdChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="customer_supportRepId">Supported By Employee</label>
+                    <TextInputComponent name="supportRepId" validations="isInt"validationError="Employee id needs to be a integer" required
+                                        id="customer_supportRepId"
+                                        placeholder="employee id"
+                                        value={this.state.customer.supportRepId}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.putCustomerToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -381,99 +270,82 @@ class CustomersComponent extends React.Component {
                 <h4 className="modal-title">Create new Customer</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postCustomerToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_firstname">First Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_firstname" placeholder="first name"
-                             onChange={this.handleFirstNameChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="firstName" validationError="this field is required" required
+                                        id="customer_firstname"
+                                        placeholder="first name"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_lastname">Last name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_lastname" placeholder="last name"
-                             onChange={this.handleLastNameChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="customer_lastname">Last Name</label>
+                    <TextInputComponent name="lastName" validationError="this field is required" required
+                                        id="customer_lastname"
+                                        placeholder="last name"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_company">Company</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_company" placeholder="company"
-                             onChange={this.handleCompanyChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="company" validationError="this field is required" required
+                                        id="customer_company"
+                                        placeholder="company"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_address">Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_address" placeholder="address"
-                             onChange={this.handleAddressChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="address" validationError="this field is required" required
+                                        id="customer_address"
+                                        placeholder="address"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_city">City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_city" placeholder="city"
-                             onChange={this.handleCityChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="city" validationError="this field is required" required id="customer_city"
+                                        placeholder="city"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_state">State</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_state" placeholder="state"
-                             onChange={this.handleStateChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="state" validationError="this field is required" required
+                                        id="customer_state"
+                                        placeholder="state"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_country">Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_country" placeholder="country"
-                             onChange={this.handleCountryChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="country" validationError="this field is required" required
+                                        id="customer_country"
+                                        placeholder="country"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_postalcode">PostalCode</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_postalcode"
-                             placeholder="postalCode"
-                             onChange={this.handlePostalCodeChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="postalCode" validationError="this field is required" required
+                                        id="customer_postalcode"
+                                        placeholder="postal code"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_phone">Phone</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_phone" placeholder="phone"
-                             onChange={this.handlePhoneChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="phone" validationError="this field is required" required
+                                        id="customer_phone"
+                                        placeholder="phone"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_fax">Fax</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_fax" placeholder="fax"
-                             onChange={this.handleFaxChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="fax" validationError="this field is required" required id="customer_fax"
+                                        placeholder="fax"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_email" placeholder="email"
-                             onChange={this.handleEmailChange.bind(this)}/>
-                    </div>
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required
+                                        id="customer_email"
+                                        placeholder="email"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="customer_supportRepId">Supported by employee</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="customer_supportedRepId"
-                             placeholder="employee id"
-                             onChange={this.handleSupportRepIdChange.bind(this)}/>
-                    </div>
+                    <label className="col-sm-4" for="customer_supportRepId">Supported By Employee</label>
+                    <TextInputComponent name="supportRepId" validations="isInt"validationError="Employee id needs to be a integer" required
+                                        id="customer_supportRepId"
+                                        placeholder="employee id"/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal"
-                        onClick={this.postCustomerToServer.bind(this)}>Submit
-                </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -742,8 +614,7 @@ class CustomersComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
-                onClick={this.addCustomer.bind(this)}>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal">
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

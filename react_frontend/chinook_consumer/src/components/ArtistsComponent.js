@@ -10,6 +10,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import Formsy from 'formsy-react';
 import TextInputComponent from './TextInputComponent';
+
 require('styles//DataTable.css');
 require('styles//Artists.css');
 
@@ -26,15 +27,6 @@ class ArtistsComponent extends React.Component {
       canSubmit: false
     }
   };
-
-  handleNameChange(e) {
-    var newState = React.addons.update(this.state, {
-      artist: {
-        name: {$set: e.target.value}
-      }
-    });
-    this.setState(newState);
-  }
 
   loadArtistsFromServer() {
     $.ajax({
@@ -69,6 +61,7 @@ class ArtistsComponent extends React.Component {
         console.error(this.state.url, status, err.toString());
       }
     });
+    $("#addModal").modal('hide');
   }
 
   putArtistToServer(data) {
@@ -129,16 +122,14 @@ class ArtistsComponent extends React.Component {
                 <h4 className="modal-title">Edit Artist</h4>
               </div>
               <div className="modal-body row">
-                <div>
                   <Formsy.Form onValidSubmit={this.putArtistToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                     <div className="form-group">
                       <label className="col-sm-4" for="artist_name">Name</label>
                       <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
-                                  placeholder="title" value={this.state.artist.name}/>
+                                  placeholder="name" value={this.state.artist.name}/>
                     </div>
                     <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
                   </Formsy.Form>
-                </div>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -179,7 +170,7 @@ class ArtistsComponent extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-4" for="artist_name">Name</label>
                     <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
-                    placeholder="title"/>
+                    placeholder="name"/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
                 </Formsy.Form>
