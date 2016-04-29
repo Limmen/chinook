@@ -50,11 +50,13 @@ class ArtistsComponent extends React.Component {
   }
 
   updateArtist(index) {
-    this.setState({artist: this.state.artists[index].artist, artistUrl:this.state.artists[index]._links.self.href})
+    this.setState({artist: this.state.artists[index].artist, artistUrl: this.state.artists[index]._links.self.href})
   }
-  addArtist(){
+
+  addArtist() {
     this.setState({artist: {}})
   }
+
   postArtistToServer() {
     $.ajax({
       type: "POST",
@@ -238,7 +240,8 @@ class ArtistsComponent extends React.Component {
             />
           </Table>
         </div>
-        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal" onClick={this.addArtist.bind(this)}>
+        <button type="button" className="btn btn-default" data-toggle="modal" data-target="#addModal"
+                onClick={this.addArtist.bind(this)}>
           <span className="glyphicon glyphicon-plus"></span> Add
         </button>
       </div>

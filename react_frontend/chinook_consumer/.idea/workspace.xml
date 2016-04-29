@@ -25,22 +25,22 @@
     <favorites_list name="chinook_consumer" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ArtistsComponent.js" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ArtistsComponent.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6098485">
-              <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="52" column="114" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="114" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlbumsComponent.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AlbumsComponent.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/AlbumsComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="214" column="211" selection-start-line="214" selection-start-column="158" selection-end-line="214" selection-end-column="211" />
+            <state vertical-scroll-proportion="-1.1817073">
+              <caret line="113" column="27" selection-start-line="113" selection-start-column="27" selection-end-line="113" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -83,7 +83,7 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.15665796">
+              <first_editor vertical-scroll-proportion="0.0">
                 <caret line="8" column="36" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="36" />
                 <folding />
               </first_editor>
@@ -143,13 +143,13 @@
         <option value="$PROJECT_DIR$/src/components/InvoicesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/CustomersComponent.js" />
         <option value="$PROJECT_DIR$/src/components/EmployeesComponent.js" />
-        <option value="$PROJECT_DIR$/src/components/AlbumsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/MediaTypesComponent.js" />
         <option value="$PROJECT_DIR$/src/components/PlaylistsComponent.js" />
         <option value="$PROJECT_DIR$/src/components/PlaylistTracksComponent.js" />
         <option value="$PROJECT_DIR$/src/components/TracksComponent.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/components/ArtistsComponent.js" />
+        <option value="$PROJECT_DIR$/src/components/AlbumsComponent.js" />
       </list>
     </option>
   </component>
@@ -197,9 +197,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -860,12 +860,13 @@
       <workItem from="1461262542866" duration="1289000" />
       <workItem from="1461319003624" duration="4932000" />
       <workItem from="1461402021032" duration="112000" />
-      <workItem from="1461831228878" duration="7190000" />
+      <workItem from="1461831228878" duration="7845000" />
+      <workItem from="1461906138678" duration="1401000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61924000" />
+    <option name="totallyTimeSpent" value="63980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -878,7 +879,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="19" width="1920" height="1181" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942238" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -888,11 +889,10 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20319849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-2" y="-24" width="4" height="26" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20319849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-2" y="-24" width="4" height="26" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17609392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27267876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283161" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -903,6 +903,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283161" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1212,7 +1213,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="109" column="44" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,16 +1227,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8902439">
           <caret line="427" column="33" selection-start-line="427" selection-start-column="33" selection-end-line="427" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
-        </state>
-      </provider>
       <provider editor-type-id="MultiMarkdownFxPreviewEditor">
         <state />
       </provider>
@@ -1244,9 +1238,13 @@
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.5678851">
             <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -1280,7 +1278,7 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.15665796">
+          <first_editor vertical-scroll-proportion="0.0">
             <caret line="8" column="36" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="36" />
             <folding />
           </first_editor>
@@ -1288,18 +1286,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AlbumsComponent.js">
+    <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="214" column="211" selection-start-line="214" selection-start-column="158" selection-end-line="214" selection-end-column="211" />
+          <caret line="52" column="114" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="114" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ArtistsComponent.js">
+    <entry file="file://$PROJECT_DIR$/src/components/AlbumsComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6098485">
-          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+        <state vertical-scroll-proportion="-1.1817073">
+          <caret line="113" column="27" selection-start-line="113" selection-start-column="27" selection-end-line="113" selection-end-column="27" />
           <folding />
         </state>
       </provider>

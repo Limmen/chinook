@@ -75,7 +75,7 @@ public class AlbumRepository {
      */
     public Album updateAlbum(Album album) {
         log.debug("update album {}", album.getAlbumId());
-        jdbc.update("UPDATE \"Album\" SET \"Name\" = ?, \"ArtistId\" = ? WHERE \"AlbumId\" = ?;", album.getTitle(), album.getArtistId(), album.getAlbumId());
+        jdbc.update("UPDATE \"Album\" SET \"Title\" = ?, \"ArtistId\" = ? WHERE \"AlbumId\" = ?;", album.getTitle(), album.getArtistId(), album.getAlbumId());
         return album;
     }
 
