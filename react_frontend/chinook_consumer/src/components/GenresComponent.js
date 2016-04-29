@@ -8,8 +8,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Genres.css');
@@ -21,7 +22,9 @@ class GenresComponent extends React.Component {
     this.state = {
       genres: [],
       url: "http://localhost:7777/resources/genres",
-      genre: {}
+      genre: {},
+      genreUrl: "",
+      canSubmit: false
     }
   };
 
@@ -41,15 +44,74 @@ class GenresComponent extends React.Component {
 
   updateGenre(index) {
     //this.setState({customer: index})
-    this.setState({genre: this.state.genres[index].genre})
+    this.setState({genre: this.state.genres[index].genre, genreUrl: this.state.genres[index]._links.self.href})
   }
 
-  deleteGenre(index) {
-
+  postGenreToServer(data) {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadGenresFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putGenreToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.genreUrl,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadGenresFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.genreUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteGenreFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.genreUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadGenresFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.genreUrl, status, err.toString());
+      }
+    });
+  }
+
+
   componentDidMount() {
     this.loadGenresFromServer();
   }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="genres-component">
@@ -61,20 +123,16 @@ class GenresComponent extends React.Component {
                 <h4 className="modal-title">Edit Genre</h4>
               </div>
               <div className="modal-body row">
-                <div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="genre_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_id" value={this.state.genre.genreId}/>
-                    </div>
-                  </div>
+                <Formsy.Form onValidSubmit={this.putGenreToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="genre_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_name" value={this.state.genre.name}/>
-                    </div>
+                    <TextInputComponent name="name" validationError="this field is required" required id="genre_name"
+                                        placeholder="name"
+                                        value={this.state.genre.name}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -90,20 +148,15 @@ class GenresComponent extends React.Component {
                 <h4 className="modal-title">Create new Genre</h4>
               </div>
               <div className="modal-body row">
-                <div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="genre_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_id" placeholder="id"/>
-                    </div>
-                  </div>
+                <Formsy.Form onValidSubmit={this.postGenreToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="genre_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_name" placeholder="name"/>
-                    </div>
+                    <TextInputComponent name="name" validationError="this field is required" required id="genre_name"
+                                        placeholder="name"/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -119,8 +172,12 @@ class GenresComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button>
-                <button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteGenreFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -171,7 +228,7 @@ class GenresComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteGenre.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateGenre.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

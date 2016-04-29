@@ -8,8 +8,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//InvoiceLines.css');
@@ -22,8 +23,10 @@ class InvoiceLinesComponent extends React.Component {
       invoiceLines: [],
       url: "http://localhost:7777/resources/invoicelines",
       invoiceLine: {},
+      invoiceLineUrl: {},
       invoice: {},
-      track: {}
+      track: {},
+      canSubmit: false
     }
   };
 
@@ -70,15 +73,87 @@ class InvoiceLinesComponent extends React.Component {
   }
 
   updateInvoiceLine(index) {
-    this.setState({invoiceLine: this.state.invoiceLines[index].invoiceLine})
+    this.setState({
+      invoiceLine: this.state.invoiceLines[index].invoiceLine,
+      invoiceLineUrl: this.state.invoiceLines[index]._links.self.href
+    })
   }
 
-  deleteInvoiceLine(index) {
+  postInvoiceLineToServer(data) {
+    console.log("post invoiceLine to serv");
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          invoiceId: data.invoiceId,
+          trackId: data.trackId,
+          unitPrice: data.unitPrice,
+          quantity: data.quantity
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoiceLinesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
+  }
 
+  putInvoiceLineToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.invoiceLineUrl,
+      data: JSON.stringify(
+        {
+          invoiceId: data.invoiceId,
+          trackId: data.trackId,
+          unitPrice: data.unitPrice,
+          quantity: data.quantity
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoiceLinesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.invoiceLineUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteInvoiceLineFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.invoiceLineUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoiceLinesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.invoiceLineUrl, status, err.toString());
+      }
+    });
   }
 
   componentDidMount() {
     this.loadInvoiceLinesFromServer();
+  }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
   }
 
   render() {
@@ -92,43 +167,34 @@ class InvoiceLinesComponent extends React.Component {
                 <h4 className="modal-title">Edit InvoiceLine</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putInvoiceLineToServer.bind(this)}
+                             onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_id"
-                             value={this.state.invoiceLine.invoiceLineId}/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_id">Invoice Id</label>
+                    <TextInputComponent name="invoiceId" validations="isInt"
+                                        validationError="Invoice id needs to be a integer" required id="invoice_id"
+                                        placeholder="invoiceId" value={this.state.invoiceLine.invoiceId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_invoice">Invoice id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_invoice"
-                             value={this.state.invoiceLine.invoiceId}/>
-                    </div>
+                    <label className="col-sm-4" for="track_id">Track Id</label>
+                    <TextInputComponent name="trackId" validations="isInt"
+                                        validationError="Track id needs to be a integer" required id="track_id"
+                                        placeholder="trackId" value={this.state.invoiceLine.trackId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_track">Track id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_track"
-                             value={this.state.invoiceLine.track}/>
-                    </div>
+                    <label className="col-sm-4" for="unitPrice">Unit Price</label>
+                    <TextInputComponent name="unitPrice" validations="isNumeric"
+                                        validationError="Unit price needs to be a number" required id="unitPrice"
+                                        placeholder="unitPrice" value={this.state.invoiceLine.unitPrice}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_billingAddress">Unit price</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_billingAddress"
-                             value={this.state.invoiceLine.unitPrice}/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_quantity">Quantity</label>
+                    <TextInputComponent name="quantity" validations="isInt"
+                                        validationError="Quantity needs to be a integer" required id="invoice_quantity"
+                                        placeholder="quantity" value={this.state.invoiceLine.quantity}/>
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_quantity">Quantity</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_quantity"
-                             value={this.state.invoiceLine.quantity}/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -144,39 +210,34 @@ class InvoiceLinesComponent extends React.Component {
                 <h4 className="modal-title">Create new InvoiceLine</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postInvoiceLineToServer.bind(this)}
+                             onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_id" placeholder="id"/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_id">Invoice Id</label>
+                    <TextInputComponent name="invoiceId" validations="isInt"
+                                        validationError="Invoice id needs to be a integer" required id="invoice_id"
+                                        placeholder="invoiceId"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_invoice">Invoice id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_invoice" placeholder="invoice id"/>
-                    </div>
+                    <label className="col-sm-4" for="track_id">Track Id</label>
+                    <TextInputComponent name="trackId" validations="isInt"
+                                        validationError="Track id needs to be a integer" required id="track_id"
+                                        placeholder="trackId"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_track">Track id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_track" placeholder="track id"/>
-                    </div>
+                    <label className="col-sm-4" for="unitPrice">Unit Price</label>
+                    <TextInputComponent name="unitPrice" validations="isNumeric"
+                                        validationError="Unit price needs to be a number" required id="unitPrice"
+                                        placeholder="unitPrice"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_billingAddress">Unit price</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_billingAddress"
-                             placeholder="unit price"/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_quantity">Quantity</label>
+                    <TextInputComponent name="quantity" validations="isInt"
+                                        validationError="Quantity needs to be a integer" required id="invoice_quantity"
+                                        placeholder="quantity"/>
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoiceLine_quantity">Quantity</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoiceLine_quantity" placeholder="quantity"/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -192,8 +253,12 @@ class InvoiceLinesComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button>
-                <button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteInvoiceLineFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -380,7 +445,7 @@ class InvoiceLinesComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteInvoiceLine.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateInvoiceLine.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>
