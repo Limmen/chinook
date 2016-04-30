@@ -68,7 +68,7 @@ public class PlaylistTrackRepository {
     public PlaylistTrack updatePlaylistTrack(PlaylistTrack playlistTrack) {
         log.info("Update PlaylistTrack. TrackId: {}, PlaylistId: {}", playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
         jdbc.update("UPDATE \"PlaylistTrack\" SET \"TrackId\" = ?, \"PlaylistId\" = ? " +
-                "WHERE \"TrackId\" = ? AND \"PlaylistTrackId\" = ?;", playlistTrack.getTrackId(), playlistTrack.getPlaylistId(),
+                "WHERE \"TrackId\" = ? AND \"PlaylistId\" = ?;", playlistTrack.getTrackId(), playlistTrack.getPlaylistId(),
                 playlistTrack.getTrackId(), playlistTrack.getPlaylistId());
         return playlistTrack;
     }

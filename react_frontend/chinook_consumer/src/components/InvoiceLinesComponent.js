@@ -80,7 +80,6 @@ class InvoiceLinesComponent extends React.Component {
   }
 
   postInvoiceLineToServer(data) {
-    console.log("post invoiceLine to serv");
     $.ajax({
       type: "POST",
       url: this.state.url,

@@ -241,14 +241,16 @@ class CustomersComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
-                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email"
+                                        required
                                         id="customer_email"
                                         placeholder="email"
                                         value={this.state.customer.email}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_supportRepId">Supported By Employee</label>
-                    <TextInputComponent name="supportRepId" validations="isInt"validationError="Employee id needs to be a integer" required
+                    <TextInputComponent name="supportRepId" validations="isInt"
+                                        validationError="Employee id needs to be a integer" required
                                         id="customer_supportRepId"
                                         placeholder="employee id"
                                         value={this.state.customer.supportRepId}/>
@@ -332,13 +334,15 @@ class CustomersComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_email">Email</label>
-                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email"
+                                        required
                                         id="customer_email"
                                         placeholder="email"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="customer_supportRepId">Supported By Employee</label>
-                    <TextInputComponent name="supportRepId" validations="isInt"validationError="Employee id needs to be a integer" required
+                    <TextInputComponent name="supportRepId" validations="isInt"
+                                        validationError="Employee id needs to be a integer" required
                                         id="customer_supportRepId"
                                         placeholder="employee id"/>
                   </div>

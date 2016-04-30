@@ -65,7 +65,6 @@ class InvoicesComponent extends React.Component {
   }
 
   postInvoiceToServer(data) {
-    console.log("post invoice to serv");
     $.ajax({
       type: "POST",
       url: this.state.url,

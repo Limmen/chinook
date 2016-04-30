@@ -7,8 +7,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//PlaylistTracks.css');
@@ -21,8 +22,10 @@ class PlaylistTracksComponent extends React.Component {
       playlistTracks: [],
       url: "http://localhost:7777/resources/playlisttracks",
       playlistTrack: {},
+      playlistTrackUrl: "",
       track: {},
-      playlist: {}
+      playlist: {},
+      canSubmit: false
     }
   };
 
@@ -39,6 +42,7 @@ class PlaylistTracksComponent extends React.Component {
       }
     });
   }
+
   loadTrackFromServer(url) {
     $.ajax({
       type: "GET",
@@ -52,6 +56,7 @@ class PlaylistTracksComponent extends React.Component {
       }
     });
   }
+
   loadPlaylistFromServer(url) {
     $.ajax({
       type: "GET",
@@ -67,16 +72,84 @@ class PlaylistTracksComponent extends React.Component {
   }
 
   updatePlaylistTrack(index) {
-    //this.setState({album: index})
-    this.setState({playlistTrack: this.state.playlistTracks[index].playlistTrack})
+    this.setState({
+      playlistTrack: this.state.playlistTracks[index].playlistTrack,
+      playlistTrackUrl: this.state.playlistTracks[index]._links.self.href
+    })
   }
 
-  deletePlaylistTrack(index) {
-
+  postPlaylistTrackToServer(data) {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          trackId: data.trackId,
+          playlistId: data.playlistId
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putPlaylistTrackToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.playlistTrackUrl,
+      data: JSON.stringify(
+        {
+          trackId: data.trackId,
+          playlistId: data.playlistId
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.playlistTrackUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deletePlaylistTrackFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.playlistTrackUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.playlistTrackUrl, status, err.toString());
+      }
+    });
+  }
+
   componentDidMount() {
     this.loadPlaylistTracksFromServer();
   }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="playlisttracks-component">
@@ -88,20 +161,23 @@ class PlaylistTracksComponent extends React.Component {
                 <h4 className="modal-title">Edit PlaylistTrack</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putPlaylistTrackToServer.bind(this)}
+                             onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="track_id">Track Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_id" value={this.state.playlistTrack.trackId}/>
-                    </div>
+                    <label className="col-sm-4" for="track_id">Track ID</label>
+                    <TextInputComponent name="trackId" validations="isInt"
+                                        validationError="Track id needs to be a integer" required id="track_id"
+                                        placeholder="track id" value={this.state.playlistTrack.trackId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="playlist_id">Playlist Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="playlist_id" value={this.state.playlistTrack.playlistId}/>
-                    </div>
+                    <label className="col-sm-4" for="playlist_id">Playlist ID</label>
+                    <TextInputComponent name="playlistId" validations="isInt"
+                                        validationError="Playlist id needs to be a integer" required id="playlist_id"
+                                        placeholder="playlist id" value={this.state.playlistTrack.playlistId}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -195,7 +271,12 @@ class PlaylistTracksComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button><button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deletePlaylistTrackFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -211,20 +292,24 @@ class PlaylistTracksComponent extends React.Component {
                 <h4 className="modal-title">Create new PlaylistTrack</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postPlaylistTrackToServer.bind(this)}
+                             onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-2" for="track_id">Track Id</label>
-                    <div className="col-sm-10 margin_bottom">
-                      <input type="text" className="form-control" id="track_id" placeholder="track id"/>
-                    </div>
+                    <label className="col-sm-4" for="track_id">Track ID</label>
+                    <TextInputComponent name="trackId" validations="isInt"
+                                        validationError="Track id needs to be a integer" required id="track_id"
+                                        placeholder="track id"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-2" for="playlist_id">Playlist Id</label>
-                    <div className="col-sm-10 margin_bottom">
-                      <input type="text" className="form-control" id="playlist_id" placeholder="playlist id"/>
-                    </div>
+                    <label className="col-sm-4" for="playlist_id">Playlist ID</label>
+                    <TextInputComponent name="playlistId" validations="isInt"
+                                        validationError="Playlist id needs to be a integer" required
+                                        id="playlist_id"
+                                        placeholder="playlist id"/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -280,7 +365,7 @@ class PlaylistTracksComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deletePlaylistTrack.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updatePlaylistTrack.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

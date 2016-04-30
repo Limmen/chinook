@@ -47,7 +47,6 @@ class ArtistsComponent extends React.Component {
   }
 
   postArtistToServer(data) {
-    console.log("post artist to serv");
     $.ajax({
       type: "POST",
       url: this.state.url,
@@ -122,14 +121,15 @@ class ArtistsComponent extends React.Component {
                 <h4 className="modal-title">Edit Artist</h4>
               </div>
               <div className="modal-body row">
-                  <Formsy.Form onValidSubmit={this.putArtistToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
-                    <div className="form-group">
-                      <label className="col-sm-4" for="artist_name">Name</label>
-                      <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
-                                  placeholder="name" value={this.state.artist.name}/>
-                    </div>
-                    <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
-                  </Formsy.Form>
+                <Formsy.Form onValidSubmit={this.putArtistToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
+                  <div className="form-group">
+                    <label className="col-sm-4" for="artist_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
+                                        placeholder="name" value={this.state.artist.name}/>
+                  </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -166,11 +166,12 @@ class ArtistsComponent extends React.Component {
                 <h4 className="modal-title">Create new Artist</h4>
               </div>
               <div className="modal-body row">
-                <Formsy.Form onValidSubmit={this.postArtistToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <Formsy.Form onValidSubmit={this.postArtistToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="artist_name">Name</label>
                     <TextInputComponent name="name" validationError="this field is required" required id="artist_name"
-                    placeholder="name"/>
+                                        placeholder="name"/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
                 </Formsy.Form>

@@ -116,6 +116,7 @@ class AlbumsComponent extends React.Component {
       }
     });
   }
+
   componentDidMount() {
     this.loadAlbumsFromServer();
   }
@@ -131,6 +132,7 @@ class AlbumsComponent extends React.Component {
       canSubmit: false
     });
   }
+
   render() {
     return (
       <div className="albums-component">
@@ -142,7 +144,8 @@ class AlbumsComponent extends React.Component {
                 <h4 className="modal-title">Edit Album</h4>
               </div>
               <div className="modal-body row">
-                <Formsy.Form onValidSubmit={this.putAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <Formsy.Form onValidSubmit={this.putAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="album_title">Title</label>
                     <TextInputComponent name="title" validationError="this field is required" required id="album_title"
@@ -150,7 +153,8 @@ class AlbumsComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="artist_id">ArtistId</label>
-                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer" required id="artist_id"
+                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer"
+                                        required id="artist_id"
                                         placeholder="artist id" value={this.state.album.artistId}/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
@@ -219,7 +223,8 @@ class AlbumsComponent extends React.Component {
                 <h4 className="modal-title">Create new Album</h4>
               </div>
               <div className="modal-body row">
-                <Formsy.Form onValidSubmit={this.postAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <Formsy.Form onValidSubmit={this.postAlbumToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="album_title">Title</label>
                     <TextInputComponent name="title" validationError="this field is required" required id="album_title"
@@ -227,7 +232,8 @@ class AlbumsComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="artist_id">ArtistId</label>
-                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer" required id="artist_id"
+                    <TextInputComponent name="artistId" validations="isInt" validationError="Id needs to be a integer"
+                                        required id="artist_id"
                                         placeholder="artist id"/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>

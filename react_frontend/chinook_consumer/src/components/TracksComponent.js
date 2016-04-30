@@ -7,8 +7,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Tracks.css');
@@ -21,9 +22,11 @@ class TracksComponent extends React.Component {
       tracks: [],
       url: "http://localhost:7777/resources/tracks",
       track: {},
+      trackUrl : "",
       album: {},
       mediaType: {},
-      genre: {}
+      genre: {},
+      canSubmit: false
     }
   };
 
@@ -82,17 +85,95 @@ class TracksComponent extends React.Component {
       }
     });
   }
+
   updateTrack(index) {
-    //this.setState({album: index})
-    this.setState({track: this.state.tracks[index].track})
+    this.setState({track: this.state.tracks[index].track, trackUrl: this.state.tracks[index]._links.self.href})
   }
 
-  deleteTrack(index) {
-
+  postTrackToServer(data) {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          name: data.name,
+          albumId: data.albumId,
+          mediaTypeId: data.mediaTypeId,
+          genreId: data.genreId,
+          composer: data.composer,
+          milliseconds: data.milliseconds,
+          bytes : data.bytes,
+          unitPrice: data.unitPrice
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putTrackToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.trackUrl,
+      data: JSON.stringify(
+        {
+          name: data.name,
+          albumId: data.albumId,
+          mediaTypeId: data.mediaTypeId,
+          genreId: data.genreId,
+          composer: data.composer,
+          milliseconds: data.milliseconds,
+          bytes : data.bytes,
+          unitPrice: data.unitPrice
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.trackUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteTrackFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.trackUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadTracksFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.trackUrl, status, err.toString());
+      }
+    });
+  }
+
   componentDidMount() {
     this.loadTracksFromServer();
   }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="tracks-component">
@@ -104,62 +185,50 @@ class TracksComponent extends React.Component {
                 <h4 className="modal-title">Edit Track</h4>
               </div>
               <div className="modal-body row">
-                <div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="track_id">Track Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_id" value={this.state.track.trackId}/>
-                    </div>
-                  </div>
+                <Formsy.Form onValidSubmit={this.putTrackToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_name" value={this.state.track.name}/>
-                    </div>
+                    <TextInputComponent name="name" validationError="this field is required" required id="track_name"
+                                        placeholder="name" value={this.state.track.name}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="album_id">Album Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_id" value={this.state.track.albumId}/>
-                    </div>
+                    <label className="col-sm-4" for="track_albumid">Album Id</label>
+                    <TextInputComponent name="albumId" validations="isInt" validationError="album id needs to be a integer" required id="track_albumid"
+                                        placeholder="album id" value={this.state.track.albumId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="mediaType_id">MediaType Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="mediaType_id" value={this.state.track.mediaTypeId}/>
-                    </div>
+                    <label className="col-sm-4" for="track_mediatypeid">MediaType Id</label>
+                    <TextInputComponent name="mediaTypeId" validations="isInt" validationError="Mediatype id needs to be a integer" required id="track_mediatypeid"
+                                        placeholder="mediaTypeId" value={this.state.track.mediaTypeId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="genre_id">Genre Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_id" value={this.state.track.genreId}/>
-                    </div>
+                    <label className="col-sm-4" for="track_genreid">Genre Id</label>
+                    <TextInputComponent name="genreId" validations="isInt" validationError="Genre id nees to be a integer" required id="track_genreid"
+                                        placeholder="genre id" value={this.state.track.genreId}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_composer">Composer</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_composer" value={this.state.track.composer}/>
-                    </div>
+                    <TextInputComponent name="composer" validationError="this field is required" required id="track_composer"
+                                        placeholder="composer" value={this.state.track.composer}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_milliseconds">Milliseconds</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_milliseconds" value={this.state.track.milliseconds}/>
-                    </div>
+                    <TextInputComponent name="milliseconds" validations="isNumeric" validationError="milliseconds need to be a number" required id="track_milliseconds"
+                                        placeholder="milliseconds" value={this.state.track.milliseconds}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_bytes">Bytes</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_bytes" value={this.state.track.bytes}/>
-                    </div>
+                    <TextInputComponent name="bytes" validations="isNumeric" validationError="bytes need to be a number" required id="track_bytes"
+                                        placeholder="bytes" value={this.state.track.bytes}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="track_unitPrice">Unit price</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_unitPrice" value={this.state.track.unitPrice}/>
-                    </div>
+                    <label className="col-sm-4" for="track_unitprice">Unitprice</label>
+                    <TextInputComponent name="unitPrice" validations="isNumeric" validationError="unitprice need to be a number" required id="track_unitprice"
+                                        placeholder="unitPrice" value={this.state.track.unitPrice}/>
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -254,7 +323,12 @@ class TracksComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button><button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteTrackFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -270,62 +344,50 @@ class TracksComponent extends React.Component {
                 <h4 className="modal-title">Create new Track</h4>
               </div>
               <div className="modal-body row">
-                <div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="track_id">Track Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_id" placeholder="id"/>
-                    </div>
-                  </div>
+                <Formsy.Form onValidSubmit={this.postTrackToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_name" placeholder="name"/>
-                    </div>
+                    <TextInputComponent name="name" validationError="this field is required" required id="track_name"
+                                        placeholder="name" />
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="album_id">Album Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="album_id" placeholder="album id"/>
-                    </div>
+                    <label className="col-sm-4" for="track_albumid">Album Id</label>
+                    <TextInputComponent name="albumId" validations="isInt" validationError="album id needs to be a integer" required id="track_albumid"
+                                        placeholder="album id" />
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="mediaType_id">MediaType Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="mediaType_id" placeholder="mediatype id"/>
-                    </div>
+                    <label className="col-sm-4" for="track_mediatypeid">MediaType Id</label>
+                    <TextInputComponent name="mediaTypeId" validations="isInt" validationError="Mediatype id needs to be a integer" required id="track_mediatypeid"
+                                        placeholder="mediaTypeId" />
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="genre_id">Genre Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="genre_id" placeholder="genre id"/>
-                    </div>
+                    <label className="col-sm-4" for="track_genreid">Genre Id</label>
+                    <TextInputComponent name="genreId" validations="isInt" validationError="Genre id nees to be a integer" required id="track_genreid"
+                                        placeholder="genre id" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_composer">Composer</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_composer" placeholder="composer"/>
-                    </div>
+                    <TextInputComponent name="composer" validationError="this field is required" required id="track_composer"
+                                        placeholder="composer" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_milliseconds">Milliseconds</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_milliseconds" placeholder="milliseconds"/>
-                    </div>
+                    <TextInputComponent name="milliseconds" validations="isNumeric" validationError="milliseconds need to be a number" required id="track_milliseconds"
+                                        placeholder="milliseconds" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="track_bytes">Bytes</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_bytes" placeholder="bytes"/>
-                    </div>
+                    <TextInputComponent name="bytes" validations="isNumeric" validationError="bytes need to be a number" required id="track_bytes"
+                                        placeholder="bytes" />
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="track_unitPrice">Unit price</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="track_unitPrice" placeholder="unit price"/>
-                    </div>
+                    <label className="col-sm-4" for="track_unitprice">Unitprice</label>
+                    <TextInputComponent name="unitPrice" validations="isNumeric" validationError="unitprice need to be a number" required id="track_unitprice"
+                                        placeholder="unitPrice" />
                   </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -452,7 +514,7 @@ class TracksComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteTrack.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateTrack.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

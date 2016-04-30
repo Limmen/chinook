@@ -7,8 +7,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//MediaTypes.css');
@@ -20,7 +21,9 @@ class MediaTypesComponent extends React.Component {
     this.state = {
       mediaTypes: [],
       url: "http://localhost:7777/resources/mediatypes",
-      mediaType: {}
+      mediaType: {},
+      mediaTypeUrl: "",
+      canSubmit: false,
     }
   };
 
@@ -37,17 +40,79 @@ class MediaTypesComponent extends React.Component {
       }
     });
   }
+
+
   updateMediaType(index) {
-    //this.setState({artist: index})
-    this.setState({mediaType: this.state.mediaTypes[index].mediaTypeEntity})
+    this.setState({
+      mediaType: this.state.mediaTypes[index].mediaTypeEntity,
+      mediaTypeUrl: this.state.mediaTypes[index]._links.self.href
+    })
   }
 
-  deleteMediaType(index) {
-
+  postMediaTypeToServer(data) {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadMediaTypesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putMediaTypeToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.mediaTypeUrl,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadMediaTypesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.mediaTypeUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteMediaTypeFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.mediaTypeUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadMediaTypesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.mediaTypeUrl, status, err.toString());
+      }
+    });
+  }
+
   componentDidMount() {
     this.loadMediaTypesFromServer();
   }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="mediatype-component">
@@ -59,20 +124,16 @@ class MediaTypesComponent extends React.Component {
                 <h4 className="modal-title">Edit MediaType</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putMediaTypeToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="artist_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_id" value={this.state.mediaType.mediaTypeId}/>
-                    </div>
+                    <label className="col-sm-4" for="mediaType_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required
+                                        id="mediaType_name"
+                                        placeholder="name" value={this.state.mediaType.name}/>
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="artist_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_name" value={this.state.mediaType.name}/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -88,7 +149,12 @@ class MediaTypesComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button><button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteMediaTypeFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,20 +170,16 @@ class MediaTypesComponent extends React.Component {
                 <h4 className="modal-title">Create new MediaType</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postMediaTypeToServer.bind(this)}
+                             onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="artist_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_id" placeholder="id"/>
-                    </div>
+                    <label className="col-sm-4" for="mediaType_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required
+                                        id="mediaType_name"
+                                        placeholder="name" />
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="artist_title">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_title" placeholder="title"/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -168,7 +230,7 @@ class MediaTypesComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteMediaType.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateMediaType.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

@@ -7,8 +7,9 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Playlists.css');
@@ -20,7 +21,9 @@ class PlaylistsComponent extends React.Component {
     this.state = {
       playlists: [],
       url: "http://localhost:7777/resources/playlists",
-      playlist: {}
+      playlist: {},
+      playlistUrl: "",
+      canSubmit: false
     }
   };
 
@@ -38,15 +41,71 @@ class PlaylistsComponent extends React.Component {
     });
   }
   updatePlaylist(index) {
-    //this.setState({artist: index})
-    this.setState({playlist: this.state.playlists[index].playlist})
+    this.setState({playlist: this.state.playlists[index].playlist, playlistUrl: this.state.playlists[index]._links.self.href})
   }
 
-  deletePlaylist(index) {
-
+  postPlaylistToServer(data) {
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistsFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putPlaylistToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.playlistUrl,
+      data: JSON.stringify({name: data.name}),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistsFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.playlistUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deletePlaylistFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.playlistUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadPlaylistsFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.playlistUrl, status, err.toString());
+      }
+    });
+  }
+
   componentDidMount() {
     this.loadPlaylistsFromServer();
+  }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
   }
   render() {
     return (
@@ -59,20 +118,15 @@ class PlaylistsComponent extends React.Component {
                 <h4 className="modal-title">Edit Playlist</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putPlaylistToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="artist_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_id" value={this.state.playlist.playlistId}/>
-                    </div>
+                    <label className="col-sm-4" for="playlist_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required id="playlist_name"
+                                        placeholder="name" value={this.state.playlist.name}/>
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="artist_name">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_name" value={this.state.playlist.name}/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -88,7 +142,12 @@ class PlaylistsComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button><button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deletePlaylistFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,20 +163,15 @@ class PlaylistsComponent extends React.Component {
                 <h4 className="modal-title">Create new Playlist</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postPlaylistToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="artist_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_id" placeholder="id"/>
-                    </div>
+                    <label className="col-sm-4" for="playlist_name">Name</label>
+                    <TextInputComponent name="name" validationError="this field is required" required id="playlist_name"
+                                        placeholder="name" />
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="artist_title">Name</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="artist_title" placeholder="title"/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -168,7 +222,7 @@ class PlaylistsComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deletePlaylist.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updatePlaylist.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

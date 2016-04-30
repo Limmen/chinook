@@ -60,7 +60,6 @@ class EmployeesComponent extends React.Component {
   }
 
   postEmployeeToServer(data) {
-    console.log("post employee to serv");
     $.ajax({
       type: "POST",
       url: this.state.url,
@@ -174,76 +173,90 @@ class EmployeesComponent extends React.Component {
                 <h4 className="modal-title">Create new Employee</h4>
               </div>
               <div className="modal-body row">
-                <Formsy.Form onValidSubmit={this.postEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <Formsy.Form onValidSubmit={this.postEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_firstname">First Name</label>
-                    <TextInputComponent name="firstName" validationError="this field is required" required id="employee_firstname"
-                                        placeholder="first name" />
+                    <TextInputComponent name="firstName" validationError="this field is required" required
+                                        id="employee_firstname"
+                                        placeholder="first name"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_lastname">Last Name</label>
-                    <TextInputComponent name="lastName" validationError="this field is required" required id="employee_lastname"
-                                        placeholder="last name" />
+                    <TextInputComponent name="lastName" validationError="this field is required" required
+                                        id="employee_lastname"
+                                        placeholder="last name"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_reportsto">Reports to Employee</label>
-                    <TextInputComponent name="reportsTo" validations="isInt"validationError="Employee id needs to be a integer" required id="employee_reportsto"
-                                        placeholder="employee id" />
+                    <TextInputComponent name="reportsTo" validations="isInt"
+                                        validationError="Employee id needs to be a integer" required
+                                        id="employee_reportsto"
+                                        placeholder="employee id"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_birthdate">BirthDate</label>
-                    <DateInputComponent name="birthDate" validationError="this field is required" required id="employee_birthdate"
-                                        placeholder="birth date" />
+                    <DateInputComponent name="birthDate" validationError="this field is required" required
+                                        id="employee_birthdate"
+                                        placeholder="birth date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_hiredate">HireDate</label>
-                    <DateInputComponent name="hireDate" validationError="this field is required" required id="employee_hiredate"
-                                        placeholder="birth date" />
+                    <DateInputComponent name="hireDate" validationError="this field is required" required
+                                        id="employee_hiredate"
+                                        placeholder="birth date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_address">Address</label>
-                    <TextInputComponent name="address" validationError="this field is required" required id="employee_address"
-                                        placeholder="address" />
+                    <TextInputComponent name="address" validationError="this field is required" required
+                                        id="employee_address"
+                                        placeholder="address"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_city">City</label>
                     <TextInputComponent name="city" validationError="this field is required" required id="employee_city"
-                                        placeholder="city" />
+                                        placeholder="city"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_state">State</label>
-                    <TextInputComponent name="state" validationError="this field is required" required id="employee_state"
-                                        placeholder="state" />
+                    <TextInputComponent name="state" validationError="this field is required" required
+                                        id="employee_state"
+                                        placeholder="state"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_country">Country</label>
-                    <TextInputComponent name="country" validationError="this field is required" required id="employee_country"
-                                        placeholder="country" />
+                    <TextInputComponent name="country" validationError="this field is required" required
+                                        id="employee_country"
+                                        placeholder="country"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_postalcode">PostalCode</label>
-                    <TextInputComponent name="postalCode" validationError="this field is required" required id="employee_postalcode"
-                                        placeholder="postalcode" />
+                    <TextInputComponent name="postalCode" validationError="this field is required" required
+                                        id="employee_postalcode"
+                                        placeholder="postalcode"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_phone">Phone</label>
-                    <TextInputComponent name="phone" validationError="this field is required" required id="employee_phone"
-                                        placeholder="phone" />
+                    <TextInputComponent name="phone" validationError="this field is required" required
+                                        id="employee_phone"
+                                        placeholder="phone"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_fax">Fax</label>
                     <TextInputComponent name="fax" validationError="this field is required" required id="employee_fax"
-                                        placeholder="fax" />
+                                        placeholder="fax"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_email">Email</label>
-                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required id="employee_email"
-                                        placeholder="email" />
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email"
+                                        required id="employee_email"
+                                        placeholder="email"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_title">Title</label>
-                    <TextInputComponent name="title" validationError="this field is required" required id="employee_title"
-                                        placeholder="title" />
+                    <TextInputComponent name="title" validationError="this field is required" required
+                                        id="employee_title"
+                                        placeholder="title"/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
                 </Formsy.Form>
@@ -262,35 +275,43 @@ class EmployeesComponent extends React.Component {
                 <h4 className="modal-title">Edit Employee</h4>
               </div>
               <div className="modal-body row">
-                <Formsy.Form onValidSubmit={this.putEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <Formsy.Form onValidSubmit={this.putEmployeeToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_firstname">First Name</label>
-                    <TextInputComponent name="firstName" validationError="this field is required" required id="employee_firstname"
+                    <TextInputComponent name="firstName" validationError="this field is required" required
+                                        id="employee_firstname"
                                         placeholder="first name" value={this.state.employee.firstName}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_lastname">Last Name</label>
-                    <TextInputComponent name="lastName" validationError="this field is required" required id="employee_lastname"
+                    <TextInputComponent name="lastName" validationError="this field is required" required
+                                        id="employee_lastname"
                                         placeholder="last name" value={this.state.employee.lastName}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_reportsto">Reports to Employee</label>
-                    <TextInputComponent name="reportsTo" validations="isInt"validationError="Employee id needs to be a integer" required id="employee_reportsto"
+                    <TextInputComponent name="reportsTo" validations="isInt"
+                                        validationError="Employee id needs to be a integer" required
+                                        id="employee_reportsto"
                                         placeholder="employee id" value={this.state.employee.reportsTo}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_birthdate">BirthDate</label>
-                    <DateInputComponent name="birthDate" validationError="this field is required" required id="employee_birthdate"
+                    <DateInputComponent name="birthDate" validationError="this field is required" required
+                                        id="employee_birthdate"
                                         placeholder="birth date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_hiredate">HireDate</label>
-                    <DateInputComponent name="hireDate" validationError="this field is required" required id="employee_hiredate"
+                    <DateInputComponent name="hireDate" validationError="this field is required" required
+                                        id="employee_hiredate"
                                         placeholder="hire date"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_address">Address</label>
-                    <TextInputComponent name="address" validationError="this field is required" required id="employee_address"
+                    <TextInputComponent name="address" validationError="this field is required" required
+                                        id="employee_address"
                                         placeholder="address" value={this.state.employee.reportsTo}/>
                   </div>
                   <div className="form-group">
@@ -300,22 +321,26 @@ class EmployeesComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_state">State</label>
-                    <TextInputComponent name="state" validationError="this field is required" required id="employee_state"
+                    <TextInputComponent name="state" validationError="this field is required" required
+                                        id="employee_state"
                                         placeholder="state" value={this.state.employee.state}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_country">Country</label>
-                    <TextInputComponent name="country" validationError="this field is required" required id="employee_country"
+                    <TextInputComponent name="country" validationError="this field is required" required
+                                        id="employee_country"
                                         placeholder="country" value={this.state.employee.country}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_postalcode">PostalCode</label>
-                    <TextInputComponent name="postalCode" validationError="this field is required" required id="employee_postalcode"
+                    <TextInputComponent name="postalCode" validationError="this field is required" required
+                                        id="employee_postalcode"
                                         placeholder="postalcode" value={this.state.employee.postalCode}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_phone">Phone</label>
-                    <TextInputComponent name="phone" validationError="this field is required" required id="employee_phone"
+                    <TextInputComponent name="phone" validationError="this field is required" required
+                                        id="employee_phone"
                                         placeholder="phone" value={this.state.employee.phone}/>
                   </div>
                   <div className="form-group">
@@ -325,12 +350,14 @@ class EmployeesComponent extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_email">Email</label>
-                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email" required id="employee_email"
+                    <TextInputComponent name="email" validations="isEmail" validationError="Enter a valid email"
+                                        required id="employee_email"
                                         placeholder="email" value={this.state.employee.email}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="employee_title">Title</label>
-                    <TextInputComponent name="title" validationError="this field is required" required id="employee_title"
+                    <TextInputComponent name="title" validationError="this field is required" required
+                                        id="employee_title"
                                         placeholder="title" value={this.state.employee.title}/>
                   </div>
                   <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
