@@ -8,8 +8,10 @@
 
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
-import $ from "jquery";
 import Dimensions from 'react-dimensions'
+import Formsy from 'formsy-react';
+import TextInputComponent from './TextInputComponent';
+import DateInputComponent from './DateInputComponent';
 
 require('styles//DataTable.css');
 require('styles//Invoices.css');
@@ -22,7 +24,9 @@ class InvoicesComponent extends React.Component {
       invoices: [],
       url: "http://localhost:7777/resources/invoices",
       invoice: {},
-      customer: {}
+      invoiceUrl: "",
+      customer: {},
+      canSubmit: false
     }
   };
 
@@ -57,15 +61,92 @@ class InvoicesComponent extends React.Component {
 
   updateInvoice(index) {
     //this.setState({customer: index})
-    this.setState({inboice: this.state.invoices[index].invoice})
+    this.setState({invoice: this.state.invoices[index].invoice, invoiceUrl: this.state.invoices[index]._links.self.href})
   }
 
-  deleteInvoice(index) {
-
+  postInvoiceToServer(data) {
+    console.log("post invoice to serv");
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          customerId: data.customerId,
+          invoiceDate: data.invoiceDate,
+          billingAddress: data.billingAddress,
+          billingCity : data.billingCity,
+          billingCountry : data.billingCountry,
+          billingPostalCode: data.billingPostalCode,
+          total: data.total
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoicesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
   }
+
+  putInvoiceToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.invoiceUrl,
+      data: JSON.stringify(
+        {
+          customerId: data.customerId,
+          invoiceDate: data.invoiceDate,
+          billingAddress: data.billingAddress,
+          billingCity : data.billingCity,
+          billingCountry : data.billingCountry,
+          billingPostalCode: data.billingPostalCode,
+          total: data.total
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoicesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.invoiceUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteInvoiceFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.invoiceUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadInvoicesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.invoiceUrl, status, err.toString());
+      }
+    });
+  }
+
   componentDidMount() {
     this.loadInvoicesFromServer();
   }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    });
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    });
+  }
+
   render() {
     return (
       <div className="invoices-component">
@@ -77,56 +158,46 @@ class InvoicesComponent extends React.Component {
                 <h4 className="modal-title">Edit Invoice</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.putInvoiceToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_id" value={this.state.invoice.invoiceId}/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_customerid">Customer Id</label>
+                    <TextInputComponent name="customerId" validations="isInt"validationError="Customer id needs to be a integer" required
+                                        id="invoice_customerid"
+                                        placeholder="customerId" value={this.state.invoice.customerId}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_customer">Customer</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_customer" value={this.state.invoice.customerId}/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoice_invoicedate">Invoice Date</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_invoicedate" value={this.state.invoice.invoiceDate}/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_invoiceDate">Invoice Date</label>
+                    <DateInputComponent name="invoiceDate" validationError="this field is required" required
+                                        id="invoice_invoiceDate"
+                                        placeholder="invoiceDate" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingAddress">Billing Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingAddress" value={this.state.invoice.billingAddress}/>
-                    </div>
+                    <TextInputComponent name="billingAddress" validationError="this field is required" required
+                                        id="invoice_billingAddress"
+                                        placeholder="billingAddress" value={this.state.invoice.billingAddress}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingCity">Billing City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingCity" value={this.state.invoice.billingCity}/>
-                    </div>
+                    <TextInputComponent name="billingCity" validationError="this field is required" required
+                                        id="invoice_billingCity"
+                                        placeholder="billing city" value={this.state.invoice.billingCity}/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingCountry">Billing Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingCountry" value={this.state.invoice.billingCountry}/>
-                    </div>
+                    <TextInputComponent name="billingCountry" validationError="this field is required" required
+                                        id="invoice_billingCountry"
+                                        placeholder="billing country" value={this.state.invoice.billingCountry}/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_billingPostalCode">Billing Postal code</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingPostalCode" value={this.state.invoice.billingPostalCode}/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_billingPostalCode">Billing Postal Code</label>
+                    <TextInputComponent name="billingPostalCode" validationError="this field is required" required
+                                        id="invoice_billingPostalCode"
+                                        placeholder="billing postalcode" value={this.state.invoice.billingPostalCode}/>
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoice_total">Total</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_total" value={this.state.invoice.total}/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -142,56 +213,46 @@ class InvoicesComponent extends React.Component {
                 <h4 className="modal-title">Create new Invoice</h4>
               </div>
               <div className="modal-body row">
-                <div>
+                <Formsy.Form onValidSubmit={this.postInvoiceToServer.bind(this)} onValid={this.enableButton.bind(this)}
+                             onInvalid={this.disableButton.bind(this)}>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_id">Id</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_id" placeholder="invoice id"/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_customerid">Customer Id</label>
+                    <TextInputComponent name="customerId" validations="isInt"validationError="Customer id needs to be a integer" required
+                                        id="invoice_customerid"
+                                        placeholder="customerId"/>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_customer">Customer</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_customer" placeholder="customer id"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoice_invoicedate">Invoice Date</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_invoicedate" placeholder="invoice date"/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_invoiceDate">Invoice Date</label>
+                    <DateInputComponent name="invoiceDate" validationError="this field is required" required
+                                        id="invoice_invoiceDate"
+                                        placeholder="invoiceDate" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingAddress">Billing Address</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingAddress" placeholder="billing address"/>
-                    </div>
+                    <TextInputComponent name="billingAddress" validationError="this field is required" required
+                                        id="invoice_billingAddress"
+                                        placeholder="billingAddress"/>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingCity">Billing City</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingCity" placeholder="billing city"/>
-                    </div>
+                    <TextInputComponent name="billingCity" validationError="this field is required" required
+                                        id="invoice_billingCity"
+                                        placeholder="billing city" />
                   </div>
                   <div className="form-group">
                     <label className="col-sm-4" for="invoice_billingCountry">Billing Country</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingCountry" placeholder="billing country"/>
-                    </div>
+                    <TextInputComponent name="billingCountry" validationError="this field is required" required
+                                        id="invoice_billingCountry"
+                                        placeholder="billing country" />
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-4" for="invoice_billingPostalCode">Billing Postal code</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_billingPostalCode" placeholder="billing postal code"/>
-                    </div>
+                    <label className="col-sm-4" for="invoice_billingPostalCode">Billing Postal Code</label>
+                    <TextInputComponent name="billingPostalCode" validationError="this field is required" required
+                                        id="invoice_billingPostalCode"
+                                        placeholder="billing postalcode" />
                   </div>
-                  <div className="form-group">
-                    <label className="col-sm-4" for="invoice_total">Total</label>
-                    <div className="col-sm-8 margin_bottom">
-                      <input type="text" className="form-control" id="invoice_total" placeholder="total"/>
-                    </div>
-                  </div>
-                </div>
+                  <button type="submit" disabled={!this.state.canSubmit} className="btn btn-default">Submit</button>
+                </Formsy.Form>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -207,8 +268,12 @@ class InvoicesComponent extends React.Component {
                 <h4 className="modal-title">Are you sure?</h4>
               </div>
               <div className="modal-body row">
-                <button type="button" className="btn btn-default">Yes</button>
-                <button type="button" className="btn btn-default">No</button>
+                <button type="button" className="btn btn-default"
+                        onClick={this.deleteInvoiceFromServer.bind(this)}
+                        data-dismiss="modal">
+                  Yes
+                </button>
+                <button type="button" className="btn btn-default" data-dismiss="modal">No</button>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -390,7 +455,7 @@ class InvoicesComponent extends React.Component {
               header={<Cell>Delete</Cell>}
               cell={props => (
 <Cell {...props}>
-<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.deleteInvoice.bind(this, props.rowIndex)}>
+<button type="button" className="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" onClick={this.updateInvoice.bind(this, props.rowIndex)}>
           <span className="glyphicon glyphicon-trash"></span> Delete
         </button>
 </Cell>

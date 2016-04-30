@@ -59,6 +59,87 @@ class EmployeesComponent extends React.Component {
     });
   }
 
+  postEmployeeToServer(data) {
+    console.log("post employee to serv");
+    $.ajax({
+      type: "POST",
+      url: this.state.url,
+      data: JSON.stringify(
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          reportsTo: data.reportsTo,
+          hireDate: data.hireDate,
+          birthDate: data.birthDate,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          country: data.country,
+          postalCode: data.postalCode,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
+          title: data.title
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.url, status, err.toString());
+      }
+    });
+    $("#addModal").modal('hide');
+  }
+
+  putEmployeeToServer(data) {
+    $.ajax({
+      type: "PUT",
+      url: this.state.employeeUrl,
+      data: JSON.stringify(
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          reportsTo: data.reportsTo,
+          hireDate: data.hireDate,
+          birthDate: data.birthDate,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          country: data.country,
+          postalCode: data.postalCode,
+          phone: data.phone,
+          fax: data.fax,
+          email: data.email,
+          title: data.title
+        }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.employeeUrl, status, err.toString());
+      }
+    });
+    $("#editModal").modal('hide');
+  }
+
+  deleteEmployeeFromServer() {
+    $.ajax({
+      type: "DELETE",
+      url: this.state.employeeUrl,
+      dataType: "json",
+      success: (response) => {
+        this.loadEmployeesFromServer();
+      },
+      error: (xhr, status, err) => {
+        console.error(this.state.employeeUrl, status, err.toString());
+      }
+    });
+  }
+
   updateEmployee(index) {
     this.setState({
       employee: this.state.employees[index].employee,
