@@ -1,5 +1,44 @@
 # JavaScript Frontend for consuming REST-API for the chinook database
 
+Table of Contents
+=================
+
+  * [REST-API for the Chinook database](#rest-api-for-the-chinook-database)
+    * [Description](#description)
+    * [Installation](#installation)
+      * [Docker](#docker)
+        * [Bild Spring Docker image with maven](#bild-spring-docker-image-with-maven)
+        * [Build Postgres Docker image](#build-postgres-docker-image)
+        * [Start Postgres container](#start-postgres-container)
+        * [Start the Spring container linked](#start-the-spring-container-linked)
+        * [Stop the containers](#stop-the-containers)
+        * [Delete containers](#delete-containers)
+        * [Watch all running containers](#watch-all-running-containers)
+        * [Watch logs of running containers](#watch-logs-of-running-containers)
+    * [Resources](#resources)
+    * [Examples](#examples)
+      * [Request collection resources](#request-collection-resources)
+      * [Request single resources:](#request-single-resources)
+        * [Artist:](#artist)
+        * [Track:](#track)
+      * [Add resources](#add-resources)
+      * [Delete resources](#delete-resources)
+      * [Update single resource](#update-single-resource)
+      * [Update collection resource](#update-collection-resource)
+      * [Request filtered resource](#request-filtered-resource)
+      * [Sort resources on given parameter](#sort-resources-on-given-parameter)
+        * [Ascending order](#ascending-order)
+        * [Descending order](#descending-order)
+      * [Error responses](#error-responses)
+        * [Invalid path:](#invalid-path)
+        * [Requesting a resource that doesn't exists:](#requesting-a-resource-that-doesnt-exists)
+        * [Using a HTTP method (verb) that is not supported:](#using-a-http-method-verb-that-is-not-supported)
+        * [Using a media type that is not supported:](#using-a-media-type-that-is-not-supported)
+        * [Invalid query string:](#invalid-query-string)
+    * [Documentation](#documentation)
+    * [Copyright and license](#copyright-and-license)
+
+
 ## Description
 
 A React application for consuming a REST-API for the chinook database.
@@ -7,20 +46,21 @@ The application was initiated with a template from: [generator-react-webpack](ht
 
 Tools used:
 
-* Webpack
-  * Module bundler. Bundles all necessary javascript files to a bundle dist/assets/app.js
+  * Webpack
+    * Module bundler. Bundles all necessary javascript files to a bundle dist/assets/app.js
 
-* Babel
-  * JavaScript compiler that transforms EcmaScript2015 code to JavaScript code that is compatible with the browser. Enables us to write the application in ES2015.
+  * Babel
+    * JavaScript compiler that transforms EcmaScript2015 code to JavaScript code that is compatible with the browser. Enables us to write the application in ES2015.
   
-* Mocha
-  * JavaScript test framework.
+  * Mocha
+    * JavaScript test framework.
   
-* Karma
-  * JavaScript test runner. Allows for executing code in real browsers.
+  * Karma
+    * JavaScript test runner. Allows for executing code in real browsers.
   
-* ESLint
-  * JavaScript linting utility (a type of static analysis).
+  * ESLint
+    * JavaScript linting utility (a type of static analysis).
+
 
 ## Screenshots
 

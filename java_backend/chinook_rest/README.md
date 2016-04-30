@@ -2,10 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Limmen/chinook.svg?branch=master)](https://travis-ci.org/Limmen/chinook)
 
-## Description
-
-A rest-api for the Chinook database. Built with the Spring framework. Documentation for the database can be found in [doc](../../doc)
-
 Table of Contents
 =================
 
@@ -44,6 +40,10 @@ Table of Contents
     * [Documentation](#documentation)
     * [Copyright and license](#copyright-and-license)
 
+
+## Description
+
+A rest-api for the Chinook database. Built with the Spring framework. Documentation for the database can be found in [doc](../../doc)
 
 ## Installation
 
