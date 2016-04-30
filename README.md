@@ -36,9 +36,17 @@ react_frontend contains a application for performing CRUD operations on the reso
 
 See separate README's for each project.
 
+[java_backend README](java_backend/chinook_rest/README.md)
+
+[react_frontend README](react_frontend/chinook_consumer/README.md)
+
 ## Documentation
 
 See separate README's for each project.
+
+[java_backend README](java_backend/chinook_rest/README.md)
+
+[react_frontend README](react_frontend/chinook_consumer/README.md)
 
 ## Author
 
