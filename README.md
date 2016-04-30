@@ -2,22 +2,35 @@
 
 [![Build Status](https://travis-ci.org/Limmen/chinook.svg?branch=master)](https://travis-ci.org/Limmen/chinook)
 [![forthebadge](http://forthebadge.com/images/badges/certified-snoop-lion.svg)](http://forthebadge.com)
+
+Table of Contents
+=================
+
+  * [Chinook](#chinook)
+    * [Description](#description)
+    * [Current state](#current-state)
+    * [How to run](#how-to-run)
+    * [Documentation](#documentation)
+    * [Author](#author)
+    * [Copyright and license](#copyright-and-license)
+
+
 ## Description
 
 This repo contains two separate projects:
 
-* react_frontend
+  * react_frontend
 
-A JavaScript frontend that consumes a REST-API for the chinook database, built with React.
+    A JavaScript frontend that consumes a REST-API for the chinook database, built with React.
 
-* java_backend
+  * java_backend
 
-A REST-API for the chinook database developed with Java and Spring.
+    A REST-API for the chinook database developed with Java and Spring.
 
 ## Current state
 
-java_backend contains a full RESP-API for the chinook database. See separate README.md for how to use
-react_frontend contains a application for performing CRUD operations of the resources of the REST API
+java_backend contains a full REST-API for the chinook database. See separate README.md for how to use.
+react_frontend contains a application for performing CRUD operations on the resources of the REST API
 
 ## How to run
 
