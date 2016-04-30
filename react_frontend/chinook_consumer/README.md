@@ -72,6 +72,8 @@ Tools used:
 
 1. `git clone https://github.com/Limmen/chinook`
 2. `cd chinook/react_frontend/chinook_consumer/`
+3. `npm install`
+4. `npm start`
 
 ## Docker
 
