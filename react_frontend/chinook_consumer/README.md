@@ -33,6 +33,44 @@ Tools used:
 1. `git clone https://github.com/Limmen/chinook`
 2. `cd chinook/react_frontend/chinook_consumer/`
 
+## Docker
+
+### Build application image (node) with docker
+
+```bash
+$ docker build -t chinook_consumer .
+```
+
+### Start application container
+
+```bash
+$ docker run --name chinook_consumer -p 3000:3000 -d chinook_consumer
+```
+
+### Stop the container
+
+```bash
+$ docker stop chinook_consumer
+```
+
+### Delete container
+
+```bash
+$ docker rm chinook_consumer
+```
+
+### Watch all running containers 
+
+```bash
+$ docker ps -a
+```
+
+###  Watch logs of running container
+
+```bash
+$ docker logs chinook_consumer
+```
+
 ## Generating new components with yeoman
 ```bash
 $ yo react-webpack:component my/namespaced/components/name
@@ -46,7 +84,7 @@ $ yo react-webpack:component my/namespaced/components/name --stateless
 ```
 
 ## Usage
-The following commands are available in your project:
+The following commands are available in the project:
 ```bash
 # Start for development
 $ npm start # or
@@ -69,6 +107,9 @@ $ npm run clean
 
 # Just copy the static assets
 $ npm run copy
+
+# run  for deployment without dev-server
+$ npm run deploy
 ```
 ### Naming Components
 Uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components).
@@ -78,10 +119,6 @@ Each component is a module and can be required using the [Webpack](http://webpac
 
 ### Running Tests
 `npm test` or `node node_modules/.bin/mocha`
-
-## TODO
-
-Most stuff. Currently the application just consists of one page with a table for displaying artists from the chinook database.
 
 ## Copyright and license
 

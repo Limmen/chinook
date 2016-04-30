@@ -16,6 +16,7 @@
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev  --history-api-fallback",
+    "deploy": "node prod_server.js --history-api-fallback",
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false"
   },
@@ -69,6 +70,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "core-js": "^2.0.0",
+    "express": "^4.13.4",
     "fixed-data-table": "^0.6.0",
     "formsy-react": "^0.18.0",
     "install": "^0.6.1",
@@ -81,7 +83,6 @@
     "react-datepicker": "^0.26.0",
     "react-dimensions": "^1.0.2",
     "react-dom": "^0.14.0",
-    "react-router": "^2.2.4",
-    "react-router-active-component": "^3.0.0"
+    "react-router": "*"
   }
 }
